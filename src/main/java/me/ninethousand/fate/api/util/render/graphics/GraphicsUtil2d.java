@@ -39,6 +39,20 @@ public class GraphicsUtil2d {
         releaseGl();
     }
 
+    public static void drawRoundedRectangleFilled(VertexHelper vertexHelper, Vec2d top, Vec2d bottom, double radius, int segments, Color color) {
+        Vec2d vertex1 = new Vec2d(bottom.x, top.y);
+        Vec2d vertex2 = new Vec2d(top.x, bottom.y);
+
+        drawArcFilled(vertexHelper, top.plus(radius), radius, new Pair(-90f, 0f), segments, color); // Top left
+        drawArcFilled(vertexHelper, vertex1.plus(-radius, radius), radius, new Pair(0f, 90f), segments, color);// Top right
+        drawArcFilled(vertexHelper, bottom.minus(radius), radius, new Pair(90f, 180f), segments, color); // Bottom right
+        drawArcFilled(vertexHelper, vertex2.plus(radius, -radius), radius, new Pair(180f, 270f), segments, color); // Bottom left
+
+        drawRectFill(vertexHelper, top.plus(radius, 0.0), vertex1.plus(-radius, radius), color); // Top
+        drawRectFill(vertexHelper, top.plus(0.0, radius), bottom.minus(0.0, radius), color); // Center
+        drawRectFill(vertexHelper, vertex2.plus(radius, -radius), bottom.minus(radius, 0.0), color); // Bottom
+    }
+
     public static void drawQuadOutline(VertexHelper vertexHelper, Vec2d topLeft, Vec2d topRight, Vec2d bottomLeft, Vec2d bottomRight, float lineWidth, Color color) {
         prepareGl();
         GL11.glLineWidth(lineWidth);
@@ -91,8 +105,25 @@ public class GraphicsUtil2d {
         drawLine(vertexHelper, vertex2.plus(radius, 0.0), bottom.minus(radius, 0.0), lineWidth, color); // Bottom
     }
 
+    private static void drawArcFilled(VertexHelper vertexHelper, Vec2d center, double radius, Pair<Float, Float> angleRange, int segments, Color color) {
+        drawTriangleFan(vertexHelper, center, getArcVertices(center, radius, angleRange, segments), color);
+    }
+
     private static void drawArcOutline(VertexHelper vertexHelper, Vec2d center, double radius, Pair<Float, Float> angleRange, int segments, float lineWidth, Color color) {
         drawLineStrip(vertexHelper, getArcVertices(center, radius, angleRange, segments), lineWidth, color);
+    }
+
+    private static void drawTriangleFan(VertexHelper vertexHelper, Vec2d centre, ArrayList<Vec2d> vertices, Color color) {
+        prepareGl();
+
+        vertexHelper.begin(GL11.GL_TRIANGLE_FAN);
+        vertexHelper.put(centre, color);
+        for (Vec2d vertex : vertices) {
+            vertexHelper.put(vertex, color);
+        }
+        vertexHelper.end();
+
+        releaseGl();
     }
 
     private static void drawLineStrip(VertexHelper vertexHelper, ArrayList<Vec2d> vertices, float lineWidth, Color color) {
@@ -124,7 +155,7 @@ public class GraphicsUtil2d {
 
     private static ArrayList<Vec2d> getArcVertices(Vec2d center, double radius, Pair<Float, Float> angleRange, int segments) {
         double range = Math.max(angleRange.first, angleRange.last) - Math.min(angleRange.first, angleRange.last);
-        int seg = calculateSegments(segments, radius, range);
+        double seg = calculateSegments(segments, radius, range);
         double segAngle = range / seg;
 
         ArrayList<Vec2d> vec2ds = new ArrayList<>();
@@ -137,10 +168,10 @@ public class GraphicsUtil2d {
         return vec2ds;
     }
 
-    private static int calculateSegments(int segmentsIn, double radius, double range) {
+    private static double calculateSegments(int segmentsIn, double radius, double range) {
         if (segmentsIn != -0) return segmentsIn;
         double segments = radius * 0.5 * Math.PI * (range / 360);
-        return Math.round(Math.max(Math.round(segments), 16));
+        return Math.max(segments, 16);
     }
 
     private static void prepareGl() {
