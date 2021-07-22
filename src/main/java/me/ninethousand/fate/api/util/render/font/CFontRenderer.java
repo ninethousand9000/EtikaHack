@@ -167,14 +167,14 @@ public final class CFontRenderer {
         return (int) getWidth(text);
     }
 
-    public void drawStringWithShadow(String text, float x, float y, int color) {
+    public int drawStringWithShadow(String text, float x, float y, int color) {
         if (text == null || text == "") {
-            return;
+            return 0;
         }
 
         drawString(StringUtils.stripControlCodes(text), x + 0.5F, y + 0.5F, 0x000000);
 
-        drawString(text, x, y, color);
+        return drawString(text, x, y, color);
     }
 
     public UnicodeFont getFont() {

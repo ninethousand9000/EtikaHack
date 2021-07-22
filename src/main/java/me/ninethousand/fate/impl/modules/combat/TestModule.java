@@ -17,6 +17,8 @@ public class TestModule extends Module {
     @SubscribeEvent
     public void onHudEvent(RenderGameOverlayEvent.Text event) {
         VertexHelper vertexHelper = new VertexHelper(true);
-        GraphicsUtil2d.drawRoundedQuadOutline(vertexHelper, new Vec2d(10, 10), new Vec2d(100, 100), 4, 10, 2f, Color.white);
+        GraphicsUtil2d.drawRoundedRectangleOutline(vertexHelper, new Vec2d(10, 10), new Vec2d(100, 100), 4, 10, 2f, Color.white);
+        GraphicsUtil2d.drawRectOutline(vertexHelper, new Vec2d(110, 10), new Vec2d(210, 100), 3, Color.white);
+        GraphicsUtil2d.drawQuadOutline(vertexHelper, new Vec2d(220, 10), new Vec2d(310, 10), new Vec2d(310, 100), new Vec2d(220, 100), 3, Color.white);
     }
 }

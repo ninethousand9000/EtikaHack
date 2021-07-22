@@ -10,19 +10,85 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class GraphicsUtil2d {
-    public static void drawRoundedQuadOutline(VertexHelper vertexHelper, Vec2d topVertex, Vec2d bottomVertex, double radius, int segments, float lineWidth, Color color) {
-        Vec2d vertex1 = new Vec2d(bottomVertex.x, topVertex.y);
-        Vec2d vertex2 = new Vec2d(topVertex.x, bottomVertex.y);
+    public static void drawQuadFill(VertexHelper vertexHelper, Vec2d topLeft, Vec2d topRight, Vec2d bottomLeft, Vec2d bottomRight, Color color) {
+        prepareGl();
 
-        drawArcOutline(vertexHelper, topVertex.plus(radius), radius, new Pair(-90f, 0f), segments, lineWidth, color); // Top left
+        vertexHelper.begin(GL11.GL_QUADS);
+        vertexHelper.put(topLeft, color);
+        vertexHelper.put(topRight, color);
+        vertexHelper.put(bottomLeft, color);
+        vertexHelper.put(bottomRight, color);
+        vertexHelper.end();
+
+        releaseGl();
+    }
+
+    public static void drawRectFill(VertexHelper vertexHelper, Vec2d topLeft, Vec2d bottomRight, Color color) {
+        Vec2d topRight = new Vec2d(bottomRight.x, topLeft.y);
+        Vec2d bottomLeft = new Vec2d(topLeft.x, bottomRight.y);
+
+        prepareGl();
+
+        vertexHelper.begin(GL11.GL_QUAD_STRIP);
+        vertexHelper.put(topLeft, color);
+        vertexHelper.put(topRight, color);
+        vertexHelper.put(bottomLeft, color);
+        vertexHelper.put(bottomRight, color);
+        vertexHelper.end();
+
+        releaseGl();
+    }
+
+    public static void drawQuadOutline(VertexHelper vertexHelper, Vec2d topLeft, Vec2d topRight, Vec2d bottomLeft, Vec2d bottomRight, float lineWidth, Color color) {
+        prepareGl();
+        GL11.glLineWidth(lineWidth);
+
+        vertexHelper.begin(GL11.GL_QUADS);
+        GL11.glPolygonMode(GL11.GL_FRONT_AND_BACK, GL11.GL_LINE);
+        vertexHelper.put(topLeft, color);
+        vertexHelper.put(topRight, color);
+        vertexHelper.put(bottomLeft, color);
+        vertexHelper.put(bottomRight, color);
+        vertexHelper.end();
+        GL11.glPolygonMode(GL11.GL_FRONT_AND_BACK, GL11.GL_FILL);
+
+        releaseGl();
+        GL11.glLineWidth(1f);
+    }
+
+    public static void drawRectOutline(VertexHelper vertexHelper, Vec2d topLeft, Vec2d bottomRight, float lineWidth, Color color) {
+        Vec2d topRight = new Vec2d(bottomRight.x, topLeft.y);
+        Vec2d bottomLeft = new Vec2d(topLeft.x, bottomRight.y);
+
+        prepareGl();
+        GL11.glLineWidth(lineWidth);
+
+        vertexHelper.begin(GL11.GL_QUAD_STRIP);
+        GL11.glPolygonMode(GL11.GL_FRONT_AND_BACK, GL11.GL_LINE);
+        vertexHelper.put(topLeft, color);
+        vertexHelper.put(topRight, color);
+        vertexHelper.put(bottomLeft, color);
+        vertexHelper.put(bottomRight, color);
+        vertexHelper.end();
+        GL11.glPolygonMode(GL11.GL_FRONT_AND_BACK, GL11.GL_FILL);
+
+        releaseGl();
+        GL11.glLineWidth(1f);
+    }
+
+    public static void drawRoundedRectangleOutline(VertexHelper vertexHelper, Vec2d top, Vec2d bottom, double radius, int segments, float lineWidth, Color color) {
+        Vec2d vertex1 = new Vec2d(bottom.x, top.y);
+        Vec2d vertex2 = new Vec2d(top.x, bottom.y);
+
+        drawArcOutline(vertexHelper, top.plus(radius), radius, new Pair(-90f, 0f), segments, lineWidth, color); // Top left
         drawArcOutline(vertexHelper, vertex1.plus(-radius, radius), radius, new Pair(0f, 90f), segments, lineWidth, color);// Top right
-        drawArcOutline(vertexHelper, bottomVertex.minus(radius), radius, new Pair(90f, 180f), segments, lineWidth, color); // Bottom right
+        drawArcOutline(vertexHelper, bottom.minus(radius), radius, new Pair(90f, 180f), segments, lineWidth, color); // Bottom right
         drawArcOutline(vertexHelper, vertex2.plus(radius, -radius), radius, new Pair(180f, 270f), segments, lineWidth, color); // Bottom left
 
-        drawLine(vertexHelper, topVertex.plus(radius, 0.0), vertex1.minus(radius, 0.0), lineWidth, color); // Top
-        drawLine(vertexHelper, topVertex.plus(0.0, radius), vertex2.minus(0.0, radius), lineWidth, color); // Left
-        drawLine(vertexHelper, vertex1.plus(0.0, radius), bottomVertex.minus(0.0, radius), lineWidth, color); // Right
-        drawLine(vertexHelper, vertex2.plus(radius, 0.0), bottomVertex.minus(radius, 0.0), lineWidth, color); // Bottom
+        drawLine(vertexHelper, top.plus(radius, 0.0), vertex1.minus(radius, 0.0), lineWidth, color); // Top
+        drawLine(vertexHelper, top.plus(0.0, radius), vertex2.minus(0.0, radius), lineWidth, color); // Left
+        drawLine(vertexHelper, vertex1.plus(0.0, radius), bottom.minus(0.0, radius), lineWidth, color); // Right
+        drawLine(vertexHelper, vertex2.plus(radius, 0.0), bottom.minus(radius, 0.0), lineWidth, color); // Bottom
     }
 
     private static void drawArcOutline(VertexHelper vertexHelper, Vec2d center, double radius, Pair<Float, Float> angleRange, int segments, float lineWidth, Color color) {

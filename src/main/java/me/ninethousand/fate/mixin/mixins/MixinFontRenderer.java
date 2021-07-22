@@ -17,7 +17,7 @@ public final class MixinFontRenderer {
 
     @Inject(method = "drawString(Ljava/lang/String;FFIZ)I", at = @At(value = "HEAD"), cancellable = true)
     public void onDrawStringHead(String text, float x, float y, int color, boolean shadow, CallbackInfoReturnable<Integer> cir) {
-        if (mc.world != null) cir.setReturnValue(FontUtil.getCurrentCustomFont().drawString(text, x, y, color));
+        if (mc.world != null) cir.setReturnValue(FontUtil.getCurrentCustomFont().drawStringWithShadow(text, x, y, color));
     }
 
     @Inject(method = "getStringWidth", at = @At("HEAD"), cancellable = true)
