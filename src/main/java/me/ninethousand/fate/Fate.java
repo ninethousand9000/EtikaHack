@@ -2,6 +2,7 @@ package me.ninethousand.fate;
 
 import me.ninethousand.fate.api.event.EventTracker;
 import me.ninethousand.fate.api.module.ModuleManager;
+import me.ninethousand.fate.api.ui.click.screen.ClickWindow;
 import me.ninethousand.fate.api.util.render.IconUtil;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -40,6 +41,10 @@ public class Fate {
         EVENT_TRACKER.init();
 
         log("     Events Initialised      ");
+
+        ClickWindow.initGui();
+
+        log("      Gui Initialised        ");
 
         log("=============================");
 

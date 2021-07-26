@@ -29,6 +29,10 @@ public final class FontUtil {
         getCurrentCustomFont().drawStringWithShadow(text, x, y, color);
     }
 
+    public static void drawText(String text, double x, double y, int color) {
+        drawText(text, (float) x, (float) y, color);
+    }
+
     public static float getStringWidth(String text) {
         return getCurrentCustomFont().getStringWidth(text);
     }

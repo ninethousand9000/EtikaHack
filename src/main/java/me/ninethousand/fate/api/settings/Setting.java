@@ -1,50 +1,103 @@
 package me.ninethousand.fate.api.settings;
 
-import java.util.function.Predicate;
+import me.ninethousand.fate.api.module.Module;
 
-public final class Setting<T> {
-    private final String id;
+import java.awt.*;
+import java.util.ArrayList;
+
+public class Setting<T> {
+    private final String name;
+
     private T value;
-    private final T min, max;
-    private final Predicate<T> visibility, callback;
 
-    Setting(
-            String id,
-            T value,
-            T min,
-            T max,
-            Predicate<T> visibility,
-            Predicate<T> callback
-    ) {
-        this.id = id;
+    private boolean isOpened;
+
+    private float alpha = 0.2f;
+
+    private final ArrayList<Setting<?>> subSettings = new ArrayList<>();
+
+    public Setting(String name, T value) {
+        this.name = name;
         this.value = value;
-        this.min = min;
-        this.max = max;
-        this.visibility = visibility;
-        this.callback = callback;
     }
 
-    public String id() {
-        return id;
+    public Setting(Setting<?> parent, String name, T value) {
+        this.name = name;
+        this.value = value;
+
+        if (parent.getValue() instanceof Boolean) {
+            Setting<Boolean> booleanSetting = (Setting<Boolean>) parent;
+            booleanSetting.addSubSetting(this);
+        }
+
+        if (parent.getValue() instanceof Enum) {
+            Setting<Enum<?>> enumSetting = (Setting<Enum<?>>) parent;
+            enumSetting.addSubSetting(this);
+        }
+
+        if (parent.getValue() instanceof Color) {
+            Setting<Color> colorSetting = (Setting<Color>) parent;
+            colorSetting.addSubSetting(this);
+        }
+
+        if (parent.getValue() instanceof Integer) {
+            NumberSetting<Integer> integerNumberSetting = (NumberSetting<Integer>) parent;
+            integerNumberSetting.addSubSetting(this);
+        }
+
+        if (parent.getValue() instanceof Double) {
+            NumberSetting<Double> doubleNumberSetting = (NumberSetting<Double>) parent;
+            doubleNumberSetting.addSubSetting(this);
+        }
+
+        if (parent.getValue() instanceof Float) {
+            NumberSetting<Float> floatNumberSetting = (NumberSetting<Float>) parent;
+            floatNumberSetting.addSubSetting(this);
+        }
     }
 
-    public T value() {
+    public ArrayList<Setting<?>> getSubSettings() {
+        return this.subSettings;
+    }
+
+    public boolean hasSubSettings() {
+        return this.subSettings.size() > 0;
+    }
+
+    public void addSubSetting(Setting<?> subSetting) {
+        this.subSettings.add(subSetting);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public T getValue() {
         return value;
     }
 
-    public void value(T value) {
-        if (callback.test(value)) this.value = value;
+    public boolean isOpened() {
+        return isOpened;
     }
 
-    public T min() {
-        return min;
+    public void setValue(T value) {
+        this.value = value;
     }
 
-    public T max() {
-        return max;
+    public void setOpened(boolean opened) {
+        isOpened = opened;
     }
 
-    public boolean visible() {
-        return visibility.test(value);
+    public float getAlpha() {
+        return alpha;
+    }
+
+    public void setAlpha(float alpha) {
+        this.alpha = alpha;
+    }
+
+    public Setting<T> register(Module module) {
+        module.settings.add(this);
+        return this;
     }
 }

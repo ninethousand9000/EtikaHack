@@ -24,7 +24,7 @@ public class EventTracker {
         if (Keyboard.getEventKeyState()) {
             if (Keyboard.getEventKey() != Keyboard.KEY_NONE) {
                 for (Module module : ModuleManager.getModules()) {
-                    if (module.bind.value().getKey() == Keyboard.getEventKey()) {
+                    if (module.getKey() == Keyboard.getEventKey()) {
                         module.toggle();
                     }
                 }

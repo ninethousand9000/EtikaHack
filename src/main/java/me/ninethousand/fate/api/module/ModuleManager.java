@@ -1,5 +1,6 @@
 package me.ninethousand.fate.api.module;
 
+import me.ninethousand.fate.impl.modules.client.ClickGUI;
 import me.ninethousand.fate.impl.modules.combat.TestModule;
 
 import java.util.ArrayList;
@@ -11,8 +12,13 @@ public class ModuleManager {
 
     public static void init() {
         modules.addAll(Arrays.asList(
-            new TestModule()
+                new TestModule(),
+                new ClickGUI()
         ));
+
+        for (int i = 0; i < 10; i++) {
+            modules.add(new TestModule());
+        }
 
         modules.sort(ModuleManager::order);
     }
@@ -25,9 +31,9 @@ public class ModuleManager {
         return modules;
     }
 
-    public ArrayList<Module> getModulesByCategory(ModuleCategory category) {
+    public static ArrayList<Module> getModulesByCategory(ModuleCategory category) {
         ArrayList<Module> modules = new ArrayList<>();
-        for (Module module : this.modules) {
+        for (Module module : ModuleManager.modules) {
             if (module.getCategory() == category) modules.add(module);
         }
         return modules;

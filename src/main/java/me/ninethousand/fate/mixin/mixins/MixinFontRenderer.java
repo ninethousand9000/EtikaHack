@@ -15,7 +15,7 @@ import java.awt.*;
 public final class MixinFontRenderer {
     private final Minecraft mc = Minecraft.getMinecraft();
 
-    @Inject(method = "drawString(Ljava/lang/String;FFIZ)I", at = @At(value = "HEAD"), cancellable = true)
+    /*@Inject(method = "drawString(Ljava/lang/String;FFIZ)I", at = @At(value = "HEAD"), cancellable = true)
     public void onDrawStringHead(String text, float x, float y, int color, boolean shadow, CallbackInfoReturnable<Integer> cir) {
         if (mc.world != null) cir.setReturnValue(FontUtil.getCurrentCustomFont().drawStringWithShadow(text, x, y, color));
     }
@@ -23,5 +23,5 @@ public final class MixinFontRenderer {
     @Inject(method = "getStringWidth", at = @At("HEAD"), cancellable = true)
     public void onGetStringWidthInvoke(String text, CallbackInfoReturnable<Integer> cir) {
         if (mc.world != null) cir.setReturnValue((int) FontUtil.getCurrentCustomFont().getStringWidth(text));
-    }
+    }*/
 }

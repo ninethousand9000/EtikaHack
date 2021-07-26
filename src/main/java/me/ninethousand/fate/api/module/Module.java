@@ -4,21 +4,21 @@ import com.mojang.realmsclient.gui.ChatFormatting;
 import me.ninethousand.fate.api.command.Command;
 import me.ninethousand.fate.api.settings.Bind;
 import me.ninethousand.fate.api.settings.Setting;
-import me.ninethousand.fate.api.settings.SettingBuilder;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.common.MinecraftForge;
-import org.lwjgl.input.Keyboard;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public abstract class Module {
-    private final Minecraft mc = Minecraft.getMinecraft();
+    protected final Minecraft mc = Minecraft.getMinecraft();
 
     public final List<Setting<?>> settings = new ArrayList<>();
 
     protected final String name = this.getClass().getSimpleName();
     protected ModuleCategory category = getAnnotation().category();
+    protected int key = getAnnotation().bind();
 
     protected final boolean enabledByDefault = getAnnotation().enabledByDefault();
     protected final boolean alwaysEnabled = getAnnotation().alwaysEnabled();
@@ -26,22 +26,11 @@ public abstract class Module {
     protected boolean enabled = alwaysEnabled || enabledByDefault;
     protected boolean opened = false;
     protected boolean binding = false;
+    protected boolean drawn = true;
 
     public boolean nullCheck() {
         return mc.player == null || mc.world == null;
     }
-
-    public final Setting<Bind> bind = new SettingBuilder<>(new Bind(getAnnotation().bind()))
-            .id("Bind")
-            .callback(value -> {
-                if (value.getKey() == Keyboard.KEY_DELETE || value.getKey() == Keyboard.KEY_ESCAPE || value.getKey() == Keyboard.KEY_BACK) value.setKey(0);
-
-                return true;
-            }).construct();
-
-    public final Setting<Boolean> drawn = new SettingBuilder<>(true)
-            .id("Drawn")
-            .construct();
 
     public Module() {
 
@@ -55,7 +44,7 @@ public abstract class Module {
     public void enable() {
         enabled = true;
         MinecraftForge.EVENT_BUS.register(this);
-        Command.sendClientMessageDefault(ChatFormatting.DARK_PURPLE + getName() + ChatFormatting.LIGHT_PURPLE + " was" + ChatFormatting.GREEN + " enabled.");
+        Command.sendClientMessageLine(ChatFormatting.DARK_PURPLE + getName() + ChatFormatting.LIGHT_PURPLE + " was" + ChatFormatting.GREEN + " enabled.");
         onEnable();
     }
 
@@ -63,7 +52,7 @@ public abstract class Module {
         if (!alwaysEnabled) {
             enabled = false;
             MinecraftForge.EVENT_BUS.unregister(this);
-            Command.sendClientMessageDefault(ChatFormatting.DARK_PURPLE + getName() + ChatFormatting.LIGHT_PURPLE + " was" + ChatFormatting.RED + " disabled.");
+            Command.sendClientMessageLine(ChatFormatting.DARK_PURPLE + getName() + ChatFormatting.LIGHT_PURPLE + " was" + ChatFormatting.RED + " disabled.");
             onDisable();
         }
     }
@@ -105,6 +94,34 @@ public abstract class Module {
 
     public void setBinding(boolean binding) {
         this.binding = binding;
+    }
+
+    public List<Setting<?>> getSettings() {
+        return settings;
+    }
+
+    public void addSettings(Setting<?>... settings) {
+        this.settings.addAll(Arrays.asList(settings));
+    }
+
+    public boolean hasSettings() {
+        return this.settings.size() > 0;
+    }
+
+    public boolean isDrawn() {
+        return drawn;
+    }
+
+    public void setDrawn(boolean drawn) {
+        this.drawn = drawn;
+    }
+
+    public void setKey(int key) {
+        this.key = key;
+    }
+
+    public int getKey() {
+        return key;
     }
 
     public void onEnable() {}

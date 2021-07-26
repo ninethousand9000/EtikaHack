@@ -3,13 +3,18 @@ package me.ninethousand.fate.api.util.render.graphics;
 import me.ninethousand.fate.api.util.math.Pair;
 import me.ninethousand.fate.api.util.math.Vec2d;
 import me.ninethousand.fate.api.util.render.gl.VertexHelper;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
 import java.util.ArrayList;
 
 public class GraphicsUtil2d {
+    private static final Minecraft mc = Minecraft.getMinecraft();
+
     public static void drawQuadFill(VertexHelper vertexHelper, Vec2d topLeft, Vec2d topRight, Vec2d bottomLeft, Vec2d bottomRight, Color color) {
         prepareGl();
 
@@ -153,6 +158,11 @@ public class GraphicsUtil2d {
         GL11.glLineWidth(1f);
     }
 
+    public static void drawImage(ResourceLocation resourceLocation, int x, int y, float u, float v, int width, int height, float textureWidth, float textureHeight) {
+        mc.getTextureManager().bindTexture(resourceLocation);
+        Gui.drawModalRectWithCustomSizedTexture(x, y, u, v, width, height, textureWidth, textureHeight);
+    }
+
     private static ArrayList<Vec2d> getArcVertices(Vec2d center, double radius, Pair<Float, Float> angleRange, int segments) {
         double range = Math.max(angleRange.first, angleRange.last) - Math.min(angleRange.first, angleRange.last);
         double seg = calculateSegments(segments, radius, range);
@@ -160,7 +170,7 @@ public class GraphicsUtil2d {
 
         ArrayList<Vec2d> vec2ds = new ArrayList<>();
 
-        for (int i = 0; i < seg; i++) {
+        for (int i = 0; i < seg + 1; i++) {
             double angle = Math.toRadians(i * segAngle + angleRange.first);
             vec2ds.add(new Vec2d(Math.sin(angle), -Math.cos(angle)).times(radius).plus(center));
         }
