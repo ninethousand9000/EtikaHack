@@ -1,6 +1,11 @@
 package me.ninethousand.fate.api.module;
 
 import me.ninethousand.fate.impl.modules.client.ClickGUI;
+import me.ninethousand.fate.impl.modules.client.ClientColor;
+import me.ninethousand.fate.impl.modules.client.ClientFont;
+import me.ninethousand.fate.impl.modules.hud.Coords;
+import me.ninethousand.fate.impl.modules.hud.Watermark;
+import me.ninethousand.fate.impl.modules.hud.Welcomer;
 import me.ninethousand.fate.impl.modules.movement.Strafe;
 
 import java.util.ArrayList;
@@ -14,8 +19,14 @@ public class ModuleManager {
         modules.addAll(Arrays.asList(
                 //Client
                 new ClickGUI(),
+                new ClientFont(),
+                new ClientColor(),
                 //Movement
-                new Strafe()
+                new Strafe(),
+                //Hud
+                new Watermark(),
+                new Coords(),
+                new Welcomer()
         ));
 
         modules.sort(ModuleManager::order);

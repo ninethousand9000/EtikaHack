@@ -2,9 +2,11 @@ package me.ninethousand.fate.api.module;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
 import me.ninethousand.fate.api.command.Command;
+import me.ninethousand.fate.api.event.events.RenderEvent2d;
 import me.ninethousand.fate.api.settings.Bind;
 import me.ninethousand.fate.api.settings.Setting;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.ScaledResolution;
 import net.minecraftforge.common.MinecraftForge;
 
 import java.util.ArrayList;
@@ -131,4 +133,6 @@ public abstract class Module {
     public void onUpdate() {}
 
     public void onTick() {}
+
+    public void onHudRender(RenderEvent2d event) {}
 }

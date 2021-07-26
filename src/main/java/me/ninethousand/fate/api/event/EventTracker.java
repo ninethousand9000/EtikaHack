@@ -1,10 +1,15 @@
 package me.ninethousand.fate.api.event;
 
+import me.ninethousand.fate.api.event.events.RenderEvent2d;
 import me.ninethousand.fate.api.module.Module;
 import me.ninethousand.fate.api.module.ModuleManager;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
@@ -49,6 +54,15 @@ public class EventTracker {
         if (nullCheck()) return;
         for (Module module : ModuleManager.getModules())
             if (module.isEnabled()) module.onTick();
+    }
 
+    @SubscribeEvent(priority = EventPriority.LOW)
+    public void onRenderGameOverlayEvent(RenderGameOverlayEvent.Text event) {
+        ScaledResolution resolution = new ScaledResolution(mc);
+        RenderEvent2d renderEvent2D = new RenderEvent2d(event.getPartialTicks(), resolution);
+        ModuleManager.getModules().stream().forEach(module -> {
+            if (module.isEnabled()) module.onHudRender(renderEvent2D);
+        });
+        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
     }
 }

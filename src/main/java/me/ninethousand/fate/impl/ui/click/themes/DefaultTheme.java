@@ -16,6 +16,7 @@ import me.ninethousand.fate.api.util.render.font.FontUtil;
 import me.ninethousand.fate.api.util.render.graphics.DrawUtil;
 import me.ninethousand.fate.api.util.render.graphics.GraphicsUtil2d;
 import me.ninethousand.fate.impl.modules.client.ClickGUI;
+import me.ninethousand.fate.impl.modules.client.ClientColor;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.util.ResourceLocation;
@@ -43,7 +44,7 @@ public final class DefaultTheme extends Theme {
     @Override
     public void drawTitles(String name, int x, int y, ModuleCategory category) {
         Gui.drawRect(x, y, (x + width), y + height + 2, 0xFF2F2F2F);
-        Gui.drawRect(x, y + height + 2, (x + width), y + height + 3, Color.white.getRGB());
+        Gui.drawRect(x, y + height + 2, (x + width), y + height + 3, ClientColor.clientColor.getValue().getRGB());
 
         FontUtil.drawText(name, x + 2, y + 2, -1);
 
@@ -209,7 +210,7 @@ public final class DefaultTheme extends Theme {
             }
         }
 
-        Gui.drawRect(x, y + height + (boost * height), x + 1, (y + height) + height + (boost * height), Color.white.getRGB());
+        Gui.drawRect(x, y + height + (boost * height), x + 1, (y + height) + height + (boost * height), ClientColor.clientColor.getValue().getRGB());
         Gui.drawRect(x + 1, y + height + (boost * height), (x + width), (y + height) + height + (boost * height), color);
 
         if (setting.hasSubSettings()) {
@@ -254,7 +255,7 @@ public final class DefaultTheme extends Theme {
             }
         }
 
-        Gui.drawRect(x, y + height + (boost * height), x + 2, (y + height) + height + (boost * height), Color.white.getRGB());
+        Gui.drawRect(x, y + height + (boost * height), x + 2, (y + height) + height + (boost * height), ClientColor.clientColor.getValue().getRGB());
         Gui.drawRect(x + 2, y + height + (boost * height), (x + width), (y + height) + height + (boost * height), color);
 
         FontUtil.drawText(subSetting.getName(), x + 6, (y + height) + 3 + (boost * height), -1);
@@ -273,7 +274,7 @@ public final class DefaultTheme extends Theme {
             }
         }
 
-        Gui.drawRect(x, y + height + (boost * height), x + 1, (y + height) + height + (boost * height), Color.white.getRGB());
+        Gui.drawRect(x, y + height + (boost * height), x + 1, (y + height) + height + (boost * height), ClientColor.clientColor.getValue().getRGB());
         Gui.drawRect(x + 1, y + height + (boost * height), (x + width), (y + height) + height + (boost * height), color);
 
         if (setting.hasSubSettings()) {
@@ -314,7 +315,7 @@ public final class DefaultTheme extends Theme {
             }
         }
 
-        Gui.drawRect(x, y + height + (boost * height), x + 2, (y + height) + height + (boost * height), Color.white.getRGB());
+        Gui.drawRect(x, y + height + (boost * height), x + 2, (y + height) + height + (boost * height), ClientColor.clientColor.getValue().getRGB());
         Gui.drawRect(x + 2, y + height + (boost * height), (x + width), (y + height) + height + (boost * height), color);
 
         FontUtil.drawText(subSetting.getName() + ChatFormatting.GRAY + " " + subSetting.getValue(), x + 6, (y + height) + 3 + (boost * height), -1);
@@ -337,7 +338,7 @@ public final class DefaultTheme extends Theme {
             pixAdd = 1;
         }
 
-        Gui.drawRect(x, y + height + (boost * height), x + 1, (y + height) + height + (boost * height), Color.white.getRGB());
+        Gui.drawRect(x, y + height + (boost * height), x + 1, (y + height) + height + (boost * height), ClientColor.clientColor.getValue().getRGB());
         Gui.drawRect(x + 1, y + height + (boost * height), (x + width), (y + height) + height + (boost * height), color);
         Gui.drawRect(x + 1, y + height + (boost * height), (x) + pixAdd, (y + height) + height + (boost * height), 0xFF2F2F2F);
 
@@ -386,7 +387,7 @@ public final class DefaultTheme extends Theme {
             pixAdd = 2;
         }
 
-        Gui.drawRect(x, y + height + (boost * height), x + 2, (y + height) + height + (boost * height), Color.white.getRGB());
+        Gui.drawRect(x, y + height + (boost * height), x + 2, (y + height) + height + (boost * height), ClientColor.clientColor.getValue().getRGB());
         Gui.drawRect(x + 2, y + height + (boost * height), (x + width), (y + height) + height + (boost * height), color);
         Gui.drawRect(x + 2, y + height + (boost * height), (x) + pixAdd, (y + height) + height + (boost * height), 0xFF2F2F2F);
 
@@ -409,7 +410,7 @@ public final class DefaultTheme extends Theme {
             pixAdd = 1;
         }
 
-        Gui.drawRect(x, y + height + (boost * height), x + 1, (y + height) + height + (boost * height), Color.white.getRGB());
+        Gui.drawRect(x, y + height + (boost * height), x + 1, (y + height) + height + (boost * height), ClientColor.clientColor.getValue().getRGB());
         Gui.drawRect(x + 1, y + height + (boost * height), (x + width), (y + height) + height + (boost * height), color);
         Gui.drawRect(x + 1, y + height + (boost * height), (x) + pixAdd, (y + height) + height + (boost * height), 0xFF2F2F2F);
 
@@ -458,7 +459,7 @@ public final class DefaultTheme extends Theme {
             pixAdd = 2;
         }
 
-        Gui.drawRect(x, y + height + (boost * height), x + 2, (y + height) + height + (boost * height), Color.white.getRGB());
+        Gui.drawRect(x, y + height + (boost * height), x + 2, (y + height) + height + (boost * height), ClientColor.clientColor.getValue().getRGB());
         Gui.drawRect(x + 2, y + height + (boost * height), (x + width), (y + height) + height + (boost * height), color);
         Gui.drawRect(x + 2, y + height + (boost * height), (x) + pixAdd, (y + height) + height + (boost * height), 0xFF2F2F2F);
 
@@ -481,7 +482,7 @@ public final class DefaultTheme extends Theme {
             pixAdd = 1;
         }
 
-        Gui.drawRect(x, y + height + (boost * height), x + 1, (y + height) + height + (boost * height), Color.white.getRGB());
+        Gui.drawRect(x, y + height + (boost * height), x + 1, (y + height) + height + (boost * height), ClientColor.clientColor.getValue().getRGB());
         Gui.drawRect(x + 1, y + height + (boost * height), (x + width), (y + height) + height + (boost * height), color);
         Gui.drawRect(x + 1, y + height + (boost * height), (x) + pixAdd, (y + height) + height + (boost * height), 0xFF2F2F2F);
 
@@ -530,7 +531,7 @@ public final class DefaultTheme extends Theme {
             pixAdd = 2;
         }
 
-        Gui.drawRect(x, y + height + (boost * height), x + 2, (y + height) + height + (boost * height), Color.white.getRGB());
+        Gui.drawRect(x, y + height + (boost * height), x + 2, (y + height) + height + (boost * height), ClientColor.clientColor.getValue().getRGB());
         Gui.drawRect(x + 2, y + height + (boost * height), (x + width), (y + height) + height + (boost * height), color);
         Gui.drawRect(x + 2, y + height + (boost * height), (x) + pixAdd, (y + height) + height + (boost * height), 0xFF2F2F2F);
 
@@ -546,7 +547,7 @@ public final class DefaultTheme extends Theme {
             }
         }
 
-        Gui.drawRect(x, y + height + (boost * height), x + 1, (y + height) + height + (boost * height), Color.white.getRGB());
+        Gui.drawRect(x, y + height + (boost * height), x + 1, (y + height) + height + (boost * height), ClientColor.clientColor.getValue().getRGB());
         Gui.drawRect(x + 1, y + height + (boost * height), (x + width), (y + height) + height + (boost * height), color);
 
         if (module.isDrawn()) {
@@ -574,7 +575,7 @@ public final class DefaultTheme extends Theme {
             module.setBinding(false);
         }
 
-        Gui.drawRect(x, y + height + (boost * height), x + 1, (y + height) + height + (boost * height), Color.white.getRGB());
+        Gui.drawRect(x, y + height + (boost * height), x + 1, (y + height) + height + (boost * height), ClientColor.clientColor.getValue().getRGB());
         Gui.drawRect(x + 1, y + height + (boost * height), (x + width), (y + height) + height + (boost * height), color);
 
         if (module.isBinding()) {
@@ -634,7 +635,7 @@ public final class DefaultTheme extends Theme {
             color[2] = 1 - (restrictedY - (float) pickerY) / pickerHeight;
         }
 
-        Gui.drawRect(pickerX - 3, pickerY - 2, pickerX + pickerWidth + 2, pickerY + pickerHeight + 30, Color.white.getRGB());
+        Gui.drawRect(pickerX - 3, pickerY - 2, pickerX + pickerWidth + 2, pickerY + pickerHeight + 30, ClientColor.clientColor.getValue().getRGB());
         Gui.drawRect(pickerX - 2, pickerY - 2, pickerX + pickerWidth + 2, pickerY + pickerHeight + 30, 0xFF212121);
 
         int selectedColor = Color.HSBtoRGB(color[0], 1.0f, 1.0f);

@@ -7,6 +7,7 @@ public enum ModuleCategory {
     Visual,//
     Exploit,
     Misc,
+    Hud,
     Client;
 
     private boolean openInGui = true;

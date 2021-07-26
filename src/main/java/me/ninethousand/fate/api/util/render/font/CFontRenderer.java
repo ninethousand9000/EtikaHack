@@ -57,11 +57,29 @@ public final class CFontRenderer {
     }
 
     public static Font getFontByName(String name) throws IOException, FontFormatException {
-        if (name == "ProductSans") {
+        if (name == "ProductSans")
             return getFontFromInput("/assets/fate/fonts/ProductSans.ttf");
-        } else {
+
+        else if (name == "Ubuntu")
+            return getFontFromInput("/assets/fate/fonts/Ubuntu.ttf");
+
+        else if (name == "Lato")
+            return getFontFromInput("/assets/fate/fonts/Lato.ttf");
+
+        else if (name == "Verdana")
+            return getFontFromInput("/assets/fate/fonts/Verdana.ttf");
+
+        else if (name == "Comfortaa")
+            return getFontFromInput("/assets/fate/fonts/Comfortaa.ttf");
+
+        else if (name == "Subtitle")
+            return getFontFromInput("/assets/fate/fonts/Subtitle.ttf");
+
+        else if (name == "ComicSans")
+            return getFontFromInput("/assets/fate/fonts/ComicSans.ttf");
+
+        else
             return Font.createFont(Font.TRUETYPE_FONT, new File("/assets/fate/fonts/" + name + ".ttf"));
-        }
     }
 
     private static Font font = null;
