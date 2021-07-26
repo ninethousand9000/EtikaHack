@@ -4,6 +4,20 @@
   "package": "me.ninethousand.fate.mixin",
   "refmap": "refmap.fate.json",
   "mixins": [
-    "mixins.MixinFontRenderer"
+    "mixins.MixinFontRenderer",
+
+    "mixins.MixinMinecraft",
+    "accessors.IMinecraft",
+
+    "mixins.MixinRenderManager",
+    "accessors.IRenderManager",
+
+    "mixins.MixinTimer",
+    "accessors.ITimer",
+
+    "mixins.MixinEntityPlayerSP",
+
+    "mixins.MixinEntity",
+    "accessors.IEntity"
   ]
 }

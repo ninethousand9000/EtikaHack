@@ -4,8 +4,10 @@ import me.ninethousand.fate.api.module.Module;
 import me.ninethousand.fate.api.module.ModuleManager;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
 import org.lwjgl.input.Keyboard;
 
 public class EventTracker {
@@ -33,5 +35,20 @@ public class EventTracker {
                 } catch (Exception ignored) {}
             }
         }
+    }
+
+    @SubscribeEvent
+    public void onUpdate(LivingEvent.LivingUpdateEvent event) {
+        if (nullCheck()) return;
+        for (Module module : ModuleManager.getModules())
+            if (module.isEnabled()) module.onUpdate();
+    }
+
+    @SubscribeEvent
+    public void onTick(TickEvent.ClientTickEvent event) {
+        if (nullCheck()) return;
+        for (Module module : ModuleManager.getModules())
+            if (module.isEnabled()) module.onTick();
+
     }
 }
