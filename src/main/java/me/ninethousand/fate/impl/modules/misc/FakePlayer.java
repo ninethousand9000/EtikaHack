@@ -24,7 +24,6 @@ public class FakePlayer extends Module {
     @Override
     public void onUpdate() {
         fakePlayer.setHealth(mc.player.getHealth());
-        fakePlayer.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS));
         fakePlayer.rotationYawHead = mc.player.rotationYawHead;
         fakePlayer.inventory = mc.player.inventory;
     }

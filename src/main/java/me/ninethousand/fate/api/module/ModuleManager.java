@@ -9,6 +9,7 @@ import me.ninethousand.fate.impl.modules.hud.Watermark;
 import me.ninethousand.fate.impl.modules.hud.Welcomer;
 import me.ninethousand.fate.impl.modules.misc.FakePlayer;
 import me.ninethousand.fate.impl.modules.movement.Strafe;
+import me.ninethousand.fate.impl.modules.visual.PopEsp;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,7 +32,9 @@ public class ModuleManager {
                 new Welcomer(),
                 new TargetHud(),
                 //Misc
-                new FakePlayer()
+                new FakePlayer(),
+                //Visual
+                new PopEsp()
         ));
 
         modules.sort(ModuleManager::order);

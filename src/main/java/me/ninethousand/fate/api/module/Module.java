@@ -3,6 +3,7 @@ package me.ninethousand.fate.api.module;
 import com.mojang.realmsclient.gui.ChatFormatting;
 import me.ninethousand.fate.api.command.Command;
 import me.ninethousand.fate.api.event.events.RenderEvent2d;
+import me.ninethousand.fate.api.event.events.RenderEvent3d;
 import me.ninethousand.fate.api.settings.Bind;
 import me.ninethousand.fate.api.settings.Setting;
 import me.ninethousand.fate.api.util.render.gl.VertexHelper;
@@ -136,4 +137,7 @@ public abstract class Module {
     public void onTick() {}
 
     public void onHudRender(RenderEvent2d event, VertexHelper vertexHelper) {}
+
+    public void onWorldRender(RenderEvent3d event3d) {}
+
 }
