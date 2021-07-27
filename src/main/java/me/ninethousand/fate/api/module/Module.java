@@ -5,6 +5,7 @@ import me.ninethousand.fate.api.command.Command;
 import me.ninethousand.fate.api.event.events.RenderEvent2d;
 import me.ninethousand.fate.api.settings.Bind;
 import me.ninethousand.fate.api.settings.Setting;
+import me.ninethousand.fate.api.util.render.gl.VertexHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraftforge.common.MinecraftForge;
@@ -134,5 +135,5 @@ public abstract class Module {
 
     public void onTick() {}
 
-    public void onHudRender(RenderEvent2d event) {}
+    public void onHudRender(RenderEvent2d event, VertexHelper vertexHelper) {}
 }

@@ -1,10 +1,12 @@
 package me.ninethousand.fate.api.util.math;
 
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class TimeUtil {
     public static int getHour() {
-        return Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+        Calendar calendar = GregorianCalendar.getInstance();
+        return calendar.get(Calendar.HOUR_OF_DAY);
     }
 
     public static int getDay() {

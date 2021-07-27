@@ -4,8 +4,10 @@ import me.ninethousand.fate.impl.modules.client.ClickGUI;
 import me.ninethousand.fate.impl.modules.client.ClientColor;
 import me.ninethousand.fate.impl.modules.client.ClientFont;
 import me.ninethousand.fate.impl.modules.hud.Coords;
+import me.ninethousand.fate.impl.modules.hud.TargetHud;
 import me.ninethousand.fate.impl.modules.hud.Watermark;
 import me.ninethousand.fate.impl.modules.hud.Welcomer;
+import me.ninethousand.fate.impl.modules.misc.FakePlayer;
 import me.ninethousand.fate.impl.modules.movement.Strafe;
 
 import java.util.ArrayList;
@@ -26,7 +28,10 @@ public class ModuleManager {
                 //Hud
                 new Watermark(),
                 new Coords(),
-                new Welcomer()
+                new Welcomer(),
+                new TargetHud(),
+                //Misc
+                new FakePlayer()
         ));
 
         modules.sort(ModuleManager::order);

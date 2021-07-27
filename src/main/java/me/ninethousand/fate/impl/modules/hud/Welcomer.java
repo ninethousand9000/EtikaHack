@@ -11,6 +11,7 @@ import me.ninethousand.fate.api.settings.Setting;
 import me.ninethousand.fate.api.util.math.TimeUtil;
 import me.ninethousand.fate.api.util.render.font.FontUtil;
 import me.ninethousand.fate.api.util.render.gl.GlStateHelper;
+import me.ninethousand.fate.api.util.render.gl.VertexHelper;
 import me.ninethousand.fate.api.util.rotation.RotationUtil;
 import me.ninethousand.fate.impl.modules.client.ClientColor;
 import net.minecraft.client.gui.ScaledResolution;
@@ -26,7 +27,7 @@ public class Welcomer extends Module {
     }
 
     @Override
-    public void onHudRender(RenderEvent2d event) {
+    public void onHudRender(RenderEvent2d event, VertexHelper vertexHelper) {
         GlStateManager.pushMatrix();
         GlStateHelper.scale(scale.getValue());
 

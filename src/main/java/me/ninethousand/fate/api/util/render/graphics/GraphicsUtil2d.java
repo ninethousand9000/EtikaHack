@@ -2,10 +2,14 @@ package me.ninethousand.fate.api.util.render.graphics;
 
 import me.ninethousand.fate.api.util.math.Pair;
 import me.ninethousand.fate.api.util.math.Vec2d;
+import me.ninethousand.fate.api.util.render.font.FontUtil;
 import me.ninethousand.fate.api.util.render.gl.VertexHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.ItemRenderer;
+import net.minecraft.client.renderer.RenderItem;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
@@ -161,6 +165,25 @@ public class GraphicsUtil2d {
     public static void drawImage(ResourceLocation resourceLocation, int x, int y, float u, float v, int width, int height, float textureWidth, float textureHeight) {
         mc.getTextureManager().bindTexture(resourceLocation);
         Gui.drawModalRectWithCustomSizedTexture(x, y, u, v, width, height, textureWidth, textureHeight);
+    }
+
+    public static void drawItem(ItemStack item, int x, int y, int amount, boolean drawAmount) {
+        RenderItem itemRenderer = mc.getRenderItem();
+
+        GlStateManager.enableTexture2D();
+        GlStateManager.enableDepth();
+        itemRenderer.zLevel = 200.0f;
+        itemRenderer.renderItemAndEffectIntoGUI(item, x, y);
+        itemRenderer.renderItemOverlayIntoGUI(mc.fontRenderer, item, x, y, "");
+        itemRenderer.zLevel = 0.0f;
+        GlStateManager.enableTexture2D();
+        GlStateManager.disableLighting();
+        GlStateManager.disableDepth();
+        if (drawAmount && amount > 0) {
+            FontUtil.drawText(amount + "", x + 17 - FontUtil.getStringWidth(amount + ""), y + FontUtil.getStringHeight("]"), Color.white.getRGB());
+        }
+        GlStateManager.enableDepth();
+        GlStateManager.disableLighting();
     }
 
     private static ArrayList<Vec2d> getArcVertices(Vec2d center, double radius, Pair<Float, Float> angleRange, int segments) {

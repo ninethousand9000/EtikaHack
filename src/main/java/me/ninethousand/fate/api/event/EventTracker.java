@@ -3,6 +3,7 @@ package me.ninethousand.fate.api.event;
 import me.ninethousand.fate.api.event.events.RenderEvent2d;
 import me.ninethousand.fate.api.module.Module;
 import me.ninethousand.fate.api.module.ModuleManager;
+import me.ninethousand.fate.api.util.render.gl.VertexHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
@@ -61,7 +62,7 @@ public class EventTracker {
         ScaledResolution resolution = new ScaledResolution(mc);
         RenderEvent2d renderEvent2D = new RenderEvent2d(event.getPartialTicks(), resolution);
         ModuleManager.getModules().stream().forEach(module -> {
-            if (module.isEnabled()) module.onHudRender(renderEvent2D);
+            if (module.isEnabled()) module.onHudRender(renderEvent2D, new VertexHelper(true));
         });
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
     }

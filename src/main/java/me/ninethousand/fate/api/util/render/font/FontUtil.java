@@ -7,33 +7,26 @@ import net.minecraft.client.Minecraft;
 public final class FontUtil {
     private static final Minecraft mc = Minecraft.getMinecraft();
 
-    public static final CFontRenderer productSansFont = new CFontRenderer("ProductSans", 17.0f);
-    public static final CFontRenderer ubuntuFont = new CFontRenderer("Ubuntu", 17.0f);
-    public static final CFontRenderer latoFont = new CFontRenderer("Lato", 17.0f);
-    public static final CFontRenderer verdanaFont = new CFontRenderer("Verdana", 17.0f);
-    public static final CFontRenderer comfortaaFont = new CFontRenderer("Comfortaa", 20.0f);
-    public static final CFontRenderer subtitleFont = new CFontRenderer("Subtitle", 17.0f);
-    public static final CFontRenderer comicSansFont = new CFontRenderer("ComicSans", 17.0f);
+    public static CFontRenderer productSansFont = new CFontRenderer("ProductSans", 17.0f);
+    public static CFontRenderer ubuntuFont = new CFontRenderer("Ubuntu", 17.0f);
+    public static CFontRenderer latoFont = new CFontRenderer("Lato", 17.0f);
+    public static CFontRenderer verdanaFont = new CFontRenderer("Verdana", 17.0f);
+    public static CFontRenderer comfortaaFont = new CFontRenderer("Comfortaa", 20.0f);
+    public static CFontRenderer subtitleFont = new CFontRenderer("Subtitle", 17.0f);
+    public static CFontRenderer comicSansFont = new CFontRenderer("ComicSans", 17.0f);
+
+    private static int currentSize;
+    private static String currentFontName;
+    private static CFontRenderer current;
 
     public static CFontRenderer getCurrentCustomFont() {
-        switch (ClientFont.font.getValue()) {
-            case ProductSans:
-                return productSansFont;
-            case Ubuntu:
-                return ubuntuFont;
-            case Lato:
-                return latoFont;
-            case Verdana:
-                return verdanaFont;
-            case Comfortaa:
-                return comfortaaFont;
-            case Subtitle:
-                return subtitleFont;
-            case ComicSans:
-                return comicSansFont;
+        if (ClientFont.size.getValue() != currentSize || ClientFont.font.getValue().toString() != currentFontName) {
+            currentSize = ClientFont.size.getValue();
+            currentFontName = ClientFont.font.getValue().toString();
+            current = new CFontRenderer(currentFontName, currentSize);
         }
 
-        return productSansFont;
+        return current;
     }
 
     public static int drawText(String text, float x, float y, int color) {

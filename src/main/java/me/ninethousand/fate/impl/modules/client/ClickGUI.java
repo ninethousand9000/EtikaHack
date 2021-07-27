@@ -6,7 +6,9 @@ import me.ninethousand.fate.api.module.ModuleCategory;
 import me.ninethousand.fate.api.settings.NumberSetting;
 import me.ninethousand.fate.api.settings.Setting;
 import me.ninethousand.fate.api.ui.click.screen.ClickScreen;
+import net.minecraft.client.gui.GuiScreenWorking;
 import net.minecraft.client.renderer.OpenGlHelper;
+import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Keyboard;
 
@@ -40,6 +42,7 @@ public class ClickGUI extends Module {
         if (nullCheck()) return;
 
         mc.displayGuiScreen(new ClickScreen());
+
 
         if (OpenGlHelper.shadersSupported) {
             try {
