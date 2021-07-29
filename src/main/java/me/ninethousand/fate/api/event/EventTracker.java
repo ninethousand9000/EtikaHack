@@ -3,8 +3,10 @@ package me.ninethousand.fate.api.event;
 import com.mojang.realmsclient.gui.ChatFormatting;
 import me.ninethousand.fate.api.command.Command;
 import me.ninethousand.fate.api.command.CommandManager;
+import me.ninethousand.fate.api.event.events.PacketEvent;
 import me.ninethousand.fate.api.event.events.RenderEvent2d;
 import me.ninethousand.fate.api.event.events.RenderEvent3d;
+import me.ninethousand.fate.api.event.events.TotemPopEvent;
 import me.ninethousand.fate.api.module.Module;
 import me.ninethousand.fate.api.module.ModuleManager;
 import me.ninethousand.fate.api.util.render.gl.GLUProjection;
@@ -13,6 +15,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GLAllocation;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.network.play.server.SPacketEntityStatus;
 import net.minecraftforge.client.event.ClientChatEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
@@ -118,6 +122,19 @@ public class EventTracker {
         GlStateManager.enableBlend();
         GlStateManager.enableDepth();
         mc.profiler.endSection();
+    }
+
+    @SubscribeEvent
+    public void onPacketReceive(PacketEvent.Receive event) {
+        if (event.getStage() != EventType.Pre)
+            return;
+        if (event.getPacket() instanceof SPacketEntityStatus) {
+            SPacketEntityStatus packet = event.getPacket();
+            if (packet.getOpCode() == 35 && packet.getEntity(mc.world) instanceof EntityPlayer) {
+                EntityPlayer player = (EntityPlayer) packet.getEntity(mc.world);
+                MinecraftForge.EVENT_BUS.post(new TotemPopEvent(player));
+            }
+        }
     }
 
     /*@SubscribeEvent(priority = EventPriority.HIGHEST)

@@ -6,6 +6,12 @@
   "mixins": [
     "mixins.MixinFontRenderer",
 
+    "mixins.MixinNetworkManager",
+
+    "mixins.MixinRenderLivingBase",
+
+    "mixins.MixinRenderPlayer",
+
     "mixins.MixinMinecraft",
     "accessors.IMinecraft",
 
