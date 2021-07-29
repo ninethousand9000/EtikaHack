@@ -9,6 +9,6 @@ public class EntityPopGhost extends EntityOtherPlayerMP {
 
     public EntityPopGhost(World worldIn, GameProfile gameProfileIn) {
         super(worldIn, gameProfileIn);
-        this.alpha = 255;
+        this.alpha = 240;
     }
 }

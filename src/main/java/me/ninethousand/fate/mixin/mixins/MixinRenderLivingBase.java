@@ -1,8 +1,10 @@
 package me.ninethousand.fate.mixin.mixins;
 
+import me.ninethousand.fate.Fate;
 import me.ninethousand.fate.api.module.ModuleManager;
 import me.ninethousand.fate.api.util.misc.popghost.EntityPopGhost;
 import me.ninethousand.fate.impl.modules.visual.Chams;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityOtherPlayerMP;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.GlStateManager;
@@ -103,7 +105,7 @@ public abstract class MixinRenderLivingBase<T extends EntityLivingBase> extends 
                     if (flag1)
                         unsetScoreTeamColor();
                 } else {
-                    if (ModuleManager.getModule(Chams.class).isEnabled() && Chams.players.getValue() && entity instanceof EntityPlayer && Chams.playerMode.getValue() == Chams.ChamMode.Fill) {
+                    if (ModuleManager.getModule(Chams.class).isEnabled() && Chams.players.getValue() && entity instanceof EntityPlayer && Chams.playerMode.getValue() == Chams.ChamMode.Fill && !(entity instanceof EntityPopGhost)) {
                         this.red = Chams.playerColor.getValue().getRed() / 255.0F;
                         this.green = Chams.playerColor.getValue().getGreen() / 255.0F;
                         this.blue = Chams.playerColor.getValue().getBlue() / 255.0F;
@@ -133,9 +135,17 @@ public abstract class MixinRenderLivingBase<T extends EntityLivingBase> extends 
                     }
 
                     if (ModuleManager.getModule(Chams.class).isEnabled() && Chams.pops.getValue() && entity instanceof EntityPopGhost && Chams.popMode.getValue() == Chams.ChamMode.Fill) {
-                        this.red = Chams.popColor.getValue().getRed() / 255.0F;
-                        this.green = Chams.popColor.getValue().getGreen() / 255.0F;
-                        this.blue = Chams.popColor.getValue().getBlue() / 255.0F;
+                        if (entity.getName() == Minecraft.getMinecraft().player.getName()) {
+                            this.red = Chams.selfPopColor.getValue().getRed() / 255.0F;
+                            this.green = Chams.selfPopColor.getValue().getGreen() / 255.0F;
+                            this.blue = Chams.selfPopColor.getValue().getBlue() / 255.0F;
+                        }
+                        else {
+                            this.red = Chams.popColor.getValue().getRed() / 255.0F;
+                            this.green = Chams.popColor.getValue().getGreen() / 255.0F;
+                            this.blue = Chams.popColor.getValue().getBlue() / 255.0F;
+                        }
+
                         float alpha = ((EntityPopGhost) entity).alpha / 255.0f;
 
                         GlStateManager.pushMatrix();
@@ -170,7 +180,7 @@ public abstract class MixinRenderLivingBase<T extends EntityLivingBase> extends 
                     if (!(entity instanceof EntityPlayer) || !((EntityPlayer) entity).isSpectator())
                         renderLayers(entity, f6, f5, partialTicks, f8, f2, f7, f4);
 
-                    if ((ModuleManager.getModule(Chams.class).isEnabled() && (Chams.players.getValue() && entity instanceof EntityPlayer && (Chams.playerMode.getValue() == Chams.ChamMode.Wireframe)))) {
+                    if ((ModuleManager.getModule(Chams.class).isEnabled() && (Chams.players.getValue() && entity instanceof EntityPlayer && (Chams.playerMode.getValue() == Chams.ChamMode.Wireframe))) && !(entity instanceof EntityPopGhost)) {
                         GlStateManager.pushMatrix();
                         GL11.glPushAttrib(1048575);
                         GL11.glPolygonMode(1032, 6913);

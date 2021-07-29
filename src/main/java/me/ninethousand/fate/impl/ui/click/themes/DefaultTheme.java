@@ -134,8 +134,7 @@ public final class DefaultTheme extends Theme {
             if (setting.getValue() instanceof Color) {
                 Setting<Color> colorSetting = (Setting<Color>) setting;
                 drawColourPicker(colorSetting, x, y, mouseX, mouseY);
-
-                boost += 8;
+                boost += 6;
             }
 
             if (setting.getValue() instanceof Integer) {
@@ -170,8 +169,7 @@ public final class DefaultTheme extends Theme {
                     if (subSetting.getValue() instanceof Color) {
                         Setting<Color> colorSubSetting = (Setting<Color>) subSetting;
                         drawColourPicker(colorSubSetting, x, y, mouseX, mouseY);
-
-                        boost += 8;
+                        boost += 6;
                     }
 
                     if (subSetting.getValue() instanceof Integer) {

@@ -17,6 +17,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import java.awt.*;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 import java.util.Random;
 import java.util.UUID;
 
@@ -26,7 +27,7 @@ public class Chams extends Module {
     public static final Setting<Boolean> playerModel = new Setting<>(players, "PlayerModel", true);
     public static final Setting<ChamMode> playerMode = new Setting<>(players, "PlayerMode", ChamMode.Fill);
     public static final Setting<Color> playerColor = new Setting<>(players,"PlayerColor", new Color(0xB3FFFFFF, true));
-    public static final Setting<Color> friendColor = new Setting<>(players,"FriendColor", new Color(0xB300FFE3, true));
+    public static final Setting<Color> playerfriendColor = new Setting<>(players,"FriendColor", new Color(0xB300FFE3, true));
     public static final NumberSetting<Float> playerOutlineWidth = new NumberSetting<>(players,"PlayerOutlineWidth", 0.1f, 1.0f, 5.0f, 1);
 
     public static final Setting<Boolean> crystals = new Setting<>("Crystals", true);
@@ -38,6 +39,8 @@ public class Chams extends Module {
     public static final Setting<Boolean> pops = new Setting<>("Pops", true);
     public static final Setting<ChamMode> popMode = new Setting<>(pops, "PopMode", ChamMode.Fill);
     public static final Setting<Color> popColor = new Setting<>(pops,"PopColor", new Color(0xB3FFFFFF, true));
+    public static final Setting<Color> friendPopColor = new Setting<>(pops,"PopColor", new Color(0xB300FFE3, true));
+    public static final Setting<Color> selfPopColor = new Setting<>(pops,"SelfPopColor", new Color(0xA8FF0000, true));
     public static final NumberSetting<Float> popOutlineWidth = new NumberSetting<>(pops,"PopOutlineWidth", 0.1f, 1.0f, 5.0f, 1);
     public static final NumberSetting<Float> popFadeSpeed = new NumberSetting<>(pops,"FadeSpeed", 0.1f, 0.7f, 2.0f, 2);
 
@@ -56,26 +59,31 @@ public class Chams extends Module {
     public void onWorldRender(RenderEvent3d event3d) {
         playersToDelete.clear();
 
-        playersToRender.forEach(ghost -> {
-            if (ghost.alpha > 0) {
-                ghost.alpha -= popFadeSpeed.getValue();
-                mc.getRenderManager().renderEntity(ghost, ghost.posX - mc.getRenderManager().viewerPosX, ghost.posY - mc.getRenderManager().viewerPosY, ghost.posZ - mc.getRenderManager().viewerPosZ, ghost.rotationYaw, 1.0f, false);
+        try {
+            for (EntityPopGhost ghost : playersToRender) {
+                if (ghost.alpha - popFadeSpeed.getValue() > 0) {
+                    ghost.alpha -= popFadeSpeed.getValue();
+                    mc.getRenderManager().renderEntity(ghost, ghost.posX - mc.getRenderManager().viewerPosX, ghost.posY - mc.getRenderManager().viewerPosY, ghost.posZ - mc.getRenderManager().viewerPosZ, ghost.rotationYawHead, 1.0f, false);
+                }
+                else {
+                    playersToDelete.add(ghost);
+                }
             }
-            else {
-                playersToDelete.add(ghost);
-            }
-        });
 
-        playersToDelete.forEach(ghost -> {
-            playersToRender.remove(ghost);
-        });
+            for (EntityPopGhost ghost : playersToDelete) {
+                playersToRender.remove(ghost);
+            }
+        }
+
+        catch (ConcurrentModificationException fuckOffCunt) {
+            // bastard
+        }
     }
 
     @SubscribeEvent
     public void onTotemPop(TotemPopEvent event) {
-        EntityPopGhost ghostyBoi = new EntityPopGhost(mc.world, new GameProfile(UUID.fromString("e4ea5edb-e317-433f-ac90-ef304841d8c8"), "Ghosty"));
+        EntityPopGhost ghostyBoi = new EntityPopGhost(mc.world, new GameProfile(UUID.fromString("e4ea5edb-e317-433f-ac90-ef304841d8c8"), event.getName()));
         ghostyBoi.copyLocationAndAnglesFrom(event.getPlayer());
-        ghostyBoi.rotationPitch = 0;
         playersToRender.add(ghostyBoi);
     }
 
