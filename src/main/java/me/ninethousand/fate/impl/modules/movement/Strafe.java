@@ -1,6 +1,5 @@
 package me.ninethousand.fate.impl.modules.movement;
 
-import me.ninethousand.fate.Fate;
 import me.ninethousand.fate.api.event.events.MoveEvent;
 import me.ninethousand.fate.api.module.Module;
 import me.ninethousand.fate.api.module.ModuleAnnotation;
@@ -13,10 +12,9 @@ import me.ninethousand.fate.mixin.accessors.IEntity;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.init.MobEffects;
 import net.minecraft.potion.Potion;
-import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-@ModuleAnnotation(category = ModuleCategory.Movement)
+@ModuleAnnotation(category = ModuleCategory.MOVEMENT)
 public class Strafe extends Module {
     public static final NumberSetting<Float> speed = new NumberSetting<>("Speed", 0.0f, 0.4f, 1.0f, 2);
     public static final NumberSetting<Float> timerSpeed = new NumberSetting<>("Timer", 1.0f, 1.15f, 1.5f, 2);

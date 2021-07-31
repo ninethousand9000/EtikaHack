@@ -6,13 +6,12 @@ import me.ninethousand.fate.api.module.ModuleCategory;
 import me.ninethousand.fate.api.settings.NumberSetting;
 import me.ninethousand.fate.api.settings.Setting;
 import me.ninethousand.fate.api.ui.click.screen.ClickScreen;
-import net.minecraft.client.gui.GuiScreenWorking;
+import me.ninethousand.fate.api.ui.newgui.ClickGUIScreen;
 import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Keyboard;
 
-@ModuleAnnotation(category = ModuleCategory.Client, bind = Keyboard.KEY_RCONTROL)
+@ModuleAnnotation(category = ModuleCategory.CLIENT, bind = Keyboard.KEY_RCONTROL)
 public class ClickGUI extends Module {
     public static final Setting<ThemeModes> theme = new Setting<>("Theme", ThemeModes.Default);
     public static final Setting<BackgroundModes> backgroundMode = new Setting<>("Background", BackgroundModes.Blur);
@@ -41,10 +40,10 @@ public class ClickGUI extends Module {
     public void onEnable() {
         if (nullCheck()) return;
 
-        mc.displayGuiScreen(new ClickScreen());
+        mc.displayGuiScreen(new ClickGUIScreen());
 
 
-        if (OpenGlHelper.shadersSupported) {
+        /*if (OpenGlHelper.shadersSupported) {
             try {
                 if (backgroundMode.getValue() == BackgroundModes.Blur) {
                     mc.entityRenderer.loadShader(new ResourceLocation("shaders/post/blur.json"));
@@ -52,7 +51,7 @@ public class ClickGUI extends Module {
             } catch (Exception ignored) {}
         }
 
-        this.toggle();
+        this.toggle();*/
     }
 
     public enum ThemeModes {

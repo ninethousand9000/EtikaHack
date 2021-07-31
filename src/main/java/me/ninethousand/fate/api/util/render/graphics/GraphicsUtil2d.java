@@ -18,6 +18,8 @@ import java.util.ArrayList;
 
 public class GraphicsUtil2d {
     private static final Minecraft mc = Minecraft.getMinecraft();
+    public static final VertexHelper vertexHelperUB = new VertexHelper(true);
+    public static final VertexHelper vertexHelperNB = new VertexHelper(false);
 
     public static void drawQuadFill(VertexHelper vertexHelper, Vec2d topLeft, Vec2d topRight, Vec2d bottomLeft, Vec2d bottomRight, Color color) {
         prepareGl();

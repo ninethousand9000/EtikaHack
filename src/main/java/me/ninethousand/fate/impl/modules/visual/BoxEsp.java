@@ -21,7 +21,7 @@ import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
 
-@ModuleAnnotation(category = ModuleCategory.Visual)
+@ModuleAnnotation(category = ModuleCategory.VISUAL)
 public class BoxEsp extends Module {
     public static final Setting<Boolean> items = new Setting<>("Items", true);
     public static final Setting<Boolean> xpBottles = new Setting<>("XPBottles", true);

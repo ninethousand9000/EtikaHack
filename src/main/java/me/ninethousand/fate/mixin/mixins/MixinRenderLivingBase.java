@@ -172,7 +172,7 @@ public abstract class MixinRenderLivingBase<T extends EntityLivingBase> extends 
                     }
 
                     boolean flag1 = setDoRenderBrightness(entity, partialTicks);
-                    if (!(entity instanceof EntityPlayer) || (ModuleManager.getModule(Chams.class).isEnabled() && Chams.playerMode.getValue() == Chams.ChamMode.Wireframe && Chams.playerModel.getValue() || !((ModuleManager.getModule(Chams.class).isEnabled()))))
+                    if (!(entity instanceof EntityPlayer) || (ModuleManager.getModule(Chams.class).isEnabled() && Chams.playerMode.getValue() == Chams.ChamMode.Wireframe && Chams.playerModel.getValue() || !((ModuleManager.getModule(Chams.class).isEnabled()))) || !Chams.players.getValue())
                         renderModel(entity, f6, f5, f8, f2, f7, f4);
                     if (flag1)
                         unsetBrightness();

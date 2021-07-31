@@ -9,19 +9,14 @@ import me.ninethousand.fate.api.module.ModuleCategory;
 import me.ninethousand.fate.api.settings.NumberSetting;
 import me.ninethousand.fate.api.settings.Setting;
 import me.ninethousand.fate.api.util.misc.popghost.EntityPopGhost;
-import me.ninethousand.fate.api.util.misc.popghost.PopGhost;
-import net.minecraft.client.entity.EntityOtherPlayerMP;
-import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.awt.*;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
-import java.util.Random;
 import java.util.UUID;
 
-@ModuleAnnotation(category = ModuleCategory.Visual)
+@ModuleAnnotation(category = ModuleCategory.VISUAL)
 public class Chams extends Module {
     public static final Setting<Boolean> players = new Setting<>("Players", true);
     public static final Setting<Boolean> playerModel = new Setting<>(players, "PlayerModel", true);

@@ -12,9 +12,7 @@ import me.ninethousand.fate.api.util.render.gl.VertexHelper;
 import me.ninethousand.fate.impl.modules.client.ClientColor;
 import net.minecraft.client.renderer.GlStateManager;
 
-import java.awt.*;
-
-@ModuleAnnotation(category = ModuleCategory.Hud)
+@ModuleAnnotation(category = ModuleCategory.HUD)
 public class Watermark extends Module {
     public static final NumberSetting<Float> scale = new NumberSetting<>("Scale", 0.1f, 1.0f, 10.0f, 1);
 

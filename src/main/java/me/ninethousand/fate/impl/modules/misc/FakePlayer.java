@@ -5,12 +5,10 @@ import me.ninethousand.fate.api.module.Module;
 import me.ninethousand.fate.api.module.ModuleAnnotation;
 import me.ninethousand.fate.api.module.ModuleCategory;
 import net.minecraft.client.entity.EntityOtherPlayerMP;
-import net.minecraft.init.MobEffects;
-import net.minecraft.potion.PotionEffect;
 
 import java.util.UUID;
 
-@ModuleAnnotation(category = ModuleCategory.Misc)
+@ModuleAnnotation(category = ModuleCategory.MISC)
 public class FakePlayer extends Module {
     private EntityOtherPlayerMP fakePlayer;
 

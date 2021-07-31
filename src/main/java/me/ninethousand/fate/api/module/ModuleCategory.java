@@ -1,14 +1,13 @@
 package me.ninethousand.fate.api.module;
 
 public enum ModuleCategory {
-    Combat,//
-    Movement,//
-    Player,//
-    Visual,//
-    Exploit,
-    Misc,
-    Hud,
-    Client;
+    COMBAT,//
+    MOVEMENT,//
+    PLAYER,//
+    VISUAL,//
+    MISC,
+    HUD,
+    CLIENT;
 
     private boolean openInGui = true;
 

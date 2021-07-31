@@ -1,7 +1,5 @@
 package me.ninethousand.fate.impl.modules.hud;
 
-import com.mojang.realmsclient.gui.ChatFormatting;
-import me.ninethousand.fate.Fate;
 import me.ninethousand.fate.api.event.events.RenderEvent2d;
 import me.ninethousand.fate.api.module.Module;
 import me.ninethousand.fate.api.module.ModuleAnnotation;
@@ -12,12 +10,11 @@ import me.ninethousand.fate.api.util.math.TimeUtil;
 import me.ninethousand.fate.api.util.render.font.FontUtil;
 import me.ninethousand.fate.api.util.render.gl.GlStateHelper;
 import me.ninethousand.fate.api.util.render.gl.VertexHelper;
-import me.ninethousand.fate.api.util.rotation.RotationUtil;
 import me.ninethousand.fate.impl.modules.client.ClientColor;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
 
-@ModuleAnnotation(category = ModuleCategory.Hud)
+@ModuleAnnotation(category = ModuleCategory.HUD)
 public class Welcomer extends Module {
     public static final Setting<Boolean> time = new Setting<>("Time", true);
     public static final NumberSetting<Float> scale = new NumberSetting<>("Scale", 0.1f, 1.0f, 10.0f, 1);

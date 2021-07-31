@@ -1,24 +1,40 @@
-package me.ninethousand.fate.api.ui.click.screen;
+package me.ninethousand.fate.api.ui.newgui;
 
+import me.ninethousand.fate.Fate;
+import me.ninethousand.fate.api.module.ModuleCategory;
+import me.ninethousand.fate.api.ui.click.screen.ClickWindow;
+import me.ninethousand.fate.api.ui.newgui.components.panel.PanelComponent;
 import me.ninethousand.fate.api.util.misc.GuiUtil;
 import me.ninethousand.fate.impl.modules.client.ClickGUI;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.OpenGlHelper;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
-public final class ClickScreen extends GuiScreen {
+public final class ClickGUIScreen extends GuiScreen {
+    public final ArrayList<PanelComponent> panels = new ArrayList<>();
+    public final int startX = 30, startY = 20, gap = 10, width = 110, height = 20;
+
+    @Override
+    public void initGui() {
+        int drawX = startX;
+        int drawY = startY;
+
+        for (ModuleCategory category : ModuleCategory.values()) {
+            panels.add(new PanelComponent(category, drawX, drawY, width, height));
+            drawX += (gap + width);
+        }
+    }
+
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         super.drawScreen(mouseX, mouseY, partialTicks);
 
-        if (ClickGUI.backgroundMode.getValue() == ClickGUI.BackgroundModes.Vanilla) {
-            this.drawDefaultBackground();
-        }
-
-        for (ClickWindow window : ClickWindow.windows) {
-            window.drawGui(mouseX, mouseY);
-        }
+        panels.forEach(panelComponent -> {
+            panelComponent.drawComponent(mouseX, mouseY);
+            Fate.log("Drawing: " + panelComponent.category.name());
+        });
 
         GuiUtil.updateMousePos(mouseX, mouseY);
     }
@@ -29,18 +45,10 @@ public final class ClickScreen extends GuiScreen {
 
         if (mouseButton == 0) {
             GuiUtil.updateLeftClick();
-
-            for (ClickWindow window : ClickWindow.windows) {
-                window.updateLeftClick();
-            }
         }
 
         if (mouseButton == 1) {
             GuiUtil.updateRightClick();
-
-            for (ClickWindow window : ClickWindow.windows) {
-                window.updateRightClick();
-            }
         }
     }
 
@@ -49,10 +57,6 @@ public final class ClickScreen extends GuiScreen {
         super.mouseReleased(mouseX, mouseY, state);
 
         if (state == 0) {
-            for (ClickWindow window : ClickWindow.windows) {
-                window.updateMouseState();
-            }
-
             GuiUtil.updateMouseState();
         }
     }
@@ -66,11 +70,7 @@ public final class ClickScreen extends GuiScreen {
 
     @Override
     public void onGuiClosed() {
-        if (OpenGlHelper.shadersSupported) {
-            try {
-                mc.entityRenderer.getShaderGroup().deleteShaderGroup();
-            } catch (Exception ignored) {}
-        }
+
     }
 
     @Override

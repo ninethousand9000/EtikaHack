@@ -15,7 +15,7 @@ import me.ninethousand.fate.impl.modules.client.ClientColor;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
 
-@ModuleAnnotation(category = ModuleCategory.Hud)
+@ModuleAnnotation(category = ModuleCategory.HUD)
 public class Coords extends Module {
     public static final Setting<Boolean> direction = new Setting<>("Direction", true);
     public static final Setting<Boolean> position = new Setting<>("Coords", true);

@@ -24,7 +24,7 @@ import java.awt.*;
 import java.util.Comparator;
 import java.util.Objects;
 
-@ModuleAnnotation(category = ModuleCategory.Hud)
+@ModuleAnnotation(category = ModuleCategory.HUD)
 public class TargetHud extends Module {
     public static final Setting<Boolean> potionEffects = new Setting<>("Potions", true);
         public static final Setting<Boolean> speed = new Setting<>(potionEffects, "Speed", true);

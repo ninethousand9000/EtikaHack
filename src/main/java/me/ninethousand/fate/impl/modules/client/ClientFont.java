@@ -7,7 +7,7 @@ import me.ninethousand.fate.api.settings.NumberSetting;
 import me.ninethousand.fate.api.settings.Setting;
 import me.ninethousand.fate.api.util.render.font.CFontRenderer;
 
-@ModuleAnnotation(category = ModuleCategory.Client, enabledByDefault = true)
+@ModuleAnnotation(category = ModuleCategory.CLIENT, enabledByDefault = true)
 public final class ClientFont extends Module {
     public static final Setting<FontModes> font = new Setting<>("Font", FontModes.Comfortaa);
     public static final NumberSetting<Integer> size = new NumberSetting<>("Size", 10, 17, 40, 1);
