@@ -23,7 +23,7 @@ public class Fate {
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        Display.setTitle("fate.tw v" + VERSION);
+        Display.setTitle("JingGod.cc " + VERSION);
         IconUtil.setWindowIcon();
     }
 

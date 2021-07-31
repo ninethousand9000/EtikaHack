@@ -44,11 +44,7 @@ public abstract class GUIComponent {
         this.height = height;
     }
 
-    public abstract void onClicked(int mouseX, int mouseY, int mouseButton);
+    public abstract void onClicked(int mouseX, int mouseY);
 
     public abstract void drawComponent(int mouseX, int mouseY);
-
-    protected boolean isHoveringOverComponent(int mouseX, int mouseY) {
-        return GuiUtil.mouseOver(mouseX, mouseY, mouseX + width, mouseY + height);
-    }
 }

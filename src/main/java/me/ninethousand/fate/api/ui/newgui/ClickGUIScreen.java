@@ -14,7 +14,8 @@ import java.util.ArrayList;
 
 public final class ClickGUIScreen extends GuiScreen {
     public final ArrayList<PanelComponent> panels = new ArrayList<>();
-    public final int startX = 30, startY = 20, gap = 10, width = 110, height = 20;
+    public final int startX = 30, startY = 20, gap = 10, width = 110, height = 18;
+    public static float rotation = 0;
 
     @Override
     public void initGui() {
@@ -33,7 +34,6 @@ public final class ClickGUIScreen extends GuiScreen {
 
         panels.forEach(panelComponent -> {
             panelComponent.drawComponent(mouseX, mouseY);
-            Fate.log("Drawing: " + panelComponent.category.name());
         });
 
         GuiUtil.updateMousePos(mouseX, mouseY);
@@ -50,6 +50,8 @@ public final class ClickGUIScreen extends GuiScreen {
         if (mouseButton == 1) {
             GuiUtil.updateRightClick();
         }
+
+        panels.forEach(panelComponent -> panelComponent.onClicked(mouseX, mouseY));
     }
 
     @Override
