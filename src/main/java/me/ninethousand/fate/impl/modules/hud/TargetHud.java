@@ -12,7 +12,7 @@ import me.ninethousand.fate.api.util.render.font.FontUtil;
 import me.ninethousand.fate.api.util.render.gl.VertexHelper;
 import me.ninethousand.fate.api.util.render.graphics.DrawUtil;
 import me.ninethousand.fate.api.util.render.graphics.GraphicsUtil2d;
-import me.ninethousand.fate.impl.modules.client.ClientColor;
+import me.ninethousand.fate.impl.modules.client.Customise;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.entity.player.EntityPlayer;
@@ -85,7 +85,7 @@ public class TargetHud extends Module {
 
         String text = ChatFormatting.WHITE + player.getName() + " | " + getPingColor(responseTime) + responseTime + " ms" +ChatFormatting.WHITE + " | " + getHpColor(totalHP) + MathUtil.roundNumber(totalHP, 1) + " HP";
 
-        FontUtil.drawText(text, 62, 58, ClientColor.clientColor.getValue().getRGB());
+        FontUtil.drawText(text, 62, 58, Customise.clientColor.getValue().getRGB());
 
         int y = 78;
 

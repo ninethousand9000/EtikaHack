@@ -12,7 +12,9 @@ public class Setting<T> {
 
     private boolean isOpened;
 
-    private float alpha = 0.2f;
+    private float alpha = 1f;
+
+    private boolean typing = false;
 
     private final ArrayList<Setting<?>> subSettings = new ArrayList<>();
 
@@ -94,6 +96,14 @@ public class Setting<T> {
 
     public void setAlpha(float alpha) {
         this.alpha = alpha;
+    }
+
+    public boolean isTyping() {
+        return typing;
+    }
+
+    public void setTyping(boolean typing) {
+        this.typing = typing;
     }
 
     public Setting<T> register(Module module) {

@@ -1,6 +1,7 @@
 package me.ninethousand.fate.api.command;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
+import me.ninethousand.fate.impl.modules.client.Customise;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.Style;
@@ -27,11 +28,11 @@ public abstract class Command {
     public abstract void doCommand(String[] commands);
 
     public static void sendClientMessageDefault(String message) {
-        mc.player.sendMessage(new TextComponentString(ChatFormatting.DARK_PURPLE + "[" + ChatFormatting.LIGHT_PURPLE + "Fate" + ChatFormatting.DARK_PURPLE + "] " + ChatFormatting.WHITE + message));
+        mc.player.sendMessage(new TextComponentString(ChatFormatting.DARK_PURPLE + "[" + ChatFormatting.LIGHT_PURPLE + Customise.clientName.getValue() + ChatFormatting.DARK_PURPLE + "] " + ChatFormatting.WHITE + message));
     }
 
     public static void sendClientMessageLine(String message) {
-        final ITextComponent itc = new TextComponentString(ChatFormatting.DARK_PURPLE + "[" + ChatFormatting.LIGHT_PURPLE + "Fate" + ChatFormatting.DARK_PURPLE + "] " + ChatFormatting.WHITE + message).setStyle(new Style().setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new TextComponentString("fate.cc"))));
+        final ITextComponent itc = new TextComponentString(ChatFormatting.DARK_PURPLE + "[" + ChatFormatting.LIGHT_PURPLE + Customise.clientName.getValue() + ChatFormatting.DARK_PURPLE + "] " + ChatFormatting.WHITE + message).setStyle(new Style().setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new TextComponentString("fate.cc"))));
         mc.ingameGUI.getChatGUI().printChatMessageWithOptionalDeletion(itc, 5936);
     }
 

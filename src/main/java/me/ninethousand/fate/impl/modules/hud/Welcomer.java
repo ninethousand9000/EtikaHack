@@ -10,7 +10,7 @@ import me.ninethousand.fate.api.util.math.TimeUtil;
 import me.ninethousand.fate.api.util.render.font.FontUtil;
 import me.ninethousand.fate.api.util.render.gl.GlStateHelper;
 import me.ninethousand.fate.api.util.render.gl.VertexHelper;
-import me.ninethousand.fate.impl.modules.client.ClientColor;
+import me.ninethousand.fate.impl.modules.client.Customise;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
 
@@ -51,7 +51,7 @@ public class Welcomer extends Module {
 
         ScaledResolution scaledResolution = new ScaledResolution(mc);
 
-        FontUtil.drawText(text, (scaledResolution.getScaledWidth() / 2 - FontUtil.getStringWidth(text)) / scale.getValue(), 2 / scale.getValue(), ClientColor.clientColor.getValue().getRGB());
+        FontUtil.drawText(text, (scaledResolution.getScaledWidth() / 2 - FontUtil.getStringWidth(text)) / scale.getValue(), 2 / scale.getValue(), Customise.clientColor.getValue().getRGB());
 
         GlStateManager.popMatrix();
     }

@@ -6,8 +6,10 @@ import me.ninethousand.fate.api.module.ModuleManager;
 import me.ninethousand.fate.api.ui.newgui.components.GUIComponent;
 import me.ninethousand.fate.api.ui.newgui.components.category.CategoryHeaderComponent;
 import me.ninethousand.fate.api.ui.newgui.components.category.module.ModuleComponent;
+import me.ninethousand.fate.api.ui.newgui.components.category.module.setting.SettingComponent;
 import me.ninethousand.fate.api.util.math.Vec2d;
 import me.ninethousand.fate.api.util.render.graphics.GraphicsUtil2d;
+import me.ninethousand.fate.impl.modules.client.ClickGUI;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -30,9 +32,6 @@ public class PanelComponent extends GUIComponent {
         components.forEach(guiComponent -> guiComponent.onClicked(mouseX, mouseY));
     }
 
-
-    // hello
-
     @Override
     public void drawComponent(int mouseX, int mouseY) {
         components.clear();
@@ -46,10 +45,18 @@ public class PanelComponent extends GUIComponent {
 
         drawY += drawHeight;
 
+        if (ClickGUI.topAccent.getValue()) drawY += 2;
+
         if (category.isOpenInGui()) {
             for (Module module : ModuleManager.getModulesByCategory(category)) {
                 components.add(new ModuleComponent(module, drawX, drawY, drawWidth, drawHeight));
                 drawY += drawHeight;
+
+                if (module.isOpened()) {
+                    SettingComponent settingComponent = new SettingComponent(module, drawX, drawY, drawWidth, drawHeight);
+                    components.add(settingComponent);
+                    drawY += settingComponent.getBoostY();
+                }
             }
         }
 

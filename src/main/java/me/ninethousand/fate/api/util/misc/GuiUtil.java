@@ -1,5 +1,7 @@
 package me.ninethousand.fate.api.util.misc;
 
+import org.lwjgl.input.Keyboard;
+
 public final class GuiUtil {
     public static int mouseX;
     public static int mouseY;
@@ -20,7 +22,7 @@ public final class GuiUtil {
         leftDown = false;
         rightDown = false;
 
-        keyDown = -1;
+        keyDown = Keyboard.KEY_NONE;
     }
 
     public static void updateLeftClick() {

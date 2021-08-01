@@ -5,33 +5,21 @@ import me.ninethousand.fate.api.module.ModuleAnnotation;
 import me.ninethousand.fate.api.module.ModuleCategory;
 import me.ninethousand.fate.api.settings.NumberSetting;
 import me.ninethousand.fate.api.settings.Setting;
-import me.ninethousand.fate.api.ui.click.screen.ClickScreen;
 import me.ninethousand.fate.api.ui.newgui.ClickGUIScreen;
-import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Keyboard;
 
 @ModuleAnnotation(category = ModuleCategory.CLIENT, bind = Keyboard.KEY_RCONTROL)
 public class ClickGUI extends Module {
-    public static final Setting<ThemeModes> theme = new Setting<>("Theme", ThemeModes.Default);
+    public static final Setting<Boolean> topAccent = new Setting<>("TopAccent", true);
     public static final Setting<BackgroundModes> backgroundMode = new Setting<>("Background", BackgroundModes.Blur);
-    public static final Setting<Boolean> windowOverflow = new Setting<>("Window Overflow", false);
     public static final NumberSetting<Integer> scrollSpeed = new NumberSetting<>("Scroll Speed", 0, 10, 20, 0);
-
-    public static final Setting<NameModes> nameMode = new Setting<>("Names", NameModes.Shrink);
-    public static final Setting<IndicatorModes> indicatorMode = new Setting<>("Indicators", IndicatorModes.Shrink);
     public static final Setting<PauseModes> pauseGame = new Setting<>("Pause Game", PauseModes.Continue);
-
-    public static ClickScreen screen = null;
 
     public ClickGUI() {
         addSettings(
-                theme,
+                topAccent,
                 backgroundMode,
-                windowOverflow,
                 scrollSpeed,
-                nameMode,
-                indicatorMode,
                 pauseGame
         );
     }
@@ -41,17 +29,6 @@ public class ClickGUI extends Module {
         if (nullCheck()) return;
 
         mc.displayGuiScreen(new ClickGUIScreen());
-
-
-        /*if (OpenGlHelper.shadersSupported) {
-            try {
-                if (backgroundMode.getValue() == BackgroundModes.Blur) {
-                    mc.entityRenderer.loadShader(new ResourceLocation("shaders/post/blur.json"));
-                }
-            } catch (Exception ignored) {}
-        }
-
-        this.toggle();*/
     }
 
     public enum ThemeModes {

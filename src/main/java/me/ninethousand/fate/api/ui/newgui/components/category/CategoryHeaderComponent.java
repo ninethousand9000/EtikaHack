@@ -8,6 +8,9 @@ import me.ninethousand.fate.api.util.math.Vec2d;
 import me.ninethousand.fate.api.util.misc.GuiUtil;
 import me.ninethousand.fate.api.util.render.font.FontUtil;
 import me.ninethousand.fate.api.util.render.graphics.GraphicsUtil2d;
+import me.ninethousand.fate.impl.modules.client.ClickGUI;
+
+import java.awt.*;
 
 public class CategoryHeaderComponent extends GUIComponent {
     public ModuleCategory category;
@@ -29,8 +32,15 @@ public class CategoryHeaderComponent extends GUIComponent {
         GraphicsUtil2d.drawRectFill(GraphicsUtil2d.vertexHelperUB,
                 new Vec2d(getPositionX(), getPositionY()),
                 new Vec2d(getPositionX() + getWidth(), getPositionY() + getHeight()),
-                GuiColors.normal);
+                new Color(GuiColors.normal.getRed(), GuiColors.normal.getGreen(), GuiColors.normal.getBlue(), 200));
 
         FontUtil.drawText(category.name(), getPositionX() + getWidth() / 2 - FontUtil.getStringWidth(category.name()) / 2, getPositionY() + 4, GuiColors.font.getRGB());
+
+        if (ClickGUI.topAccent.getValue()) {
+            GraphicsUtil2d.drawRectFill(GraphicsUtil2d.vertexHelperUB,
+                new Vec2d(getPositionX(), getPositionY() + getHeight()),
+                new Vec2d(getPositionX() + getWidth(), getPositionY() + getHeight() + 2),
+                new Color(GuiColors.accent.getRed(), GuiColors.accent.getGreen(), GuiColors.accent.getBlue(), 255));
+        }
     }
 }

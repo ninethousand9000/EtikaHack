@@ -9,7 +9,7 @@ import me.ninethousand.fate.api.util.render.font.CFontRenderer;
 
 @ModuleAnnotation(category = ModuleCategory.CLIENT, enabledByDefault = true)
 public final class ClientFont extends Module {
-    public static final Setting<FontModes> font = new Setting<>("Font", FontModes.Comfortaa);
+    public static final Setting<FontModes> font = new Setting<>("Font", FontModes.Roboto);
     public static final NumberSetting<Integer> size = new NumberSetting<>("Size", 10, 17, 40, 1);
     public static final Setting<Boolean> overrideMinecraft = new Setting<>("Override Minecraft", false);
     public static final Setting<Boolean> shadow = new Setting<>("Shadow", true);
@@ -39,6 +39,8 @@ public final class ClientFont extends Module {
         Verdana,
         Comfortaa,
         Subtitle,
-        ComicSans
+        ComicSans,
+        SergoeUI,
+        Roboto
     }
 }

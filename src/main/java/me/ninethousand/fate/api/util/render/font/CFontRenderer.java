@@ -78,6 +78,12 @@ public final class CFontRenderer {
         else if (name == "ComicSans")
             return getFontFromInput("/assets/fate/fonts/ComicSans.ttf");
 
+        else if (name == "SergoeUI")
+            return getFontFromInput("/assets/fate/fonts/SergoeUI.ttf");
+
+        else if (name == "Roboto")
+            return getFontFromInput("/assets/fate/fonts/Roboto.ttf");
+
         else
             return Font.createFont(Font.TRUETYPE_FONT, new File("/assets/fate/fonts/" + name + ".ttf"));
     }

@@ -9,7 +9,7 @@ import me.ninethousand.fate.api.settings.NumberSetting;
 import me.ninethousand.fate.api.util.render.font.FontUtil;
 import me.ninethousand.fate.api.util.render.gl.GlStateHelper;
 import me.ninethousand.fate.api.util.render.gl.VertexHelper;
-import me.ninethousand.fate.impl.modules.client.ClientColor;
+import me.ninethousand.fate.impl.modules.client.Customise;
 import net.minecraft.client.renderer.GlStateManager;
 
 @ModuleAnnotation(category = ModuleCategory.HUD)
@@ -25,7 +25,7 @@ public class Watermark extends Module {
         GlStateManager.pushMatrix();
         GlStateHelper.scale(scale.getValue());
 
-        FontUtil.drawText(Fate.NAME + Fate.VERSION, 2 / scale.getValue(), 2 / scale.getValue(), ClientColor.clientColor.getValue().getRGB());
+        FontUtil.drawText(Customise.clientName.getValue() + Fate.VERSION, 2 / scale.getValue(), 2 / scale.getValue(), Customise.clientColor.getValue().getRGB());
 
         GlStateManager.popMatrix();
     }

@@ -8,10 +8,11 @@ import me.ninethousand.fate.api.settings.Setting;
 import java.awt.*;
 
 @ModuleAnnotation(category = ModuleCategory.CLIENT, alwaysEnabled = true)
-public class ClientColor extends Module {
+public class Customise extends Module {
+    public static final Setting<String> clientName = new Setting<>("Name", "Fate");
     public static final Setting<Color> clientColor = new Setting<>("Color", new Color(0x8019B8));
 
-    public ClientColor() {
-        addSettings(clientColor);
+    public Customise() {
+        addSettings(clientColor, clientName);
     }
 }

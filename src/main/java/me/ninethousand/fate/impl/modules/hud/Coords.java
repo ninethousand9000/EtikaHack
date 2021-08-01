@@ -11,7 +11,7 @@ import me.ninethousand.fate.api.util.render.font.FontUtil;
 import me.ninethousand.fate.api.util.render.gl.GlStateHelper;
 import me.ninethousand.fate.api.util.render.gl.VertexHelper;
 import me.ninethousand.fate.api.util.rotation.RotationUtil;
-import me.ninethousand.fate.impl.modules.client.ClientColor;
+import me.ninethousand.fate.impl.modules.client.Customise;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
 
@@ -47,12 +47,12 @@ public class Coords extends Module {
         int items = 1;
 
         if (position.getValue()) {
-            FontUtil.drawText(coordinates, 2 / scale.getValue(), (scaledResolution.getScaledHeight() - (items * (FontUtil.getStringHeight("[") + 2))) / scale.getValue(), ClientColor.clientColor.getValue().getRGB());
+            FontUtil.drawText(coordinates, 2 / scale.getValue(), (scaledResolution.getScaledHeight() - (items * (FontUtil.getStringHeight("[") + 2))) / scale.getValue(), Customise.clientColor.getValue().getRGB());
             items++;
         }
 
         if (direction.getValue()) {
-            FontUtil.drawText(dir, 2 / scale.getValue(), (scaledResolution.getScaledHeight() - (items * (FontUtil.getStringHeight("[") + 2))) / scale.getValue(), ClientColor.clientColor.getValue().getRGB());
+            FontUtil.drawText(dir, 2 / scale.getValue(), (scaledResolution.getScaledHeight() - (items * (FontUtil.getStringHeight("[") + 2))) / scale.getValue(), Customise.clientColor.getValue().getRGB());
             items++;
         }
 

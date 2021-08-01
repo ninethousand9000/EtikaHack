@@ -1,13 +1,10 @@
 package me.ninethousand.fate.api.ui.newgui;
 
-import me.ninethousand.fate.Fate;
 import me.ninethousand.fate.api.module.ModuleCategory;
-import me.ninethousand.fate.api.ui.click.screen.ClickWindow;
 import me.ninethousand.fate.api.ui.newgui.components.panel.PanelComponent;
 import me.ninethousand.fate.api.util.misc.GuiUtil;
 import me.ninethousand.fate.impl.modules.client.ClickGUI;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.renderer.OpenGlHelper;
 
 import java.io.IOException;
 import java.util.ArrayList;
