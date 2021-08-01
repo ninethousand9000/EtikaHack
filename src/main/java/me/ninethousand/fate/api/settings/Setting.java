@@ -94,10 +94,6 @@ public class Setting<T> {
             Color c = new Color(Color.HSBtoRGB(hue, 1 - saturation, 1 - brightness));
 
             value = (T) (new Color(c.getRed(), c.getGreen(), c.getBlue(), (int) ((1 - alpha) * 255)));
-
-            if (this == Chams.playerColor) {
-                Fate.log(1 + " ");
-            }
         }
 
         subSettings.forEach(sub -> sub.updateSetting());

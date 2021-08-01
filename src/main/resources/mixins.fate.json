@@ -24,6 +24,9 @@
     "mixins.MixinEntityPlayerSP",
 
     "mixins.MixinEntity",
-    "accessors.IEntity"
+    "accessors.IEntity",
+
+    "mixins.MixinCPacketPlayer",
+    "accessors.ICPacketPlayer"
   ]
 }

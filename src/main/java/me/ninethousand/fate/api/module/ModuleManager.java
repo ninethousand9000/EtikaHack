@@ -3,6 +3,7 @@ package me.ninethousand.fate.api.module;
 import me.ninethousand.fate.impl.modules.client.ClickGUI;
 import me.ninethousand.fate.impl.modules.client.Customise;
 import me.ninethousand.fate.impl.modules.client.ClientFont;
+import me.ninethousand.fate.impl.modules.combat.BlockNuker;
 import me.ninethousand.fate.impl.modules.combat.Surround;
 import me.ninethousand.fate.impl.modules.hud.Coords;
 import me.ninethousand.fate.impl.modules.hud.TargetHud;
@@ -11,6 +12,7 @@ import me.ninethousand.fate.impl.modules.hud.Welcomer;
 import me.ninethousand.fate.impl.modules.misc.FakePlayer;
 import me.ninethousand.fate.impl.modules.misc.SettingTestModule;
 import me.ninethousand.fate.impl.modules.misc.TotemPop;
+import me.ninethousand.fate.impl.modules.misc.VisualRange;
 import me.ninethousand.fate.impl.modules.movement.AntiVoid;
 import me.ninethousand.fate.impl.modules.movement.Strafe;
 import me.ninethousand.fate.impl.modules.visual.BoxEsp;
@@ -31,6 +33,7 @@ public class ModuleManager {
                 new Customise(),
                 //Combat
                 new Surround(),
+                new BlockNuker(),
                 //Movement
                 new Strafe(),
                 new AntiVoid(),
@@ -42,7 +45,7 @@ public class ModuleManager {
                 //Misc
                 new FakePlayer(),
                 new TotemPop(),
-                new SettingTestModule(),
+                new VisualRange(),
                 //Visual
                 new Chams(),
                 new BoxEsp()
