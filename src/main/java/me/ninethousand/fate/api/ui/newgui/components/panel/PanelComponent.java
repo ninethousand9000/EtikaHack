@@ -30,6 +30,9 @@ public class PanelComponent extends GUIComponent {
         components.forEach(guiComponent -> guiComponent.onClicked(mouseX, mouseY));
     }
 
+
+    // hello
+
     @Override
     public void drawComponent(int mouseX, int mouseY) {
         components.clear();
