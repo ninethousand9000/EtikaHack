@@ -7,9 +7,9 @@ public final class GuiUtil {
     public static int mouseY;
     public static int keyDown;
 
+    public static boolean leftClicked;
     public static boolean leftDown;
-    public static boolean leftHeld;
-    public static boolean rightDown;
+    public static boolean rightClicked;
 
     public static boolean mouseOver(int minX, int minY, int maxX, int maxY) {
         return mouseX >= minX && mouseY >= minY && mouseX <= maxX && mouseY <= maxY;
@@ -19,23 +19,23 @@ public final class GuiUtil {
         mouseX = mouseXPos;
         mouseY = mouseYPos;
 
-        leftDown = false;
-        rightDown = false;
+        leftClicked = false;
+        rightClicked = false;
 
         keyDown = Keyboard.KEY_NONE;
     }
 
     public static void updateLeftClick() {
+        leftClicked = true;
         leftDown = true;
-        leftHeld = true;
     }
 
     public static void updateRightClick() {
-        rightDown = true;
+        rightClicked = true;
     }
 
     public static void updateMouseState() {
-        leftHeld = false;
+        leftDown = false;
     }
 
     public static void updateKeyState(int key) {

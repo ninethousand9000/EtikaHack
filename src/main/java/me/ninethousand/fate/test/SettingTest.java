@@ -2,6 +2,8 @@ package me.ninethousand.fate.test;
 
 import me.ninethousand.fate.api.settings.Setting;
 
+import java.awt.*;
+
 public class SettingTest {
     public static Setting<Boolean> mainSetting = new Setting<>("Main", true);
     public static Setting<Boolean> sub1 = new Setting<>(mainSetting, "Sub1", true);
@@ -11,7 +13,12 @@ public class SettingTest {
 
 
     public static void main(String[] args) {
-        drawSetting(mainSetting);
+        for (int i = 0; i < 5; i++) {
+            Color start = new Color(Color.HSBtoRGB((float) i / 5, 1.0f, 1.0f));
+            Color end = new Color(Color.HSBtoRGB((((float) i + 1) / 5), 1.0f, 1.0f));
+            System.out.println("Start:" + i + " Color: " + start);
+            System.out.println("End:" + i + " Color: " + end);
+        }
     }
 
     public static void drawSetting(Setting<?> setting) {

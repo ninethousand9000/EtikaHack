@@ -7,6 +7,7 @@ import me.ninethousand.fate.api.ui.newgui.components.GUIComponent;
 import me.ninethousand.fate.api.ui.newgui.components.category.CategoryHeaderComponent;
 import me.ninethousand.fate.api.ui.newgui.components.category.module.ModuleComponent;
 import me.ninethousand.fate.api.ui.newgui.components.category.module.setting.SettingComponent;
+import me.ninethousand.fate.api.ui.newgui.components.category.module.setting.settings.BindComponent;
 import me.ninethousand.fate.api.util.math.Vec2d;
 import me.ninethousand.fate.api.util.render.graphics.GraphicsUtil2d;
 import me.ninethousand.fate.impl.modules.client.ClickGUI;
@@ -56,6 +57,9 @@ public class PanelComponent extends GUIComponent {
                     SettingComponent settingComponent = new SettingComponent(module, drawX, drawY, drawWidth, drawHeight);
                     components.add(settingComponent);
                     drawY += settingComponent.getBoostY();
+                    BindComponent bindComponent = new BindComponent(module, drawX, drawY, drawWidth, drawHeight);
+                    components.add(bindComponent);
+                    drawY += getHeight();
                 }
             }
         }

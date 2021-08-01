@@ -1,6 +1,7 @@
 package me.ninethousand.fate.impl.modules.visual;
 
 import com.mojang.authlib.GameProfile;
+import me.ninethousand.fate.Fate;
 import me.ninethousand.fate.api.event.events.RenderEvent3d;
 import me.ninethousand.fate.api.event.events.TotemPopEvent;
 import me.ninethousand.fate.api.module.Module;
@@ -80,6 +81,11 @@ public class Chams extends Module {
         EntityPopGhost ghostyBoi = new EntityPopGhost(mc.world, new GameProfile(UUID.fromString("e4ea5edb-e317-433f-ac90-ef304841d8c8"), event.getName()));
         ghostyBoi.copyLocationAndAnglesFrom(event.getPlayer());
         playersToRender.add(ghostyBoi);
+    }
+
+    @Override
+    public void onUpdate() {
+//        Fate.log((int) (1 - playerColor.getAlpha()) * 255 + " alpha");
     }
 
     public enum ChamMode {

@@ -33,6 +33,8 @@ public final class ClickGUIScreen extends GuiScreen {
             panelComponent.drawComponent(mouseX, mouseY);
         });
 
+        panels.forEach(panelComponent -> panelComponent.onClicked(mouseX, mouseY));
+
         GuiUtil.updateMousePos(mouseX, mouseY);
     }
 
@@ -47,8 +49,6 @@ public final class ClickGUIScreen extends GuiScreen {
         if (mouseButton == 1) {
             GuiUtil.updateRightClick();
         }
-
-        panels.forEach(panelComponent -> panelComponent.onClicked(mouseX, mouseY));
     }
 
     @Override

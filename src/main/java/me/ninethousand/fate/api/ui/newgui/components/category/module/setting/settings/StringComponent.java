@@ -22,8 +22,8 @@ public class StringComponent extends GUIComponent {
     @Override
     public void onClicked(int mouseX, int mouseY) {
         if (GuiUtil.mouseOver(getPositionX(), getPositionY(), getPositionX() + getWidth(), getPositionY() + getHeight())) {
-            if (GuiUtil.rightDown) setting.setOpened(!setting.isOpened());
-            if (GuiUtil.leftDown) setting.setTyping(!setting.isTyping());
+            if (GuiUtil.rightClicked) setting.setOpened(!setting.isOpened());
+            if (GuiUtil.leftClicked) setting.setTyping(!setting.isTyping());
         }
     }
 

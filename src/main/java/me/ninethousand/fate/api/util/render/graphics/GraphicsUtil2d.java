@@ -50,6 +50,33 @@ public class GraphicsUtil2d {
         releaseGl();
     }
 
+    public static void drawRectGradient(VertexHelper vertexHelper, Vec2d topLeft, Vec2d bottomRight, Color startColor, Color endColor, boolean horizontal) {
+        Vec2d topRight = new Vec2d(bottomRight.x, topLeft.y);
+        Vec2d bottomLeft = new Vec2d(topLeft.x, bottomRight.y);
+
+        prepareGl();
+
+        if (horizontal) {
+            vertexHelper.begin(GL11.GL_QUAD_STRIP);
+            vertexHelper.put(topLeft, startColor);
+            vertexHelper.put(bottomLeft, startColor);
+            vertexHelper.put(topRight, endColor);
+            vertexHelper.put(bottomRight, endColor);
+            vertexHelper.end();
+        }
+
+        else {
+            vertexHelper.begin(GL11.GL_QUAD_STRIP);
+            vertexHelper.put(topLeft, startColor);
+            vertexHelper.put(topRight, startColor);
+            vertexHelper.put(bottomLeft, endColor);
+            vertexHelper.put(bottomRight, endColor);
+            vertexHelper.end();
+        }
+
+        releaseGl();
+    }
+
     public static void drawRoundedRectangleFilled(VertexHelper vertexHelper, Vec2d top, Vec2d bottom, double radius, int segments, Color color) {
         Vec2d vertex1 = new Vec2d(bottom.x, top.y);
         Vec2d vertex2 = new Vec2d(top.x, bottom.y);

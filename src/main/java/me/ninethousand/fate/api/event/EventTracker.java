@@ -1,14 +1,12 @@
 package me.ninethousand.fate.api.event;
 
-import com.mojang.realmsclient.gui.ChatFormatting;
-import me.ninethousand.fate.api.command.Command;
-import me.ninethousand.fate.api.command.CommandManager;
 import me.ninethousand.fate.api.event.events.PacketEvent;
 import me.ninethousand.fate.api.event.events.RenderEvent2d;
 import me.ninethousand.fate.api.event.events.RenderEvent3d;
 import me.ninethousand.fate.api.event.events.TotemPopEvent;
 import me.ninethousand.fate.api.module.Module;
 import me.ninethousand.fate.api.module.ModuleManager;
+import me.ninethousand.fate.api.settings.Setting;
 import me.ninethousand.fate.api.util.render.gl.GLUProjection;
 import me.ninethousand.fate.api.util.render.gl.VertexHelper;
 import net.minecraft.client.Minecraft;
@@ -17,7 +15,6 @@ import net.minecraft.client.renderer.GLAllocation;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.play.server.SPacketEntityStatus;
-import net.minecraftforge.client.event.ClientChatEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.common.MinecraftForge;
@@ -29,6 +26,7 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
+import java.awt.*;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 
@@ -62,8 +60,11 @@ public class EventTracker {
     @SubscribeEvent
     public void onUpdate(LivingEvent.LivingUpdateEvent event) {
         if (nullCheck()) return;
-        for (Module module : ModuleManager.getModules())
+        for (Module module : ModuleManager.getModules()) {
             if (module.isEnabled()) module.onUpdate();
+
+            module.getSettings().forEach(setting -> setting.updateSetting());
+        }
     }
 
     @SubscribeEvent

@@ -109,7 +109,7 @@ public abstract class MixinRenderLivingBase<T extends EntityLivingBase> extends 
                         this.red = Chams.playerColor.getValue().getRed() / 255.0F;
                         this.green = Chams.playerColor.getValue().getGreen() / 255.0F;
                         this.blue = Chams.playerColor.getValue().getBlue() / 255.0F;
-                        float alpha = Chams.playerColor.getAlpha();
+                        float alpha = Chams.playerColor.getValue().getAlpha() / 255.0F;
 
                         GlStateManager.pushMatrix();
                         GL11.glPushAttrib(1048575);
@@ -194,7 +194,7 @@ public abstract class MixinRenderLivingBase<T extends EntityLivingBase> extends 
                         this.red = Chams.playerColor.getValue().getRed() / 255.0F;
                         this.green = Chams.playerColor.getValue().getGreen() / 255.0F;
                         this.blue = Chams.playerColor.getValue().getBlue() / 255.0F;
-                        float alpha = Chams.playerColor.getAlpha();
+                        float alpha = Chams.playerColor.getValue().getAlpha() / 255.0F;
 
                         GL11.glColor4f(red, green, blue, alpha);
                         GL11.glLineWidth(Chams.playerOutlineWidth.getValue());
@@ -218,7 +218,7 @@ public abstract class MixinRenderLivingBase<T extends EntityLivingBase> extends 
                         this.red = Chams.popColor.getValue().getRed() / 255.0F;
                         this.green = Chams.popColor.getValue().getGreen() / 255.0F;
                         this.blue = Chams.popColor.getValue().getBlue() / 255.0F;
-                        float alpha = Chams.popColor.getAlpha();
+                        float alpha = Chams.popColor.getValue().getAlpha() / 255.0F;
 
                         GL11.glColor4f(red, green, blue, alpha);
                         GL11.glLineWidth(Chams.playerOutlineWidth.getValue());

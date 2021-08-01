@@ -9,8 +9,6 @@ import me.ninethousand.fate.api.util.render.font.FontUtil;
 import me.ninethousand.fate.api.util.render.graphics.GraphicsUtil2d;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class BooleanComponent extends GUIComponent {
     public Setting<Boolean> setting;
@@ -23,8 +21,8 @@ public class BooleanComponent extends GUIComponent {
     @Override
     public void onClicked(int mouseX, int mouseY) {
         if (GuiUtil.mouseOver(getPositionX(), getPositionY(), getPositionX() + getWidth(), getPositionY() + getHeight())) {
-            if (GuiUtil.rightDown) setting.setOpened(!setting.isOpened());
-            if (GuiUtil.leftDown) setting.setValue(!setting.getValue());
+            if (GuiUtil.rightClicked) setting.setOpened(!setting.isOpened());
+            if (GuiUtil.leftClicked) setting.setValue(!setting.getValue());
         }
     }
 

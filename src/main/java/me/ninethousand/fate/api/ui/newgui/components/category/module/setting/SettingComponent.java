@@ -1,14 +1,14 @@
 package me.ninethousand.fate.api.ui.newgui.components.category.module.setting;
 
 import me.ninethousand.fate.api.module.Module;
+import me.ninethousand.fate.api.settings.NumberSetting;
 import me.ninethousand.fate.api.settings.Setting;
 import me.ninethousand.fate.api.ui.newgui.GuiColors;
 import me.ninethousand.fate.api.ui.newgui.components.GUIComponent;
-import me.ninethousand.fate.api.ui.newgui.components.category.module.setting.settings.BooleanComponent;
-import me.ninethousand.fate.api.ui.newgui.components.category.module.setting.settings.EnumComponent;
-import me.ninethousand.fate.api.ui.newgui.components.category.module.setting.settings.StringComponent;
+import me.ninethousand.fate.api.ui.newgui.components.category.module.setting.settings.*;
 import me.ninethousand.fate.api.util.math.Vec2d;
 import me.ninethousand.fate.api.util.render.graphics.GraphicsUtil2d;
+import scala.Int;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -58,6 +58,26 @@ public class SettingComponent extends GUIComponent {
         else if (setting.getValue() instanceof String) {
             settingComponents.add(new StringComponent((Setting<String>) setting, drawX, drawY, getWidth(), getHeight()));
             drawY += getHeight();
+        }
+
+        else if (setting.getValue() instanceof Integer) {
+            settingComponents.add(new IntegerComponent((NumberSetting<Integer>) setting, drawX, drawY, getWidth(), getHeight()));
+            drawY += getHeight();
+        }
+
+        else if (setting.getValue() instanceof Float) {
+            settingComponents.add(new FloatComponent((NumberSetting<Float>) setting, drawX, drawY, getWidth(), getHeight()));
+            drawY += getHeight();
+        }
+
+        else if (setting.getValue() instanceof Double) {
+            settingComponents.add(new DoubleComponent((NumberSetting<Double>) setting, drawX, drawY, getWidth(), getHeight()));
+            drawY += getHeight();
+        }
+
+        else if (setting.getValue() instanceof Color) {
+            settingComponents.add(new BetterColorComponent((Setting<Color>) setting, drawX, drawY, getWidth(), getHeight()));
+            drawY += setting.isOpened() ? getHeight() + (20 - getHeight()) + 40 + getHeight() : getHeight();
         }
 
         if (setting.isOpened()) setting.getSubSettings().forEach(setting1 -> createSettings(setting1));

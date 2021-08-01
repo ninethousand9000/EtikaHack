@@ -1,6 +1,5 @@
 package me.ninethousand.fate.api.ui.newgui.components.category;
 
-import me.ninethousand.fate.Fate;
 import me.ninethousand.fate.api.module.ModuleCategory;
 import me.ninethousand.fate.api.ui.newgui.GuiColors;
 import me.ninethousand.fate.api.ui.newgui.components.GUIComponent;
@@ -23,7 +22,7 @@ public class CategoryHeaderComponent extends GUIComponent {
     @Override
     public void onClicked(int mouseX, int mouseY) {
         if (GuiUtil.mouseOver(getPositionX(), getPositionY(), getPositionX() + getWidth(), getPositionY() + getHeight())) {
-            if (GuiUtil.rightDown) category.setOpenInGui(!category.isOpenInGui());
+            if (GuiUtil.rightClicked) category.setOpenInGui(!category.isOpenInGui());
         }
     }
 
