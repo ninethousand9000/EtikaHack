@@ -3,6 +3,7 @@ package me.ninethousand.fate.api.module;
 import me.ninethousand.fate.impl.modules.client.ClickGUI;
 import me.ninethousand.fate.impl.modules.client.Customise;
 import me.ninethousand.fate.impl.modules.client.ClientFont;
+import me.ninethousand.fate.impl.modules.client.RPC;
 import me.ninethousand.fate.impl.modules.combat.BlockNuker;
 import me.ninethousand.fate.impl.modules.combat.Surround;
 import me.ninethousand.fate.impl.modules.hud.Coords;
@@ -17,6 +18,8 @@ import me.ninethousand.fate.impl.modules.movement.AntiVoid;
 import me.ninethousand.fate.impl.modules.movement.Strafe;
 import me.ninethousand.fate.impl.modules.visual.BoxEsp;
 import me.ninethousand.fate.impl.modules.visual.Chams;
+import me.ninethousand.fate.impl.modules.visual.EtikaMode;
+import me.ninethousand.fate.impl.modules.visual.VoidEsp;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,6 +34,7 @@ public class ModuleManager {
                 new ClickGUI(),
                 new ClientFont(),
                 new Customise(),
+                new RPC(),
                 //Combat
                 new Surround(),
                 new BlockNuker(),
@@ -46,6 +50,8 @@ public class ModuleManager {
                 new FakePlayer(),
                 new TotemPop(),
                 new VisualRange(),
+                new VoidEsp(),
+                new EtikaMode(),
                 //Visual
                 new Chams(),
                 new BoxEsp()

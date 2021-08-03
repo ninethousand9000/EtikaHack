@@ -47,7 +47,7 @@ public class FontUtil {
     }
 
     public static float getStringHeight(String text) {
-        return 4.5f;
+        return 9f;
     }
 
     /*public static float getStringWidth(String text) {

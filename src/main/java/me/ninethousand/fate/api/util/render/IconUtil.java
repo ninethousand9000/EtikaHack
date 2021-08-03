@@ -15,8 +15,8 @@ import java.util.Arrays;
 public class IconUtil {
     public static void setWindowIcon() {
         if (Util.getOSType() != Util.EnumOS.OSX) {
-            try (InputStream inputStream16x = Minecraft.class.getResourceAsStream("/assets/fate/logos/newlogo-16x.png");
-                 InputStream inputStream32x = Minecraft.class.getResourceAsStream("/assets/fate/logos/newlogo-32x.png")) {
+            try (InputStream inputStream16x = Minecraft.class.getResourceAsStream("/assets/fate/logos/etika16.png");
+                 InputStream inputStream32x = Minecraft.class.getResourceAsStream("/assets/fate/logos/etika32.png")) {
                 ByteBuffer[] icons = new ByteBuffer[]{readImageToBuffer(inputStream16x), readImageToBuffer(inputStream32x)};
                 Display.setIcon(icons);
             } catch (Exception e) {

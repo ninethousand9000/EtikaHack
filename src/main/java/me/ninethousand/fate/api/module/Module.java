@@ -7,6 +7,7 @@ import me.ninethousand.fate.api.event.events.RenderEvent3d;
 import me.ninethousand.fate.api.settings.Bind;
 import me.ninethousand.fate.api.settings.Setting;
 import me.ninethousand.fate.api.util.render.gl.VertexHelper;
+import me.ninethousand.fate.impl.modules.client.Customise;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraftforge.common.MinecraftForge;
@@ -48,7 +49,7 @@ public abstract class Module {
     public void enable() {
         enabled = true;
         MinecraftForge.EVENT_BUS.register(this);
-        Command.sendClientMessageLine(ChatFormatting.DARK_PURPLE + getName() + ChatFormatting.LIGHT_PURPLE + " was" + ChatFormatting.GREEN + " enabled.");
+        Command.sendClientMessageLine(Customise.moduleColor.getValue().getFormatting() + name + ChatFormatting.GREEN + " enabled");
         onEnable();
     }
 
@@ -56,7 +57,7 @@ public abstract class Module {
         if (!alwaysEnabled) {
             enabled = false;
             MinecraftForge.EVENT_BUS.unregister(this);
-            Command.sendClientMessageLine(ChatFormatting.DARK_PURPLE + getName() + ChatFormatting.LIGHT_PURPLE + " was" + ChatFormatting.RED + " disabled.");
+            Command.sendClientMessageLine(Customise.moduleColor.getValue().getFormatting() + name + ChatFormatting.RED + " disabled");
             onDisable();
         }
     }

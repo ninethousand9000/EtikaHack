@@ -25,7 +25,7 @@ public class Watermark extends Module {
         GlStateManager.pushMatrix();
         GlStateHelper.scale(scale.getValue());
 
-        FontUtil.drawText(Customise.clientName.getValue() + Fate.VERSION, 2 / scale.getValue(), 2 / scale.getValue(), Customise.clientColor.getValue().getRGB());
+        FontUtil.drawText(Customise.clientName.getValue() + " v" + Fate.VERSION , 2 / scale.getValue(), 2 / scale.getValue(), Customise.clientColor.getValue().getRGB());
 
         GlStateManager.popMatrix();
     }

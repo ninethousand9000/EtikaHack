@@ -15,14 +15,14 @@ import org.lwjgl.opengl.Display;
 public class Fate {
     public static final String MODID = "fate";
     public static final String NAME = "Fate";
-    public static final String VERSION = "1.1";
+    public static final String VERSION = "1.1.1";
 
     public static final Logger LOGGER = LogManager.getLogger(MODID);
     public static final EventTracker EVENT_TRACKER = new EventTracker();
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        Display.setTitle("JingGod.cc " + VERSION);
+        Display.setTitle("EtikaHack v" + VERSION);
         IconUtil.setWindowIcon();
     }
 

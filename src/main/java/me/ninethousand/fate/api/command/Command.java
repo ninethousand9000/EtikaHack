@@ -28,11 +28,11 @@ public abstract class Command {
     public abstract void doCommand(String[] commands);
 
     public static void sendClientMessageDefault(String message) {
-        mc.player.sendMessage(new TextComponentString(getClient() + message));
+        mc.player.sendMessage(new TextComponentString(getMessage(message)));
     }
 
     public static void sendClientMessageLine(String message) {
-        final ITextComponent itc = new TextComponentString(getClient() + message).setStyle(new Style().setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new TextComponentString("fate.cc"))));
+        final ITextComponent itc = new TextComponentString(getMessage(message)).setStyle(new Style().setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new TextComponentString("fate.cc"))));
         mc.ingameGUI.getChatGUI().printChatMessageWithOptionalDeletion(itc, 5936);
     }
 
@@ -44,8 +44,20 @@ public abstract class Command {
         Command.prefix = prefix;
     }
 
+    public static String getMessage(String textIn) {
+        String textOut = "";
+
+        if (Customise.useClientPrefix.getValue()) {
+            textOut += Customise.clientBracketColor.getValue().getFormatting() + "[" + Customise.clientnameColor.getValue().getFormatting() + Customise.clientName.getValue() + Customise.clientBracketColor.getValue().getFormatting() + "] " + ChatFormatting.RESET;
+        }
+
+        textOut += textIn;
+
+        return textOut;
+    }
+
     public static String getClient() {
-        return ChatFormatting.BLUE + "[" + ChatFormatting.WHITE + Customise.clientName.getValue() + ChatFormatting.BLUE + "] " + ChatFormatting.WHITE;
+        return ChatFormatting.BLUE + "<" + Customise.clientName.getValue() + "> " + ChatFormatting.WHITE;
     }
 
     public String getAlias() {

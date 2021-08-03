@@ -1,8 +1,5 @@
 package me.ninethousand.fate.api.util.render.graphics;
 
-import me.ninethousand.fate.api.module.ModuleManager;
-import me.ninethousand.fate.api.util.render.font.CFontRenderer;
-import me.ninethousand.fate.impl.modules.client.ClientFont;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
@@ -84,10 +81,10 @@ public class GraphicsUtil3d {
             GL11.glEnable(2848);
             GL11.glHint(3154, 4354);
             GL11.glLineWidth(lineWidth);
-            if (mode == RenderBoxMode.Filled || mode == RenderBoxMode.Fancy || mode == RenderBoxMode.Outline_Filled) {
+            if (mode == RenderBoxMode.Filled || mode == RenderBoxMode.Fancy || mode == RenderBoxMode.OutlineFilled) {
                 RenderGlobal.renderFilledBox(bb, (float) color.getRed() / 255.0f, (float) color.getGreen() / 255.0f, (float) color.getBlue() / 255.0f, (float) color.getAlpha() / 255.0f);
             }
-            if (mode == RenderBoxMode.Outline || mode == RenderBoxMode.Outline_Filled) {
+            if (mode == RenderBoxMode.Outline || mode == RenderBoxMode.OutlineFilled) {
                 drawBlockOutline(bb, color, 2f);
             }
             if (mode == RenderBoxMode.Fancy) {
@@ -148,6 +145,6 @@ public class GraphicsUtil3d {
         Outline,
         Filled,
         Fancy,
-        Outline_Filled,
+        OutlineFilled,
     }
 }

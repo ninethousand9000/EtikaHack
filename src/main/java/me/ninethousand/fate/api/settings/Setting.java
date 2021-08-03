@@ -3,7 +3,9 @@ package me.ninethousand.fate.api.settings;
 import me.ninethousand.fate.Fate;
 import me.ninethousand.fate.api.command.Command;
 import me.ninethousand.fate.api.module.Module;
+import me.ninethousand.fate.impl.modules.client.Customise;
 import me.ninethousand.fate.impl.modules.visual.Chams;
+import net.minecraft.client.Minecraft;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -80,10 +82,20 @@ public class Setting<T> {
     }
 
     public void updateSetting() {
-        if (value instanceof Color) {
+        if (Minecraft.getMinecraft().player == null ||Minecraft.getMinecraft().world == null) return;
+
+        float addition = 0.001f;
+
+        try {
+            addition = Customise.rainbowSpeed.getValue() / 10000f;
+        }
+
+        catch (Exception e) {}
+
+            if (value instanceof Color) {
             if (rainbow) {
-                if (hue + 0.0001 <= 1.0f) {
-                    hue += 0.0001;
+                if (hue + addition <= 1.0f) {
+                    hue += addition;
                 }
 
                 else {

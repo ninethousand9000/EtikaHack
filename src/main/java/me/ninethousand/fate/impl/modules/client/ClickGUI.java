@@ -6,10 +6,15 @@ import me.ninethousand.fate.api.module.ModuleCategory;
 import me.ninethousand.fate.api.settings.NumberSetting;
 import me.ninethousand.fate.api.settings.Setting;
 import me.ninethousand.fate.api.ui.newgui.ClickGUIScreen;
+import me.ninethousand.fate.api.ui.newgui.GuiColors;
 import org.lwjgl.input.Keyboard;
+
+import java.awt.*;
 
 @ModuleAnnotation(category = ModuleCategory.CLIENT, bind = Keyboard.KEY_RCONTROL)
 public class ClickGUI extends Module {
+    public static final Setting<Color> accentColor = new Setting<>("AccentColor", new Color(0x2A93B3));
+    public static final Setting<Color> backgroundColor = new Setting<>("BackGroundColor", new Color(0x131822));
     public static final Setting<Boolean> topAccent = new Setting<>("TopAccent", true);
     public static final Setting<BackgroundModes> backgroundMode = new Setting<>("Background", BackgroundModes.Blur);
     public static final NumberSetting<Integer> scrollSpeed = new NumberSetting<>("Scroll Speed", 0, 10, 20, 0);
@@ -17,6 +22,8 @@ public class ClickGUI extends Module {
 
     public ClickGUI() {
         addSettings(
+                accentColor,
+                backgroundColor,
                 topAccent,
                 backgroundMode,
                 scrollSpeed,
@@ -29,6 +36,12 @@ public class ClickGUI extends Module {
         if (nullCheck()) return;
 
         mc.displayGuiScreen(new ClickGUIScreen());
+    }
+
+    @Override
+    public void onUpdate() {
+        if (GuiColors.accent != accentColor.getValue()) GuiColors.accent = accentColor.getValue();
+        if (GuiColors.normal != backgroundColor.getValue()) GuiColors.normal = backgroundColor.getValue();
     }
 
     public enum ThemeModes {

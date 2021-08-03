@@ -74,25 +74,29 @@ public class BlockNuker extends Module {
     public TileEntity getTargetBlock() {
         TileEntity target = null;
 
-        if (shulkers.getValue()) {
-            for (TileEntity shulker : mc.world.loadedTileEntityList) {
-                if (shulker instanceof TileEntityShulkerBox) {
-                    if (shulker.getDistanceSq(mc.player.posX, mc.player.posY, mc.player.posZ) <= (range.getValue() * range.getValue())) {
-                        target = shulker;
+        try {
+            if (shulkers.getValue()) {
+                for (TileEntity shulker : mc.world.loadedTileEntityList) {
+                    if (shulker instanceof TileEntityShulkerBox) {
+                        if (shulker.getDistanceSq(mc.player.posX, mc.player.posY, mc.player.posZ) <= (range.getValue() * range.getValue())) {
+                            target = shulker;
+                        }
+                    }
+                }
+            }
+
+            if (hoppers.getValue()) {
+                for (TileEntity hopper : mc.world.loadedTileEntityList) {
+                    if (hopper instanceof TileEntityHopper) {
+                        if (hopper.getDistanceSq(mc.player.posX, mc.player.posY, mc.player.posZ) <= (range.getValue() * range.getValue())) {
+                            target = hopper;
+                        }
                     }
                 }
             }
         }
 
-        if (hoppers.getValue()) {
-            for (TileEntity hopper : mc.world.loadedTileEntityList) {
-                if (hopper instanceof TileEntityHopper) {
-                    if (hopper.getDistanceSq(mc.player.posX, mc.player.posY, mc.player.posZ) <= (range.getValue() * range.getValue())) {
-                        target = hopper;
-                    }
-                }
-            }
-        }
+        catch (Exception nah) {}
 
         return target;
     }
