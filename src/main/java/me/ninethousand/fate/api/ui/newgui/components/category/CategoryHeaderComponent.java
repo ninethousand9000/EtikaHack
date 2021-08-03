@@ -33,6 +33,7 @@ public class CategoryHeaderComponent extends GUIComponent {
                 new Vec2d(getPositionX() + getWidth(), getPositionY() + getHeight()),
                 new Color(GuiColors.normal.getRed(), GuiColors.normal.getGreen(), GuiColors.normal.getBlue(), 200));
 
+
         FontUtil.drawText(category.name(), getPositionX() + getWidth() / 2 - FontUtil.getStringWidth(category.name()) / 2, getPositionY() + 4, GuiColors.font.getRGB());
 
         if (ClickGUI.topAccent.getValue()) {

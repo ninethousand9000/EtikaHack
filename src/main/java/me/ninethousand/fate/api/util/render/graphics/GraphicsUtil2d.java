@@ -1,9 +1,12 @@
 package me.ninethousand.fate.api.util.render.graphics;
 
+import me.ninethousand.fate.api.module.ModuleManager;
 import me.ninethousand.fate.api.util.math.Pair;
 import me.ninethousand.fate.api.util.math.Vec2d;
+import me.ninethousand.fate.api.util.render.font.CFontRenderer;
 import me.ninethousand.fate.api.util.render.font.FontUtil;
 import me.ninethousand.fate.api.util.render.gl.VertexHelper;
+import me.ninethousand.fate.impl.modules.client.ClientFont;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.GlStateManager;

@@ -4,17 +4,10 @@ import me.ninethousand.fate.api.module.ModuleManager;
 import me.ninethousand.fate.impl.modules.client.ClientFont;
 import net.minecraft.client.Minecraft;
 
-public final class FontUtil {
+public class FontUtil {
     private static final Minecraft mc = Minecraft.getMinecraft();
 
-    public static CFontRenderer productSansFont = new CFontRenderer("ProductSans", 17.0f);
-    public static CFontRenderer ubuntuFont = new CFontRenderer("Ubuntu", 17.0f);
-    public static CFontRenderer latoFont = new CFontRenderer("Lato", 17.0f);
-    public static CFontRenderer verdanaFont = new CFontRenderer("Verdana", 17.0f);
-    public static CFontRenderer comfortaaFont = new CFontRenderer("Comfortaa", 20.0f);
-    public static CFontRenderer subtitleFont = new CFontRenderer("Subtitle", 17.0f);
-    public static CFontRenderer comicSansFont = new CFontRenderer("ComicSans", 17.0f);
-
+    //Font
     private static int currentSize;
     private static String currentFontName;
     private static CFontRenderer current;
@@ -50,10 +43,18 @@ public final class FontUtil {
     }
 
     public static float getStringWidth(String text) {
+        return mc.fontRenderer.getStringWidth(text);
+    }
+
+    public static float getStringHeight(String text) {
+        return 4.5f;
+    }
+
+    /*public static float getStringWidth(String text) {
         return getCurrentCustomFont().getStringWidth(text);
     }
 
     public static float getStringHeight(String text) {
         return getCurrentCustomFont().getStringHeight(text);
-    }
+    }*/
 }

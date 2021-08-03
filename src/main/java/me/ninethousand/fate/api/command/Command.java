@@ -28,11 +28,11 @@ public abstract class Command {
     public abstract void doCommand(String[] commands);
 
     public static void sendClientMessageDefault(String message) {
-        mc.player.sendMessage(new TextComponentString(ChatFormatting.DARK_PURPLE + "[" + ChatFormatting.LIGHT_PURPLE + Customise.clientName.getValue() + ChatFormatting.DARK_PURPLE + "] " + ChatFormatting.WHITE + message));
+        mc.player.sendMessage(new TextComponentString(getClient() + message));
     }
 
     public static void sendClientMessageLine(String message) {
-        final ITextComponent itc = new TextComponentString(ChatFormatting.DARK_PURPLE + "[" + ChatFormatting.LIGHT_PURPLE + Customise.clientName.getValue() + ChatFormatting.DARK_PURPLE + "] " + ChatFormatting.WHITE + message).setStyle(new Style().setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new TextComponentString("fate.cc"))));
+        final ITextComponent itc = new TextComponentString(getClient() + message).setStyle(new Style().setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new TextComponentString("fate.cc"))));
         mc.ingameGUI.getChatGUI().printChatMessageWithOptionalDeletion(itc, 5936);
     }
 
@@ -42,6 +42,10 @@ public abstract class Command {
 
     public static void setPrefix(String prefix) {
         Command.prefix = prefix;
+    }
+
+    public static String getClient() {
+        return ChatFormatting.BLUE + "[" + ChatFormatting.WHITE + Customise.clientName.getValue() + ChatFormatting.BLUE + "] " + ChatFormatting.WHITE;
     }
 
     public String getAlias() {

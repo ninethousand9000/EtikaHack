@@ -16,6 +16,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 import java.util.List;
 
 @ModuleAnnotation(category = ModuleCategory.MISC)
@@ -46,100 +47,104 @@ public class VisualRange extends Module {
 
     @Override
     public void onUpdate() {
-        mc.world.loadedEntityList.forEach(entity -> {
-            if (entity instanceof EntityPlayer && !currentLoaded.contains(entity) && players.getValue()) {
-                if (coords.getValue()) {
-                    Command.sendClientMessageDefault("Player: " + entity.getName() +
-                            " has been spotted at X=" + (int) entity.posX +
-                            " Y=" + (int) entity.posY +
-                            " Z=" + (int) entity.posZ);
+        try {
+            mc.world.loadedEntityList.forEach(entity -> {
+                if (entity instanceof EntityPlayer && !currentLoaded.contains(entity) && players.getValue()) {
+                    if (coords.getValue()) {
+                        Command.sendClientMessageDefault("Player: " + entity.getName() +
+                                " has been spotted at X=" + (int) entity.posX +
+                                " Y=" + (int) entity.posY +
+                                " Z=" + (int) entity.posZ);
+                    }
+
+                    else {
+                        Command.sendClientMessageDefault("Player: " + entity.getName() +
+                                " has been spotted");
+                    }
+
+                    if (sound.getValue()) mc.getSoundHandler().playSound(PositionedSoundRecord.getMasterRecord(SoundEvents.ENTITY_PLAYER_LEVELUP, 1.0F));
+
                 }
 
-                else {
-                    Command.sendClientMessageDefault("Player: " + entity.getName() +
-                            " has been spotted");
+                if (entity instanceof EntityHorse && !currentLoaded.contains(entity) && horses.getValue()) {
+                    if (coords.getValue()) {
+                        Command.sendClientMessageDefault("Horse has been spotted at X=" + (int) entity.posX +
+                                " Y=" + (int) entity.posY +
+                                " Z=" + (int) entity.posZ);
+                    }
+
+                    else {
+                        Command.sendClientMessageDefault("Horse has been spotted");
+                    }
+
+                    if (sound.getValue()) mc.getSoundHandler().playSound(PositionedSoundRecord.getMasterRecord(SoundEvents.ENTITY_PLAYER_LEVELUP, 1.0F));
+
                 }
 
-                if (sound.getValue()) mc.getSoundHandler().playSound(PositionedSoundRecord.getMasterRecord(SoundEvents.ENTITY_PLAYER_LEVELUP, 1.0F));
+                if (entity instanceof EntityDonkey && !currentLoaded.contains(entity) && donkeys.getValue()) {
+                    if (coords.getValue()) {
+                        Command.sendClientMessageDefault("Donkey has been spotted at X=" + (int) entity.posX +
+                                " Y=" + (int) entity.posY +
+                                " Z=" + (int) entity.posZ);
+                    }
 
-            }
+                    else {
+                        Command.sendClientMessageDefault("Donkey has been spotted");
+                    }
 
-            if (entity instanceof EntityHorse && !currentLoaded.contains(entity) && horses.getValue()) {
-                if (coords.getValue()) {
-                    Command.sendClientMessageDefault("Horse has been spotted at X=" + (int) entity.posX +
-                            " Y=" + (int) entity.posY +
-                            " Z=" + (int) entity.posZ);
+                    if (sound.getValue()) mc.getSoundHandler().playSound(PositionedSoundRecord.getMasterRecord(SoundEvents.ENTITY_PLAYER_LEVELUP, 1.0F));
+
                 }
 
-                else {
-                    Command.sendClientMessageDefault("Horse has been spotted");
+                if (entity instanceof EntityMule && !currentLoaded.contains(entity) && mules.getValue()) {
+                    if (coords.getValue()) {
+                        Command.sendClientMessageDefault("Mule has been spotted at X=" + (int) entity.posX +
+                                " Y=" + (int) entity.posY +
+                                " Z=" + (int) entity.posZ);
+                    }
+
+                    else {
+                        Command.sendClientMessageDefault("Mule has been spotted");
+                    }
+
+                    if (sound.getValue()) mc.getSoundHandler().playSound(PositionedSoundRecord.getMasterRecord(SoundEvents.ENTITY_PLAYER_LEVELUP, 1.0F));
+
                 }
 
-                if (sound.getValue()) mc.getSoundHandler().playSound(PositionedSoundRecord.getMasterRecord(SoundEvents.ENTITY_PLAYER_LEVELUP, 1.0F));
+                if (entity instanceof EntityGhast && !currentLoaded.contains(entity) && ghasts.getValue()) {
+                    if (coords.getValue()) {
+                        Command.sendClientMessageDefault("Ghast has been spotted at X=" + (int) entity.posX +
+                                " Y=" + (int) entity.posY +
+                                " Z=" + (int) entity.posZ);
+                    }
 
-            }
+                    else {
+                        Command.sendClientMessageDefault("Ghast has been spotted");
+                    }
 
-            if (entity instanceof EntityDonkey && !currentLoaded.contains(entity) && donkeys.getValue()) {
-                if (coords.getValue()) {
-                    Command.sendClientMessageDefault("Donkey has been spotted at X=" + (int) entity.posX +
-                            " Y=" + (int) entity.posY +
-                            " Z=" + (int) entity.posZ);
+                    if (sound.getValue()) mc.getSoundHandler().playSound(PositionedSoundRecord.getMasterRecord(SoundEvents.ENTITY_PLAYER_LEVELUP, 1.0F));
+
                 }
 
-                else {
-                    Command.sendClientMessageDefault("Donkey has been spotted");
+                if (entity instanceof EntityEvoker && !currentLoaded.contains(entity) && evokers.getValue()) {
+                    if (coords.getValue()) {
+                        Command.sendClientMessageDefault("Evoker has been spotted at X=" + (int) entity.posX +
+                                " Y=" + (int) entity.posY +
+                                " Z=" + (int) entity.posZ);
+                    }
+
+                    else {
+                        Command.sendClientMessageDefault("Evoker has been spotted");
+                    }
+
+                    if (sound.getValue()) mc.getSoundHandler().playSound(PositionedSoundRecord.getMasterRecord(SoundEvents.ENTITY_PLAYER_LEVELUP, 1.0F));
+
                 }
 
-                if (sound.getValue()) mc.getSoundHandler().playSound(PositionedSoundRecord.getMasterRecord(SoundEvents.ENTITY_PLAYER_LEVELUP, 1.0F));
+                if (!currentLoaded.contains(entity)) currentLoaded.add(entity);
+            });
+        }
 
-            }
-
-            if (entity instanceof EntityMule && !currentLoaded.contains(entity) && mules.getValue()) {
-                if (coords.getValue()) {
-                    Command.sendClientMessageDefault("Mule has been spotted at X=" + (int) entity.posX +
-                            " Y=" + (int) entity.posY +
-                            " Z=" + (int) entity.posZ);
-                }
-
-                else {
-                    Command.sendClientMessageDefault("Mule has been spotted");
-                }
-
-                if (sound.getValue()) mc.getSoundHandler().playSound(PositionedSoundRecord.getMasterRecord(SoundEvents.ENTITY_PLAYER_LEVELUP, 1.0F));
-
-            }
-
-            if (entity instanceof EntityGhast && !currentLoaded.contains(entity) && ghasts.getValue()) {
-                if (coords.getValue()) {
-                    Command.sendClientMessageDefault("Ghast has been spotted at X=" + (int) entity.posX +
-                            " Y=" + (int) entity.posY +
-                            " Z=" + (int) entity.posZ);
-                }
-
-                else {
-                    Command.sendClientMessageDefault("Ghast has been spotted");
-                }
-
-                if (sound.getValue()) mc.getSoundHandler().playSound(PositionedSoundRecord.getMasterRecord(SoundEvents.ENTITY_PLAYER_LEVELUP, 1.0F));
-
-            }
-
-            if (entity instanceof EntityEvoker && !currentLoaded.contains(entity) && evokers.getValue()) {
-                if (coords.getValue()) {
-                    Command.sendClientMessageDefault("Evoker has been spotted at X=" + (int) entity.posX +
-                            " Y=" + (int) entity.posY +
-                            " Z=" + (int) entity.posZ);
-                }
-
-                else {
-                    Command.sendClientMessageDefault("Evoker has been spotted");
-                }
-
-                if (sound.getValue()) mc.getSoundHandler().playSound(PositionedSoundRecord.getMasterRecord(SoundEvents.ENTITY_PLAYER_LEVELUP, 1.0F));
-
-            }
-
-            if (!currentLoaded.contains(entity)) currentLoaded.add(entity);
-        });
+        catch (ConcurrentModificationException fatfucker) {}
     }
 }
