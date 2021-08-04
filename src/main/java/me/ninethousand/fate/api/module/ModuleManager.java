@@ -7,10 +7,7 @@ import me.ninethousand.fate.impl.modules.hud.Coords;
 import me.ninethousand.fate.impl.modules.hud.TargetHud;
 import me.ninethousand.fate.impl.modules.hud.Watermark;
 import me.ninethousand.fate.impl.modules.hud.Welcomer;
-import me.ninethousand.fate.impl.modules.misc.FakePlayer;
-import me.ninethousand.fate.impl.modules.misc.SettingTestModule;
-import me.ninethousand.fate.impl.modules.misc.TotemPop;
-import me.ninethousand.fate.impl.modules.misc.VisualRange;
+import me.ninethousand.fate.impl.modules.misc.*;
 import me.ninethousand.fate.impl.modules.movement.AntiVoid;
 import me.ninethousand.fate.impl.modules.movement.Strafe;
 import me.ninethousand.fate.impl.modules.visual.BoxEsp;
@@ -51,6 +48,7 @@ public class ModuleManager {
                 new VoidEsp(),
                 new EtikaMode(),
                 new SettingTestModule(),
+                new AutoDuper(),
                 //Visual
                 new Chams(),
                 new BoxEsp()

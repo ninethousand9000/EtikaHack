@@ -27,6 +27,8 @@
     "accessors.IEntity",
 
     "mixins.MixinCPacketPlayer",
-    "accessors.ICPacketPlayer"
+    "accessors.ICPacketPlayer",
+
+    "mixins.MixinPlayerControllerMP"
   ]
 }
