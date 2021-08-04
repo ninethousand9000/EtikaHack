@@ -12,6 +12,8 @@ import net.minecraft.util.math.BlockPos;
 public class Surround extends Module {
     @Override
     public void onUpdate() {
+        if (nullCheck()) return;
+
         BlockPos player = mc.player.getPosition();
 
         for (EnumFacing direction : EnumFacing.values()) {

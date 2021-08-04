@@ -43,6 +43,8 @@ public class BoxEsp extends Module {
 
     @Override
     public void onWorldRender(RenderEvent3d gay) {
+        if (nullCheck()) return;
+
         float r = boxColor.getValue().getRed() / 255f;
         float g = boxColor.getValue().getGreen() / 255f;
         float b = boxColor.getValue().getBlue() / 255f;

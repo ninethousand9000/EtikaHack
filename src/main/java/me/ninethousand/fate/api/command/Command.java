@@ -32,8 +32,6 @@ public abstract class Command {
     }
 
     public static void sendClientMessageLine(String message) {
-        if (mc.player == null || mc.world == null) return;
-
         final ITextComponent itc = new TextComponentString(getMessage(message)).setStyle(new Style().setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new TextComponentString("fate.cc"))));
         mc.ingameGUI.getChatGUI().printChatMessageWithOptionalDeletion(itc, 5936);
     }

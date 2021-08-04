@@ -1,0 +1,15 @@
+{
+  "Name": "SettingTestModule",
+  "Enabled": false,
+  "Drawn": true,
+  "Bind": 0,
+  "Settings": {
+    "Color": "[255, 0, 100, 123]",
+    "ColorSubSettings": {
+      "Stringe": "nottrue",
+      "StringeSubSettings": {
+        "Stringeeee": "nottrue"
+      }
+    }
+  }
+}

@@ -53,6 +53,8 @@ public class Chams extends Module {
 
     @Override
     public void onWorldRender(RenderEvent3d event3d) {
+        if (nullCheck()) return;
+
         playersToDelete.clear();
 
         try {

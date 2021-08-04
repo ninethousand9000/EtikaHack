@@ -47,6 +47,9 @@ public class TargetHud extends Module {
 
     @Override
     public void onHudRender(RenderEvent2d event, VertexHelper vertexHelper) {
+        if (nullCheck()) return;
+
+
         EntityPlayer player = mc.world.playerEntities.stream()
                 .filter(otherPlayer -> otherPlayer != mc.player)
                 .min(Comparator.comparing(otherPlayer -> mc.player.getDistance(otherPlayer)))

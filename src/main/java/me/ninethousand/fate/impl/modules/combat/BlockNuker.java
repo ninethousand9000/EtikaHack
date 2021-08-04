@@ -105,6 +105,8 @@ public class BlockNuker extends Module {
 
     @SubscribeEvent
     public void onPacketSend(PacketEvent.Send event) {
+        if (nullCheck()) return;
+
         if (rotate.getValue()) {
             Packet packet = event.getPacket();
             if (packet instanceof CPacketPlayer) {
@@ -116,6 +118,8 @@ public class BlockNuker extends Module {
 
     @Override
     public void onWorldRender(RenderEvent3d event3d) {
+        if (nullCheck()) return;
+
         if (render.getValue() && getTargetBlock() != null) {
             GraphicsUtil3d.renderStandardBox(getTargetBlock().getPos(), color.getValue(), renderMode.getValue(), 0, outline.getValue());
         }
@@ -123,6 +127,8 @@ public class BlockNuker extends Module {
 
     @Override
     public void onDisable() {
+        if (nullCheck()) return;
+
         if (rotate.getValue()) {
             resetRotations();
         }

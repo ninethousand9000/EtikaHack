@@ -139,6 +139,13 @@ public class Setting<T> {
 
     public void setValue(T value) {
         this.value = value;
+
+        if (value instanceof Color) {
+            this.alpha = 1 - ((Color) value).getAlpha() / 255f;
+            this.hue = Color.RGBtoHSB(((Color) value).getRed(), ((Color) value).getGreen(), ((Color) value).getBlue(), null)[0];
+            this.saturation = 1 - Color.RGBtoHSB(((Color) value).getRed(), ((Color) value).getGreen(), ((Color) value).getBlue(), null)[1];
+            this.brightness = 1 - Color.RGBtoHSB(((Color) value).getRed(), ((Color) value).getGreen(), ((Color) value).getBlue(), null)[2];
+        }
     }
 
     public void setOpened(boolean opened) {

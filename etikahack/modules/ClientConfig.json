@@ -1,0 +1,10 @@
+{
+  "Name": "ClientConfig",
+  "Enabled": true,
+  "Drawn": true,
+  "Bind": 0,
+  "Settings": {
+    "Save": false,
+    "Load": false
+  }
+}

@@ -115,7 +115,8 @@ public class Config {
                     ((Setting<Color>) setting).getValue().getRed(),
                     ((Setting<Color>) setting).getValue().getGreen(),
                     ((Setting<Color>) setting).getValue().getBlue(),
-                    ((Setting<Color>) setting).getValue().getAlpha()
+                    ((Setting<Color>) setting).getValue().getAlpha(),
+                    setting.isRainbow() ? 1 : 0
             ));
 
             json.add(setting.getName(), new JsonPrimitive(String.valueOf(rgbaArr)));
@@ -149,9 +150,9 @@ public class Config {
                 loadSetting(setting, settings);
             }
 
-            module.setEnabled(moduleObject.get("Enabled").getAsBoolean());
+            /*module.setEnabled(moduleObject.get("Enabled").getAsBoolean());
             module.setDrawn(moduleObject.get("Drawn").getAsBoolean());
-            module.setKey((moduleObject.get("Bind").getAsInt()));
+            module.setKey((moduleObject.get("Bind").getAsInt()));*/
         }
     }
 
@@ -187,6 +188,7 @@ public class Config {
             String value = jsonValue.getAsString().replaceAll("\\[", "").replaceAll("\\]","").replaceAll(" ", "");
             String[] values = value.split(",");
             colorSetting.setValue(new Color(Integer.parseInt(values[0]), Integer.parseInt(values[1]), Integer.parseInt(values[2]), Integer.parseInt(values[3])));
+            colorSetting.setRainbow(Integer.parseInt(values[4]) == 1 ? true : false);
         }
 
         if (setting.hasSubSettings()) {

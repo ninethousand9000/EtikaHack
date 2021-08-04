@@ -1,9 +1,6 @@
 package me.ninethousand.fate.api.module;
 
-import me.ninethousand.fate.impl.modules.client.ClickGUI;
-import me.ninethousand.fate.impl.modules.client.Customise;
-import me.ninethousand.fate.impl.modules.client.ClientFont;
-import me.ninethousand.fate.impl.modules.client.RPC;
+import me.ninethousand.fate.impl.modules.client.*;
 import me.ninethousand.fate.impl.modules.combat.BlockNuker;
 import me.ninethousand.fate.impl.modules.combat.Surround;
 import me.ninethousand.fate.impl.modules.hud.Coords;
@@ -35,6 +32,7 @@ public class ModuleManager {
                 new ClientFont(),
                 new Customise(),
                 new RPC(),
+                new ClientConfig(),
                 //Combat
                 new Surround(),
                 new BlockNuker(),

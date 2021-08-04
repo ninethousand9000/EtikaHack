@@ -7,5 +7,9 @@ import me.ninethousand.fate.api.module.ModuleCategory;
 @ModuleAnnotation(category = ModuleCategory.MOVEMENT)
 public class AntiVoid extends Module {
     @Override
-    public void onUpdate() {if (mc.player.posY < 1) mc.player.motionY = 0;}
+    public void onUpdate() {
+        if (nullCheck()) return;
+
+        if (mc.player.posY < 1) mc.player.motionY = 0;
+    }
 }

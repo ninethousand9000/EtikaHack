@@ -47,6 +47,8 @@ public class VisualRange extends Module {
 
     @Override
     public void onUpdate() {
+        if (nullCheck()) return;
+
         try {
             mc.world.loadedEntityList.forEach(entity -> {
                 if (entity instanceof EntityPlayer && !currentLoaded.contains(entity) && players.getValue()) {

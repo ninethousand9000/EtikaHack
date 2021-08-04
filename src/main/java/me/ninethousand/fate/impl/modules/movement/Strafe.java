@@ -29,6 +29,8 @@ public class Strafe extends Module {
 
     @Override
     public void onEnable() {
+        if (nullCheck()) return;
+
         playerSpeed = getBaseMoveSpeed();
     }
 

@@ -22,6 +22,8 @@ public class Watermark extends Module {
 
     @Override
     public void onHudRender(RenderEvent2d event, VertexHelper vertexHelper) {
+        if (nullCheck()) return;
+
         GlStateManager.pushMatrix();
         GlStateHelper.scale(scale.getValue());
 

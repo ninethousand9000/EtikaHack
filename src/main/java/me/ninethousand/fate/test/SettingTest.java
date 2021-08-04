@@ -20,11 +20,13 @@ public class SettingTest {
 
     public static void main(String[] args) throws IOException {
         configLoad();
-        System.out.println("String1: " + SettingTestModule.string2.getValue());
+        System.out.println("Blue: " + SettingTestModule.color.getValue());
     }
 
-    public static void configSetup() {
+    public static void configSetup() throws IOException {
         ModuleManager.init();
+
+        Config.createDirectory();
 
         Config.saveConfig();
     }
@@ -32,6 +34,6 @@ public class SettingTest {
     public static void configLoad() throws IOException {
         ModuleManager.init();
 
-        Config.loadModules();
+        Config.loadConfig();
     }
 }
