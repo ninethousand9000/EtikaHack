@@ -4,6 +4,8 @@ import club.minnced.discord.rpc.DiscordEventHandlers;
 import club.minnced.discord.rpc.DiscordRPC;
 import club.minnced.discord.rpc.DiscordRichPresence;
 import me.ninethousand.fate.Fate;
+import me.ninethousand.fate.impl.modules.client.RPC;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiMultiplayer;
 import net.minecraft.client.gui.GuiWorldSelection;
 
@@ -34,7 +36,17 @@ public class DiscordUtil {
         new Thread(() -> {
             while (!Thread.currentThread().isInterrupted()) {
                 try {
+                    details = "Balling";
+
+                    if (Minecraft.getMinecraft().getCurrentServerData() != null) {
+                        details = Minecraft.getMinecraft().getCurrentServerData().serverIP.toLowerCase();
+                    }
+
+                    state = RPC.message.getValue();
+
+
                     discordRichPresence.details = details;
+                    discordRichPresence.state = state;
 
                     discordRPC.Discord_UpdatePresence(discordRichPresence);
                 } catch (Exception exception) {
