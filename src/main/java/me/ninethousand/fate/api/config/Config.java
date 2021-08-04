@@ -150,9 +150,9 @@ public class Config {
                 loadSetting(setting, settings);
             }
 
-            /*module.setEnabled(moduleObject.get("Enabled").getAsBoolean());
+            module.setEnabled(moduleObject.get("Enabled").getAsBoolean());
             module.setDrawn(moduleObject.get("Drawn").getAsBoolean());
-            module.setKey((moduleObject.get("Bind").getAsInt()));*/
+            module.setKey((moduleObject.get("Bind").getAsInt()));
         }
     }
 

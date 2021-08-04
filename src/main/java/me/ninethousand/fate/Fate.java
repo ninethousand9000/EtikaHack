@@ -15,9 +15,9 @@ import org.lwjgl.opengl.Display;
 
 @Mod(modid = Fate.MODID, name = Fate.NAME, version = Fate.VERSION)
 public class Fate {
-    public static final String MODID = "fate";
-    public static final String NAME = "Fate";
-    public static final String VERSION = "1.1.2";
+    public static final String MODID = "etikahack";
+    public static final String NAME = "EtikaHack";
+    public static final String VERSION = "1.2.0";
 
     public static final Logger LOGGER = LogManager.getLogger(MODID);
     public static final EventTracker EVENT_TRACKER = new EventTracker();

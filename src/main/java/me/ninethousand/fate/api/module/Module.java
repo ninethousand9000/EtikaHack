@@ -49,7 +49,11 @@ public abstract class Module {
     public void enable() {
         enabled = true;
         MinecraftForge.EVENT_BUS.register(this);
-        Command.sendClientMessageLine(Customise.moduleColor.getValue().getFormatting() + name + ChatFormatting.GREEN + " enabled");
+
+        if (!(nullCheck())) {
+            Command.sendClientMessageLine(Customise.moduleColor.getValue().getFormatting() + name + ChatFormatting.GREEN + " enabled");
+        }
+
         onEnable();
     }
 
@@ -57,7 +61,11 @@ public abstract class Module {
         if (!alwaysEnabled) {
             enabled = false;
             MinecraftForge.EVENT_BUS.unregister(this);
-            Command.sendClientMessageLine(Customise.moduleColor.getValue().getFormatting() + name + ChatFormatting.RED + " disabled");
+
+            if (!(nullCheck())) {
+                Command.sendClientMessageLine(Customise.moduleColor.getValue().getFormatting() + name + ChatFormatting.RED + " disabled");
+            }
+
             onDisable();
         }
     }

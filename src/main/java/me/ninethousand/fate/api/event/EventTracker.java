@@ -1,9 +1,6 @@
 package me.ninethousand.fate.api.event;
 
-import me.ninethousand.fate.api.event.events.PacketEvent;
-import me.ninethousand.fate.api.event.events.RenderEvent2d;
-import me.ninethousand.fate.api.event.events.RenderEvent3d;
-import me.ninethousand.fate.api.event.events.TotemPopEvent;
+import me.ninethousand.fate.api.event.events.*;
 import me.ninethousand.fate.api.module.Module;
 import me.ninethousand.fate.api.module.ModuleManager;
 import me.ninethousand.fate.api.settings.Setting;
@@ -72,6 +69,11 @@ public class EventTracker {
         if (nullCheck()) return;
         for (Module module : ModuleManager.getModules())
             if (module.isEnabled()) module.onTick();
+
+        for (EntityPlayer player : mc.world.playerEntities) {
+            if (player == null || player.getHealth() > 0.0F) continue;
+            MinecraftForge.EVENT_BUS.post(new PlayerDeathEvent(player));
+        }
     }
 
     @SubscribeEvent(priority = EventPriority.LOW)
