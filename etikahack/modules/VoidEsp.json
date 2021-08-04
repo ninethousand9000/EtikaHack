@@ -1,0 +1,12 @@
+{
+  "Name": "VoidEsp",
+  "Enabled": false,
+  "Drawn": true,
+  "Bind": 0,
+  "Settings": {
+    "Range": 6,
+    "Color": "[42, 147, 179, 255]",
+    "Void": "OutlineFilled",
+    "Block": "OutlineFilled"
+  }
+}

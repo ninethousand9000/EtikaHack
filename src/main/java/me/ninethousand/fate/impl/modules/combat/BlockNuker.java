@@ -50,6 +50,8 @@ public class BlockNuker extends Module {
 
     @Override
     public void onUpdate() {
+        if (nullCheck()) return;
+
         if (getTargetBlock() != null) {
             if (swap.getValue() == SwapMode.Normal && InventoryUtil.findItemInHotbar(Items.DIAMOND_PICKAXE) != -1) {
                 int pickSlot = InventoryUtil.findItemInHotbar(Items.DIAMOND_PICKAXE);

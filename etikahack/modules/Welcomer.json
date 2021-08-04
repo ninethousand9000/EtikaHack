@@ -1,0 +1,10 @@
+{
+  "Name": "Welcomer",
+  "Enabled": false,
+  "Drawn": true,
+  "Bind": 0,
+  "Settings": {
+    "Time": true,
+    "Scale": 1.0
+  }
+}

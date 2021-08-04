@@ -1,0 +1,25 @@
+{
+  "Name": "TargetHud",
+  "Enabled": false,
+  "Drawn": true,
+  "Bind": 0,
+  "Settings": {
+    "Potions": true,
+    "PotionsSubSettings": {
+      "Speed": true,
+      "Weakness": true,
+      "Strength": true
+    },
+    "Armor": true,
+    "ArmorSubSettings": {
+      "Count": true
+    },
+    "Items": true,
+    "ItemsSubSettings": {
+      "Totems": true,
+      "XP": true,
+      "Crystals": true,
+      "Gapples": true
+    }
+  }
+}

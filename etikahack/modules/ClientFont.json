@@ -1,0 +1,13 @@
+{
+  "Name": "ClientFont",
+  "Enabled": true,
+  "Drawn": true,
+  "Bind": 0,
+  "Settings": {
+    "Font": "Roboto",
+    "Size": 17,
+    "Override Minecraft": false,
+    "Shadow": true,
+    "Lowercase": false
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "Name": "RPC",
+  "Enabled": false,
+  "Drawn": true,
+  "Bind": 0,
+  "Settings": {
+    "Message": "Etika Strong"
+  }
+}

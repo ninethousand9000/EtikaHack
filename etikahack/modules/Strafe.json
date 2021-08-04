@@ -1,0 +1,10 @@
+{
+  "Name": "Strafe",
+  "Enabled": false,
+  "Drawn": true,
+  "Bind": 0,
+  "Settings": {
+    "Speed": 0.4,
+    "Timer": 1.15
+  }
+}

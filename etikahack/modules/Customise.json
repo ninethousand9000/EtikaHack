@@ -1,0 +1,21 @@
+{
+  "Name": "Customise",
+  "Enabled": true,
+  "Drawn": true,
+  "Bind": 0,
+  "Settings": {
+    "HudColor": "[42, 147, 179, 255]",
+    "Name": "EtikaHack",
+    "RainbowSpeed": 10,
+    "ClientMessageOptions": true,
+    "ClientMessageOptionsSubSettings": {
+      "UseClientName": true,
+      "ClientMessageColors": true,
+      "ClientMessageColorsSubSettings": {
+        "BracketColor": "BLUE",
+        "NameColor": "BLUE",
+        "ModuleColor": "BLUE"
+      }
+    }
+  }
+}

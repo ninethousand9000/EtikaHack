@@ -1,8 +1,10 @@
 package me.ninethousand.fate;
 
+import me.ninethousand.fate.api.config.Config;
 import me.ninethousand.fate.api.event.EventTracker;
 import me.ninethousand.fate.api.module.ModuleManager;
 import me.ninethousand.fate.api.util.render.IconUtil;
+import net.minecraft.client.Minecraft;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -28,21 +30,25 @@ public class Fate {
 
     @EventHandler
     public void init(FMLInitializationEvent event) {
-        log("=============================");
-        log("       Welcome To Fate       ");
-        log("                             ");
+        log("Welcome To EtikaHack");
+        log("Proudly developed by ninethousand");
+        log("https://discord.gg/mRGn35t4XE");
 
         ModuleManager.init();
 
-        log("     Modules Initialised     ");
+        log("Modules Loaded");
 
         EVENT_TRACKER.init();
 
-        log("     Events Initialised      ");
+        log("Events Loaded");
 
-        log("=============================");
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            Config.saveConfig();
+            log("Config Saved");
+        }));
 
-
+        Config.loadConfig();
+        log("Config Loaded");
     }
 
     public static void log(String message) {

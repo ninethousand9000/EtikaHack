@@ -1,29 +1,37 @@
 package me.ninethousand.fate.test;
 
+import com.mojang.realmsclient.gui.ChatFormatting;
+import me.ninethousand.fate.api.command.Command;
+import me.ninethousand.fate.api.config.Config;
+import me.ninethousand.fate.api.module.ModuleManager;
 import me.ninethousand.fate.api.settings.Setting;
+import me.ninethousand.fate.impl.modules.misc.SettingTestModule;
 
 import java.awt.*;
+import java.io.IOException;
 
 public class SettingTest {
     public static Setting<Boolean> mainSetting = new Setting<>("Main", true);
-    public static Setting<Boolean> sub1 = new Setting<>(mainSetting, "Sub1", true);
+    public static Setting<ChatFormatting> sub1 = new Setting<>(mainSetting, "Sub1", ChatFormatting.BLUE);
     public static Setting<Boolean> subSub1 = new Setting<>(sub1, "SubSub1", true);
     public static Setting<Boolean> sub2 = new Setting<>(mainSetting, "Sub2", true);
     public static Setting<Boolean> sub3 = new Setting<>(mainSetting, "Sub3", true);
 
 
-    public static void main(String[] args) {
-        for (int i = 0; i < 5; i++) {
-            Color start = new Color(Color.HSBtoRGB((float) i / 5, 1.0f, 1.0f));
-            Color end = new Color(Color.HSBtoRGB((((float) i + 1) / 5), 1.0f, 1.0f));
-            System.out.println("Start:" + i + " Color: " + start);
-            System.out.println("End:" + i + " Color: " + end);
-        }
+    public static void main(String[] args) throws IOException {
+        configLoad();
+        System.out.println("String1: " + SettingTestModule.string2.getValue());
     }
 
-    public static void drawSetting(Setting<?> setting) {
-        System.out.println(setting.getName());
+    public static void configSetup() {
+        ModuleManager.init();
 
-        setting.getSubSettings().forEach(setting1 -> drawSetting(setting1));
+        Config.saveConfig();
+    }
+
+    public static void configLoad() throws IOException {
+        ModuleManager.init();
+
+        Config.loadModules();
     }
 }

@@ -52,6 +52,7 @@ public class ModuleManager {
                 new VisualRange(),
                 new VoidEsp(),
                 new EtikaMode(),
+                new SettingTestModule(),
                 //Visual
                 new Chams(),
                 new BoxEsp()

@@ -1,0 +1,31 @@
+{
+  "Name": "Chams",
+  "Enabled": false,
+  "Drawn": true,
+  "Bind": 0,
+  "Settings": {
+    "Players": true,
+    "PlayersSubSettings": {
+      "PlayerModel": true,
+      "PlayerMode": "Fill",
+      "PlayerColor": "[255, 255, 255, 179]",
+      "FriendColor": "[0, 255, 227, 179]",
+      "PlayerOutlineWidth": 1.0
+    },
+    "Crystals": true,
+    "CrystalsSubSettings": {
+      "CrystalModel": true,
+      "CrystalMode": "Fill",
+      "CrystalColor": "[255, 255, 255, 179]",
+      "CrystalOutlineWidth": 1.0
+    },
+    "Pops": true,
+    "PopsSubSettings": {
+      "PopMode": "Fill",
+      "PopColor": "[0, 255, 227, 179]",
+      "SelfPopColor": "[255, 0, 0, 168]",
+      "PopOutlineWidth": 1.0,
+      "FadeSpeed": 0.7
+    }
+  }
+}

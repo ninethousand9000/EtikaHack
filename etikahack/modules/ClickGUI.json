@@ -1,0 +1,14 @@
+{
+  "Name": "ClickGUI",
+  "Enabled": false,
+  "Drawn": true,
+  "Bind": 157,
+  "Settings": {
+    "AccentColor": "[42, 147, 179, 255]",
+    "BackGroundColor": "[19, 24, 34, 255]",
+    "TopAccent": true,
+    "Background": "Blur",
+    "Scroll Speed": 10,
+    "Pause Game": "Continue"
+  }
+}

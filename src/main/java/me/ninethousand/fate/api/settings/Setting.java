@@ -50,7 +50,9 @@ public class Setting<T> {
             this.brightness = 1 - Color.RGBtoHSB(((Color) value).getRed(), ((Color) value).getGreen(), ((Color) value).getBlue(), null)[2];
         }
 
-        if (parent.getValue() instanceof Boolean) {
+        parent.addSubSetting(this);
+
+        /*f (parent.getValue() instanceof Boolean) {
             Setting<Boolean> booleanSetting = (Setting<Boolean>) parent;
             booleanSetting.addSubSetting(this);
         }
@@ -78,7 +80,7 @@ public class Setting<T> {
         if (parent.getValue() instanceof Float) {
             NumberSetting<Float> floatNumberSetting = (NumberSetting<Float>) parent;
             floatNumberSetting.addSubSetting(this);
-        }
+        }*/
     }
 
     public void updateSetting() {

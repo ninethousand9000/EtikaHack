@@ -1,0 +1,14 @@
+{
+  "Name": "BoxEsp",
+  "Enabled": false,
+  "Drawn": true,
+  "Bind": 0,
+  "Settings": {
+    "Items": true,
+    "XPBottles": true,
+    "XPOrbs": true,
+    "Pearls": true,
+    "BoxColor": "[255, 255, 255, 255]",
+    "Width": 2.0
+  }
+}
