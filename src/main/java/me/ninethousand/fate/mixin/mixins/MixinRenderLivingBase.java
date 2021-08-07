@@ -253,6 +253,10 @@ public abstract class MixinRenderLivingBase<T extends EntityLivingBase> extends 
                                 GlStateManager.popMatrix();
                             }
                         }
+
+                        else {
+                            renderModel(entity, f6, f5, f8, f2, f7, f4);
+                        }
                     }
 
                     else {

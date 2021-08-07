@@ -56,18 +56,22 @@ public class PlayerChams extends Module {
     public void onWorldRender(RenderEvent3d event3d) {
         if (nullCheck()) return;
 
-        playersToRender.forEach(pair -> {
-            mc.getRenderManager().renderEntity(pair.first,
-                    pair.first.posX - mc.getRenderManager().viewerPosX,
-                    pair.first.posY - mc.getRenderManager().viewerPosY,
-                    pair.first.posZ - mc.getRenderManager().viewerPosZ,
-                    pair.first.rotationYaw,
-                    1.0f, false);
+        try {
+            playersToRender.forEach(pair -> {
+                mc.getRenderManager().renderEntity(pair.first,
+                        pair.first.posX - mc.getRenderManager().viewerPosX,
+                        pair.first.posY - mc.getRenderManager().viewerPosY,
+                        pair.first.posZ - mc.getRenderManager().viewerPosZ,
+                        pair.first.rotationYaw,
+                        1.0f, false);
 
-            pair.last -= popFadeSpeed.getValue();
-        });
+                pair.last -= popFadeSpeed.getValue();
+            });
 
-        playersToDelete.clear();
+            playersToDelete.clear();
+        }
+
+        catch (Exception ignored) {}
     }
 
     @SubscribeEvent
