@@ -1,10 +1,7 @@
 package me.ninethousand.fate.api.settings;
 
-import me.ninethousand.fate.Fate;
-import me.ninethousand.fate.api.command.Command;
 import me.ninethousand.fate.api.module.Module;
 import me.ninethousand.fate.impl.modules.client.Customise;
-import me.ninethousand.fate.impl.modules.visual.Chams;
 import net.minecraft.client.Minecraft;
 
 import java.awt.*;

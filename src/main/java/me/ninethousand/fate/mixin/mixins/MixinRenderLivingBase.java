@@ -1,11 +1,10 @@
 package me.ninethousand.fate.mixin.mixins;
 
-import me.ninethousand.fate.Fate;
 import me.ninethousand.fate.api.module.ModuleManager;
-import me.ninethousand.fate.api.util.misc.popghost.EntityPopGhost;
-import me.ninethousand.fate.impl.modules.visual.Chams;
+import me.ninethousand.fate.impl.modules.visual.PlayerChams;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityOtherPlayerMP;
+import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -14,8 +13,8 @@ import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.scoreboard.Team;
 import net.minecraft.util.math.MathHelper;
-import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.common.MinecraftForge;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -28,218 +27,266 @@ import org.spongepowered.asm.mixin.Shadow;
 public abstract class MixinRenderLivingBase<T extends EntityLivingBase> extends Render<T> {
     @Shadow
     private static final Logger LOGGER = LogManager.getLogger();
+
     @Shadow
     protected ModelBase mainModel;
+
     @Shadow
     protected boolean renderMarker;
 
-    private float red;
-
-    private float green;
-
-    private float blue;
-
     protected MixinRenderLivingBase(RenderManager renderManager) {
         super(renderManager);
-        this.red = 0.0F;
-        this.green = 0.0F;
-        this.blue = 0.0F;
     }
 
     @Overwrite
     public void doRender(T entity, double x, double y, double z, float entityYaw, float partialTicks) {
-        if (!MinecraftForge.EVENT_BUS.post(new RenderLivingEvent.Pre(entity, RenderLivingBase.class.cast(this), partialTicks, x, y, z))) {
-            GlStateManager.pushMatrix();
-            GlStateManager.disableCull();
-            this.mainModel.swingProgress = getSwingProgress(entity, partialTicks);
-            boolean shouldSit = (entity.isRiding() && entity.getRidingEntity() != null && entity.getRidingEntity().shouldRiderSit());
-            this.mainModel.isRiding = shouldSit;
-            this.mainModel.isChild = entity.isChild();
-            try {
-                float f = interpolateRotation(entity.prevRenderYawOffset, entity.renderYawOffset, partialTicks);
-                float f1 = interpolateRotation(entity.prevRotationYawHead, entity.rotationYawHead, partialTicks);
-                float f2 = f1 - f;
-                if (shouldSit && entity.getRidingEntity() instanceof EntityLivingBase) {
-                    EntityLivingBase entitylivingbase = (EntityLivingBase) entity.getRidingEntity();
-                    f = interpolateRotation(entitylivingbase.prevRenderYawOffset, entitylivingbase.renderYawOffset, partialTicks);
-                    f2 = f1 - f;
-                    float f3 = MathHelper.wrapDegrees(f2);
-                    if (f3 < -85.0F)
-                        f3 = -85.0F;
-                    if (f3 >= 85.0F)
-                        f3 = 85.0F;
-                    f = f1 - f3;
-                    if (f3 * f3 > 2500.0F)
-                        f += f3 * 0.2F;
-                    f2 = f1 - f;
+        if (MinecraftForge.EVENT_BUS.post(new net.minecraftforge.client.event.RenderLivingEvent.Pre<T>(entity, RenderLivingBase.class.cast(this), partialTicks, x, y, z))) return;
+        GlStateManager.pushMatrix();
+        GlStateManager.disableCull();
+        this.mainModel.swingProgress = this.getSwingProgress(entity, partialTicks);
+        boolean shouldSit = entity.isRiding() && (entity.getRidingEntity() != null && entity.getRidingEntity().shouldRiderSit());
+        this.mainModel.isRiding = shouldSit;
+        this.mainModel.isChild = entity.isChild();
+
+        try {
+            float f = this.interpolateRotation(entity.prevRenderYawOffset, entity.renderYawOffset, partialTicks);
+            float f1 = this.interpolateRotation(entity.prevRotationYawHead, entity.rotationYawHead, partialTicks);
+            float f2 = f1 - f;
+
+            if (shouldSit && entity.getRidingEntity() instanceof EntityLivingBase) {
+                EntityLivingBase entitylivingbase = (EntityLivingBase)entity.getRidingEntity();
+                f = this.interpolateRotation(entitylivingbase.prevRenderYawOffset, entitylivingbase.renderYawOffset, partialTicks);
+                f2 = f1 - f;
+                float f3 = MathHelper.wrapDegrees(f2);
+
+                if (f3 < -85.0F)
+                {
+                    f3 = -85.0F;
                 }
-                float f7 = entity.prevRotationPitch + (entity.rotationPitch - entity.prevRotationPitch) * partialTicks;
-                renderLivingAt(entity, x, y, z);
-                float f8 = handleRotationFloat(entity, partialTicks);
-                applyRotations(entity, f8, f, partialTicks);
-                float f4 = prepareScale(entity, partialTicks);
-                float f5 = 0.0F;
-                float f6 = 0.0F;
-                if (!entity.isRiding()) {
-                    f5 = entity.prevLimbSwingAmount + (entity.limbSwingAmount - entity.prevLimbSwingAmount) * partialTicks;
-                    f6 = entity.limbSwing - entity.limbSwingAmount * (1.0F - partialTicks);
-                    if (entity.isChild())
-                        f6 *= 3.0F;
-                    if (f5 > 1.0F)
-                        f5 = 1.0F;
-                    f2 = f1 - f;
+
+                if (f3 >= 85.0F)
+                {
+                    f3 = 85.0F;
                 }
-                GlStateManager.enableAlpha();
-                this.mainModel.setLivingAnimations(entity, f6, f5, partialTicks);
-                this.mainModel.setRotationAngles(f6, f5, f8, f2, f7, f4, entity);
-                if (this.renderOutlines) {
-                    boolean flag1 = setScoreTeamColor(entity);
-                    GlStateManager.enableColorMaterial();
-                    GlStateManager.enableOutlineMode(getTeamColor(entity));
-                    if (!this.renderMarker)
-                        renderModel(entity, f6, f5, f8, f2, f7, f4);
-                    if (!(entity instanceof EntityPlayer) || !((EntityPlayer) entity).isSpectator())
-                        renderLayers(entity, f6, f5, partialTicks, f8, f2, f7, f4);
-                    GlStateManager.disableOutlineMode();
-                    GlStateManager.disableColorMaterial();
-                    if (flag1)
-                        unsetScoreTeamColor();
-                } else {
-                    if (ModuleManager.getModule(Chams.class).isEnabled() && Chams.players.getValue() && entity instanceof EntityPlayer && (Chams.playerMode.getValue() == Chams.ChamMode.Fill || Chams.playerMode.getValue() == Chams.ChamMode.Pretty) && !(entity instanceof EntityPopGhost)) {
-                        this.red = Chams.playerColor.getValue().getRed() / 255.0F;
-                        this.green = Chams.playerColor.getValue().getGreen() / 255.0F;
-                        this.blue = Chams.playerColor.getValue().getBlue() / 255.0F;
-                        float alpha = Chams.playerColor.getValue().getAlpha() / 255.0F;
 
-                        GlStateManager.pushMatrix();
-                        GL11.glPushAttrib(1048575);
-                        GL11.glDisable(3553);
-                        GL11.glDisable(2896);
-                        GL11.glEnable(2848);
-                        GL11.glEnable(3042);
-                        GL11.glBlendFunc(770, 771);
-                        GL11.glDisable(2929);
-                        GL11.glDepthMask(false);
+                f = f1 - f3;
 
-                        GL11.glColor4f(red, green, blue, alpha);
-                        renderModel(entity, f6, f5, f8, f2, f7, f4);
-                        GL11.glDisable(2896);
-                        GL11.glEnable(2929);
-                        GL11.glDepthMask(true);
-
-                        GL11.glColor4f(red, green, blue, alpha);
-                        renderModel(entity, f6, f5, f8, f2, f7, f4);
-                        GL11.glEnable(2896);
-                        GlStateManager.popAttrib();
-                        GlStateManager.popMatrix();
-                    }
-
-                    if (ModuleManager.getModule(Chams.class).isEnabled() && Chams.pops.getValue() && entity instanceof EntityPopGhost && (Chams.popMode.getValue() == Chams.ChamMode.Wireframe || Chams.popMode.getValue() == Chams.ChamMode.Pretty)) {
-                        if (entity.getName() == Minecraft.getMinecraft().player.getName()) {
-                            this.red = Chams.selfPopColor.getValue().getRed() / 255.0F;
-                            this.green = Chams.selfPopColor.getValue().getGreen() / 255.0F;
-                            this.blue = Chams.selfPopColor.getValue().getBlue() / 255.0F;
-                        }
-                        else {
-                            this.red = Chams.popColor.getValue().getRed() / 255.0F;
-                            this.green = Chams.popColor.getValue().getGreen() / 255.0F;
-                            this.blue = Chams.popColor.getValue().getBlue() / 255.0F;
-                        }
-
-                        float alpha = ((EntityPopGhost) entity).alpha / 255.0f;
-
-                        GlStateManager.pushMatrix();
-                        GL11.glPushAttrib(1048575);
-                        GL11.glDisable(3553);
-                        GL11.glDisable(2896);
-                        GL11.glEnable(2848);
-                        GL11.glEnable(3042);
-                        GL11.glBlendFunc(770, 771);
-                        GL11.glDisable(2929);
-                        GL11.glDepthMask(false);
-
-                        GL11.glColor4f(red, green, blue, alpha);
-                        renderModel(entity, f6, f5, f8, f2, f7, f4);
-                        GL11.glDisable(2896);
-                        GL11.glEnable(2929);
-                        GL11.glDepthMask(true);
-
-                        GL11.glColor4f(red, green, blue, alpha);
-                        renderModel(entity, f6, f5, f8, f2, f7, f4);
-                        GL11.glEnable(2896);
-                        GlStateManager.popAttrib();
-                        GlStateManager.popMatrix();
-                    }
-
-                    boolean flag1 = setDoRenderBrightness(entity, partialTicks);
-                    if (!(entity instanceof EntityPlayer) || (ModuleManager.getModule(Chams.class).isEnabled() && Chams.playerMode.getValue() == Chams.ChamMode.Wireframe && Chams.playerModel.getValue() || !((ModuleManager.getModule(Chams.class).isEnabled()))) || !Chams.players.getValue())
-                        renderModel(entity, f6, f5, f8, f2, f7, f4);
-                    if (flag1)
-                        unsetBrightness();
-                    GlStateManager.depthMask(true);
-                    if (!(entity instanceof EntityPlayer) || !((EntityPlayer) entity).isSpectator())
-                        renderLayers(entity, f6, f5, partialTicks, f8, f2, f7, f4);
-
-                    if ((ModuleManager.getModule(Chams.class).isEnabled() && (Chams.players.getValue() && entity instanceof EntityPlayer && ((Chams.playerMode.getValue() == Chams.ChamMode.Wireframe) || Chams.playerMode.getValue() == Chams.ChamMode.Pretty))) && !(entity instanceof EntityPopGhost)) {
-                        GlStateManager.pushMatrix();
-                        GL11.glPushAttrib(1048575);
-                        GL11.glPolygonMode(1032, 6913);
-                        GL11.glDisable(3553);
-                        GL11.glDisable(2896);
-                        GL11.glDisable(2929);
-                        GL11.glEnable(2848);
-                        GL11.glEnable(3042);
-                        GL11.glBlendFunc(770, 771);
-
-                        this.red = Chams.playerColor.getValue().getRed() / 255.0F;
-                        this.green = Chams.playerColor.getValue().getGreen() / 255.0F;
-                        this.blue = Chams.playerColor.getValue().getBlue() / 255.0F;
-                        float alpha = 1;
-
-                        GL11.glColor4f(red, green, blue, alpha);
-                        GL11.glLineWidth(Chams.playerOutlineWidth.getValue());
-                        renderModel(entity, f6, f5, f8, f2, f7, f4);
-                        GL11.glEnable(2896);
-                        GlStateManager.popAttrib();
-                        GlStateManager.popMatrix();
-                    }
-
-                    if ((ModuleManager.getModule(Chams.class).isEnabled() && (Chams.pops.getValue() && entity instanceof EntityPopGhost && (Chams.popMode.getValue() == Chams.ChamMode.Wireframe || Chams.popMode.getValue() == Chams.ChamMode.Pretty)))) {
-                        GlStateManager.pushMatrix();
-                        GL11.glPushAttrib(1048575);
-                        GL11.glPolygonMode(1032, 6913);
-                        GL11.glDisable(3553);
-                        GL11.glDisable(2896);
-                        GL11.glDisable(2929);
-                        GL11.glEnable(2848);
-                        GL11.glEnable(3042);
-                        GL11.glBlendFunc(770, 771);
-
-                        this.red = Chams.popColor.getValue().getRed() / 255.0F;
-                        this.green = Chams.popColor.getValue().getGreen() / 255.0F;
-                        this.blue = Chams.popColor.getValue().getBlue() / 255.0F;
-                        float alpha = 1;
-
-                        GL11.glColor4f(red, green, blue, alpha);
-                        GL11.glLineWidth(Chams.playerOutlineWidth.getValue());
-                        renderModel(entity, f6, f5, f8, f2, f7, f4);
-                        GL11.glEnable(2896);
-                        GlStateManager.popAttrib();
-                        GlStateManager.popMatrix();
-                    }
+                if (f3 * f3 > 2500.0F)
+                {
+                    f += f3 * 0.2F;
                 }
-                GlStateManager.disableRescaleNormal();
-            } catch (Exception var20) {
-                LOGGER.error("Couldn't render entity", var20);
+
+                f2 = f1 - f;
             }
-            GlStateManager.setActiveTexture(OpenGlHelper.lightmapTexUnit);
-            GlStateManager.enableTexture2D();
-            GlStateManager.setActiveTexture(OpenGlHelper.defaultTexUnit);
-            GlStateManager.enableCull();
-            GlStateManager.popMatrix();
-            super.doRender(entity, x, y, z, entityYaw, partialTicks);
-            MinecraftForge.EVENT_BUS.post(new RenderLivingEvent.Post(entity, RenderLivingBase.class.cast(this), partialTicks, x, y, z));
+
+            float f7 = entity.prevRotationPitch + (entity.rotationPitch - entity.prevRotationPitch) * partialTicks;
+            this.renderLivingAt(entity, x, y, z);
+            float f8 = this.handleRotationFloat(entity, partialTicks);
+            this.applyRotations(entity, f8, f, partialTicks);
+            float f4 = this.prepareScale(entity, partialTicks);
+            float f5 = 0.0F;
+            float f6 = 0.0F;
+
+            if (!entity.isRiding()) {
+                f5 = entity.prevLimbSwingAmount + (entity.limbSwingAmount - entity.prevLimbSwingAmount) * partialTicks;
+                f6 = entity.limbSwing - entity.limbSwingAmount * (1.0F - partialTicks);
+
+                if (entity.isChild())
+                {
+                    f6 *= 3.0F;
+                }
+
+                if (f5 > 1.0F)
+                {
+                    f5 = 1.0F;
+                }
+                f2 = f1 - f; // Forge: Fix MC-1207
+            }
+
+            GlStateManager.enableAlpha();
+            this.mainModel.setLivingAnimations(entity, f6, f5, partialTicks);
+            this.mainModel.setRotationAngles(f6, f5, f8, f2, f7, f4, entity);
+
+            if (this.renderOutlines) {
+                boolean flag1 = this.setScoreTeamColor(entity);
+                GlStateManager.enableColorMaterial();
+                GlStateManager.enableOutlineMode(this.getTeamColor(entity));
+
+                if (!this.renderMarker)
+                {
+                    this.renderModel(entity, f6, f5, f8, f2, f7, f4);
+                }
+
+                if (!(entity instanceof EntityPlayer) || !((EntityPlayer)entity).isSpectator())
+                {
+                    this.renderLayers(entity, f6, f5, partialTicks, f8, f2, f7, f4);
+                }
+
+                GlStateManager.disableOutlineMode();
+                GlStateManager.disableColorMaterial();
+
+                if (flag1)
+                {
+                    this.unsetScoreTeamColor();
+                }
+            }
+
+            else {
+                if (ModuleManager.getModule(PlayerChams.class).isEnabled()) {
+                    if (entity instanceof EntityPlayer) {
+                        if (entity instanceof EntityOtherPlayerMP && entity.getName() == "人" && PlayerChams.pops.getValue()) {
+                            float
+                                    r = PlayerChams.popColor.getValue().getRed() / 255f,
+                                    g = PlayerChams.popColor.getValue().getGreen() / 255f,
+                                    b = PlayerChams.popColor.getValue().getBlue() / 255f,
+                                    a = PlayerChams.getAlpha(entity) / 255f,
+                                    ro = PlayerChams.popColorO.getValue().getRed() / 255f,
+                                    go = PlayerChams.popColorO.getValue().getGreen() / 255f,
+                                    bo = PlayerChams.popColorO.getValue().getBlue() / 255f;
+
+                            if (PlayerChams.popMode.getValue() == PlayerChams.ChamMode.Fill ||
+                                    PlayerChams.popMode.getValue() == PlayerChams.ChamMode.Pretty) {
+                                GlStateManager.pushMatrix();
+                                GlStateManager.rotate(entity.rotationYaw, 0.0F, 1.0F, 0.0F);
+                                GL11.glPushAttrib(GL11.GL_ALL_ATTRIB_BITS);
+                                GL11.glDisable(GL11.GL_TEXTURE_2D);
+                                GL11.glDisable(GL11.GL_LIGHTING);
+                                GL11.glEnable(GL11.GL_LINE_SMOOTH);
+                                GL11.glEnable(GL11.GL_BLEND);
+                                GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+                                GL11.glDisable(GL11.GL_DEPTH_TEST);
+                                GL11.glDepthMask(false);
+
+                                GL11.glColor4f(r, g, b, a);
+                                renderModel(entity, f6, f5, f8, f2, f7, f4);
+                                GL11.glDisable(GL11.GL_LIGHTING);
+                                GL11.glEnable(GL11.GL_DEPTH_TEST);
+                                GL11.glDepthMask(true);
+
+                                GL11.glColor4f(r, g, b, a);
+                                renderModel(entity, f6, f5, f8, f2, f7, f4);
+                                GL11.glEnable(GL11.GL_LIGHTING);
+                                GlStateManager.popAttrib();
+                                GlStateManager.popMatrix();
+                            }
+
+                            if (PlayerChams.popMode.getValue() == PlayerChams.ChamMode.Wireframe ||
+                                    PlayerChams.popMode.getValue() == PlayerChams.ChamMode.Pretty) {
+                                GlStateManager.pushMatrix();
+                                GlStateManager.rotate(entity.rotationYaw, 0.0F, 1.0F, 0.0F);
+                                GL11.glPushAttrib(GL11.GL_ALL_ATTRIB_BITS);
+                                GL11.glPolygonMode(GL11.GL_FRONT_AND_BACK, GL11.GL_LINE);
+                                GL11.glDisable(GL11.GL_TEXTURE_2D);
+                                GL11.glDisable(GL11.GL_LIGHTING);
+                                GL11.glDisable(GL11.GL_DEPTH_TEST);
+                                GL11.glEnable(GL11.GL_LINE_SMOOTH);
+                                GL11.glEnable(GL11.GL_BLEND);
+                                GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+
+                                GL11.glColor4f(ro, go, bo, a);
+                                GL11.glLineWidth(PlayerChams.popOutlineWidth.getValue());
+                                renderModel(entity, f6, f5, f8, f2, f7, f4);
+                                GL11.glEnable(2896);
+                                GlStateManager.popAttrib();
+                                GlStateManager.popMatrix();
+                            }
+                        }
+
+                        else if (PlayerChams.players.getValue()) {
+                            float
+                                    r = PlayerChams.playerColor.getValue().getRed() / 255f,
+                                    g = PlayerChams.playerColor.getValue().getGreen() / 255f,
+                                    b = PlayerChams.playerColor.getValue().getBlue() / 255f,
+                                    a = PlayerChams.playerColor.getValue().getAlpha() / 255f,
+                                    ro = PlayerChams.playerColorO.getValue().getRed() / 255f,
+                                    go = PlayerChams.playerColorO.getValue().getGreen() / 255f,
+                                    bo = PlayerChams.playerColorO.getValue().getBlue() / 255f,
+                                    ao = PlayerChams.playerColorO.getValue().getAlpha() / 255f;
+
+                            if (PlayerChams.playerModel.getValue()) {
+                                renderModel(entity, f6, f5, f8, f2, f7, f4);
+                            }
+
+                            if (PlayerChams.playerMode.getValue() == PlayerChams.ChamMode.Fill ||
+                                    PlayerChams.playerMode.getValue() == PlayerChams.ChamMode.Pretty) {
+                                GlStateManager.pushMatrix();
+                                GL11.glPushAttrib(GL11.GL_ALL_ATTRIB_BITS);
+                                GL11.glDisable(GL11.GL_TEXTURE_2D);
+                                GL11.glDisable(GL11.GL_LIGHTING);
+                                GL11.glEnable(GL11.GL_LINE_SMOOTH);
+                                GL11.glEnable(GL11.GL_BLEND);
+                                GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+                                GL11.glDisable(GL11.GL_DEPTH_TEST);
+                                GL11.glDepthMask(false);
+
+                                GL11.glColor4f(r, g, b, a);
+                                renderModel(entity, f6, f5, f8, f2, f7, f4);
+                                GL11.glDisable(GL11.GL_LIGHTING);
+                                GL11.glEnable(GL11.GL_DEPTH_TEST);
+                                GL11.glDepthMask(true);
+
+                                GL11.glColor4f(r, g, b, a);
+                                renderModel(entity, f6, f5, f8, f2, f7, f4);
+                                GL11.glEnable(GL11.GL_LIGHTING);
+                                GlStateManager.popAttrib();
+                                GlStateManager.popMatrix();
+                            }
+
+                            if (PlayerChams.playerMode.getValue() == PlayerChams.ChamMode.Wireframe ||
+                                    PlayerChams.playerMode.getValue() == PlayerChams.ChamMode.Pretty) {
+
+                                GlStateManager.pushMatrix();
+                                GL11.glPushAttrib(GL11.GL_ALL_ATTRIB_BITS);
+                                GL11.glPolygonMode(GL11.GL_FRONT_AND_BACK, GL11.GL_LINE);
+                                GL11.glDisable(GL11.GL_TEXTURE_2D);
+                                GL11.glDisable(GL11.GL_LIGHTING);
+                                GL11.glDisable(GL11.GL_DEPTH_TEST);
+                                GL11.glEnable(GL11.GL_LINE_SMOOTH);
+                                GL11.glEnable(GL11.GL_BLEND);
+                                GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+
+                                GL11.glColor4f(ro, go, bo, ao);
+                                GL11.glLineWidth(PlayerChams.playerOutlineWidth.getValue());
+                                renderModel(entity, f6, f5, f8, f2, f7, f4);
+                                GL11.glEnable(2896);
+                                GlStateManager.popAttrib();
+                                GlStateManager.popMatrix();
+                            }
+                        }
+                    }
+
+                    else {
+                        renderModel(entity, f6, f5, f8, f2, f7, f4);
+                    }
+
+                }
+
+                else {
+                    renderModel(entity, f6, f5, f8, f2, f7, f4);
+                }
+            }
+
+            boolean flag1 = setDoRenderBrightness(entity, partialTicks);
+            if (flag1)
+                unsetBrightness();
+            GlStateManager.depthMask(true);
+            if (!(entity instanceof EntityPlayer) || !((EntityPlayer) entity).isSpectator())
+                renderLayers(entity, f6, f5, partialTicks, f8, f2, f7, f4);
+
+            GlStateManager.disableRescaleNormal();
         }
+        catch (Exception exception)
+        {
+            LOGGER.error("Couldn't render entity", (Throwable)exception);
+        }
+
+        GlStateManager.setActiveTexture(OpenGlHelper.lightmapTexUnit);
+        GlStateManager.enableTexture2D();
+        GlStateManager.setActiveTexture(OpenGlHelper.defaultTexUnit);
+        GlStateManager.enableCull();
+        GlStateManager.popMatrix();
+        super.doRender(entity, x, y, z, entityYaw, partialTicks);
+        MinecraftForge.EVENT_BUS.post(new net.minecraftforge.client.event.RenderLivingEvent.Post<T>(entity, RenderLivingBase.class.cast(this), partialTicks, x, y, z));
     }
 
     @Shadow
@@ -280,5 +327,43 @@ public abstract class MixinRenderLivingBase<T extends EntityLivingBase> extends 
 
     @Shadow
     protected abstract boolean setDoRenderBrightness(T paramT, float paramFloat);
-}
 
+    @Overwrite
+    protected boolean canRenderName(T entity)
+    {
+        if (entity.getName() == "人") {
+            this.unsetBrightness();
+            return false;
+        }
+
+        EntityPlayerSP entityplayersp = Minecraft.getMinecraft().player;
+        boolean flag = !entity.isInvisibleToPlayer(entityplayersp);
+
+        if (entity != entityplayersp)
+        {
+            Team team = entity.getTeam();
+            Team team1 = entityplayersp.getTeam();
+
+            if (team != null)
+            {
+                Team.EnumVisible team$enumvisible = team.getNameTagVisibility();
+
+                switch (team$enumvisible)
+                {
+                    case ALWAYS:
+                        return flag;
+                    case NEVER:
+                        return false;
+                    case HIDE_FOR_OTHER_TEAMS:
+                        return team1 == null ? flag : team.isSameTeam(team1) && (team.getSeeFriendlyInvisiblesEnabled() || flag);
+                    case HIDE_FOR_OWN_TEAM:
+                        return team1 == null ? flag : !team.isSameTeam(team1) && flag;
+                    default:
+                        return true;
+                }
+            }
+        }
+
+        return Minecraft.isGuiEnabled() && entity != this.renderManager.renderViewEntity && flag && !entity.isBeingRidden();
+    }
+}

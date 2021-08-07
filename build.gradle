@@ -17,7 +17,7 @@ apply plugin: 'org.spongepowered.mixin'
 apply plugin: 'com.github.johnrengelman.shadow'
 
 group = 'me.ninethousand.fate'
-version = '1.2.0'
+version = '1.2.1'
 archivesBaseName = 'EtikaHack'
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'

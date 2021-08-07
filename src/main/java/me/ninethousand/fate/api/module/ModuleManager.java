@@ -11,7 +11,7 @@ import me.ninethousand.fate.impl.modules.misc.*;
 import me.ninethousand.fate.impl.modules.movement.AntiVoid;
 import me.ninethousand.fate.impl.modules.movement.Strafe;
 import me.ninethousand.fate.impl.modules.visual.BoxEsp;
-import me.ninethousand.fate.impl.modules.visual.Chams;
+import me.ninethousand.fate.impl.modules.visual.PlayerChams;
 import me.ninethousand.fate.impl.modules.visual.EtikaMode;
 import me.ninethousand.fate.impl.modules.visual.VoidEsp;
 
@@ -47,10 +47,9 @@ public class ModuleManager {
                 new VisualRange(),
                 new VoidEsp(),
                 new EtikaMode(),
-                new SettingTestModule(),
                 new AutoDuper(),
                 //Visual
-                new Chams(),
+                new PlayerChams(),
                 new BoxEsp()
         ));
 

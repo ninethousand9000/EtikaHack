@@ -1,6 +1,7 @@
 package me.ninethousand.fate.impl.modules.misc;
 
 import com.mojang.authlib.GameProfile;
+import me.ninethousand.fate.api.event.events.RenderEvent3d;
 import me.ninethousand.fate.api.module.Module;
 import me.ninethousand.fate.api.module.ModuleAnnotation;
 import me.ninethousand.fate.api.module.ModuleCategory;

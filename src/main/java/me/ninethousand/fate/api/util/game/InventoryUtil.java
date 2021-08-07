@@ -2,6 +2,7 @@ package me.ninethousand.fate.api.util.game;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
+import net.minecraft.inventory.ClickType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -63,6 +64,20 @@ public class InventoryUtil {
 
     public static int getBlocks(Block block) {
         return getItems(Item.getItemFromBlock(block));
+    }
+
+    public static void replaceSlots(int slot1, int slot2) {
+        if (slot1 > 45 || slot1 < 0 || slot2 > 45 || slot2 < 0) return;
+
+        clickSlot(slot1);
+        clickSlot(slot2);
+        clickSlot(slot1);
+    }
+
+    private static void clickSlot(int slot) {
+        if (slot > 45 || slot == 0) return;
+
+        mc.playerController.windowClick(mc.player.inventoryContainer.windowId, slot, 0, ClickType.PICKUP, mc.player);
     }
 }
 
