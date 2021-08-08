@@ -29,6 +29,8 @@
     "mixins.MixinCPacketPlayer",
     "accessors.ICPacketPlayer",
 
-    "mixins.MixinPlayerControllerMP"
+    "mixins.MixinPlayerControllerMP",
+
+    "mixins.MixinRenderGlobal"
   ]
 }

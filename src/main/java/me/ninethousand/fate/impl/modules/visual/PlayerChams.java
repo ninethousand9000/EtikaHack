@@ -50,7 +50,7 @@ public class PlayerChams extends Module {
     }
 
     private static ArrayList<Pair<EntityOtherPlayerMP, Float>> playersToRender = new ArrayList<>();
-    private static ArrayList<EntityOtherPlayerMP> playersToDelete = new ArrayList<>();
+    private static ArrayList<Pair<EntityOtherPlayerMP, Float>> playersToDelete = new ArrayList<>();
 
     @Override
     public void onWorldRender(RenderEvent3d event3d) {
@@ -65,7 +65,9 @@ public class PlayerChams extends Module {
                         pair.first.rotationYaw,
                         1.0f, false);
 
-                pair.last -= popFadeSpeed.getValue();
+                if (popFadeSpeed.getValue() <= pair.last && pair.last >= 0) pair.last -= popFadeSpeed.getValue();
+
+                else playersToDelete.add(pair);
             });
 
             playersToDelete.clear();

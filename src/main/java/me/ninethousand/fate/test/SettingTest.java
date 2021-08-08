@@ -6,6 +6,7 @@ import me.ninethousand.fate.api.config.Config;
 import me.ninethousand.fate.api.module.ModuleManager;
 import me.ninethousand.fate.api.settings.Setting;
 import me.ninethousand.fate.impl.modules.misc.SettingTestModule;
+import org.lwjgl.input.Keyboard;
 
 import java.awt.*;
 import java.io.IOException;
@@ -19,8 +20,7 @@ public class SettingTest {
 
 
     public static void main(String[] args) throws IOException {
-        configLoad();
-        System.out.println("Blue: " + SettingTestModule.color.getValue());
+        System.out.println(Keyboard.getKeyIndex("P"));
     }
 
     public static void configSetup() throws IOException {

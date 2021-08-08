@@ -1,10 +1,9 @@
 package me.ninethousand.fate.api.command;
 
-import me.ninethousand.fate.api.command.commands.ToggleCommand;
+import me.ninethousand.fate.api.command.commands.BindCommand;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.NoSuchElementException;
 
 public class CommandManager {
@@ -12,14 +11,14 @@ public class CommandManager {
 
     public static void init() {
         commands.addAll(Arrays.asList(
-            new ToggleCommand()
+            new BindCommand()
         ));
 
         commands.sort(CommandManager::order);
     }
 
     private static int order(Command command1, Command command2) {
-        return command1.getAlias().compareTo(command2.getAlias());
+        return command1.getLabel().compareTo(command2.getLabel());
     }
 
     public static ArrayList<Command> getCommands() {

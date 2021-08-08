@@ -31,11 +31,17 @@ public class ClickGUI extends Module {
         );
     }
 
+    private static ClickGUIScreen screen = null;
+
     @Override
     public void onEnable() {
         if (nullCheck()) return;
 
-        mc.displayGuiScreen(new ClickGUIScreen());
+        if (screen == null) {
+            screen = new ClickGUIScreen();
+        }
+
+        mc.displayGuiScreen(screen);
     }
 
     @Override

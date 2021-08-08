@@ -9,6 +9,7 @@ import me.ninethousand.fate.api.ui.newgui.components.category.module.ModuleCompo
 import me.ninethousand.fate.api.ui.newgui.components.category.module.setting.SettingComponent;
 import me.ninethousand.fate.api.ui.newgui.components.category.module.setting.settings.BindComponent;
 import me.ninethousand.fate.api.util.math.Vec2d;
+import me.ninethousand.fate.api.util.misc.GuiUtil;
 import me.ninethousand.fate.api.util.render.graphics.GraphicsUtil2d;
 import me.ninethousand.fate.impl.modules.client.ClickGUI;
 
@@ -20,6 +21,7 @@ public class PanelComponent extends GUIComponent {
     private List<GUIComponent> components = new ArrayList<>();
     private int draggingPositionX, draggingPositionY;
     private boolean dragging = false, pinned = false;
+    private int offsetX = 0, offsetY = 0;
 
     public ModuleCategory category;
 
@@ -36,6 +38,24 @@ public class PanelComponent extends GUIComponent {
     @Override
     public void drawComponent(int mouseX, int mouseY) {
         components.clear();
+
+        if (GuiUtil.mouseOver(getPositionX(), getPositionY(), getPositionX() + getWidth(), getPositionY() + getHeight())) {
+            if (GuiUtil.leftDown) {
+                if (!dragging) {
+                    offsetX = mouseX - getPositionX();
+                    offsetY = mouseY - getPositionY();
+                }
+
+                dragging = true;
+
+                setPositionX(mouseX - offsetX);
+                setPositionY(mouseY - offsetY);
+            }
+
+            else {
+                dragging = false;
+            }
+        }
 
         int drawX = getPositionX();
         int drawY = getPositionY();

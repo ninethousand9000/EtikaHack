@@ -1,5 +1,7 @@
 package me.ninethousand.fate.api.event;
 
+import me.ninethousand.fate.api.command.Command;
+import me.ninethousand.fate.api.command.CommandManager;
 import me.ninethousand.fate.api.event.events.*;
 import me.ninethousand.fate.api.module.Module;
 import me.ninethousand.fate.api.module.ModuleManager;
@@ -12,6 +14,7 @@ import net.minecraft.client.renderer.GLAllocation;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.play.server.SPacketEntityStatus;
+import net.minecraftforge.client.event.ClientChatEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.common.MinecraftForge;
@@ -26,6 +29,8 @@ import org.lwjgl.opengl.GL11;
 import java.awt.*;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class EventTracker {
     private static final Minecraft mc = Minecraft.getMinecraft();
@@ -140,22 +145,21 @@ public class EventTracker {
         }
     }
 
-    /*@SubscribeEvent(priority = EventPriority.HIGHEST)
+    @SubscribeEvent(priority = EventPriority.HIGHEST)
     public void onChatSent(ClientChatEvent event) {
-        if (event.getMessage().startsWith(Command.getPrefix())) {
+        if(event.getMessage().startsWith(Command.getPrefix())) {
             event.setCanceled(true);
-            try {
-                mc.ingameGUI.getChatGUI().addToSentMessages(event.getMessage());
-                if (event.getMessage().length() > 1) {
-                    CommandManager.doCommand(event.getMessage().substring(Command.getPrefix().length() - 1));
-                } else {
-                    Command.sendClientMessageDefault("Please enter a command.");
+            mc.ingameGUI.getChatGUI().addToSentMessages(event.getMessage());
+
+            ArrayList<String> arguments = new ArrayList<>(Arrays.asList(event.getMessage().substring(Command.getPrefix().length()).split(" ")));
+
+            for(Command command : CommandManager.getCommands()) {
+                if(command.getLabel().equalsIgnoreCase(arguments.get(0))) {
+                    arguments.remove(0);
+                    command.runCommand(arguments);
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
-                Command.sendClientMessageDefault(ChatFormatting.RED + "An error has been caused by this command!");
             }
-            event.setMessage("");
+
         }
-    }*/
+    }
 }

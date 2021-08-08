@@ -10,10 +10,8 @@ import me.ninethousand.fate.impl.modules.hud.Welcomer;
 import me.ninethousand.fate.impl.modules.misc.*;
 import me.ninethousand.fate.impl.modules.movement.AntiVoid;
 import me.ninethousand.fate.impl.modules.movement.Strafe;
-import me.ninethousand.fate.impl.modules.visual.BoxEsp;
-import me.ninethousand.fate.impl.modules.visual.PlayerChams;
-import me.ninethousand.fate.impl.modules.visual.EtikaMode;
-import me.ninethousand.fate.impl.modules.visual.VoidEsp;
+import me.ninethousand.fate.impl.modules.player.XCarry;
+import me.ninethousand.fate.impl.modules.visual.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -45,12 +43,17 @@ public class ModuleManager {
                 new FakePlayer(),
                 new TotemPop(),
                 new VisualRange(),
-                new VoidEsp(),
-                new EtikaMode(),
                 new AutoDuper(),
                 //Visual
                 new PlayerChams(),
-                new BoxEsp()
+                new BoxEsp(),
+                new SkyColor(),
+                new PopCam(),
+                new EtikaMode(),
+                new VoidEsp(),
+                //Player
+                new XCarry()
+
         ));
 
         modules.sort(ModuleManager::order);
@@ -70,6 +73,14 @@ public class ModuleManager {
             if (module.getCategory() == category) modules.add(module);
         }
         return modules;
+    }
+
+    public static Module getModulesByName(String name) {
+        for (Module module : ModuleManager.modules) {
+            if (module.getName().equalsIgnoreCase(name)) return module;
+        }
+
+        throw new NoSuchElementException();
     }
 
     public static <T extends Module> Module getModule(Class<T> clazz) {

@@ -1,17 +1,24 @@
 package me.ninethousand.fate;
 
+import me.ninethousand.fate.api.command.CommandManager;
 import me.ninethousand.fate.api.config.Config;
 import me.ninethousand.fate.api.event.EventTracker;
 import me.ninethousand.fate.api.module.ModuleManager;
 import me.ninethousand.fate.api.util.render.IconUtil;
+import me.ninethousand.fate.impl.modules.client.ClickGUI;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.settings.GameSettings;
+import net.minecraft.client.settings.KeyBinding;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
+
+import java.util.Arrays;
 
 @Mod(modid = Fate.MODID, name = Fate.NAME, version = Fate.VERSION)
 public class Fate {
@@ -21,6 +28,8 @@ public class Fate {
 
     public static final Logger LOGGER = LogManager.getLogger(MODID);
     public static final EventTracker EVENT_TRACKER = new EventTracker();
+
+    public static final Minecraft mc = Minecraft.getMinecraft();
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
@@ -34,13 +43,14 @@ public class Fate {
         log("Proudly developed by ninethousand");
         log("https://discord.gg/mRGn35t4XE");
 
-        ModuleManager.init();
+        EVENT_TRACKER.init();
+        log("Events Loaded");
 
+        ModuleManager.init();
         log("Modules Loaded");
 
-        EVENT_TRACKER.init();
-
-        log("Events Loaded");
+        CommandManager.init();
+        log("Commands Loaded");
 
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             Config.saveConfig();

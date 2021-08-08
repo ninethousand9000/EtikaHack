@@ -16,11 +16,12 @@ import net.minecraft.client.renderer.GlStateManager;
 
 @ModuleAnnotation(category = ModuleCategory.HUD)
 public class Welcomer extends Module {
-    public static final Setting<Boolean> time = new Setting<>("Time", true);
+    public static final Setting<WelcomeMode> welcomeMode = new Setting<>("Mode", WelcomeMode.Default);
+    public static final Setting<String> customText = new Setting<>(welcomeMode, "Text","Hi, $player");
     public static final NumberSetting<Float> scale = new NumberSetting<>("Scale", 0.1f, 1.0f, 10.0f, 1);
 
     public Welcomer() {
-        addSettings(time, scale);
+        addSettings(welcomeMode, scale);
     }
 
     @Override
@@ -32,7 +33,7 @@ public class Welcomer extends Module {
 
         String text = "Hey, " + mc.player.getName();
 
-        if (time.getValue()) {
+        if (welcomeMode.getValue() == WelcomeMode.Time) {
             int hour = TimeUtil.getHour();
 
             if (hour >= 0 && hour < 12)
@@ -51,10 +52,20 @@ public class Welcomer extends Module {
                 text = "Welcome, " + mc.player.getName();
         }
 
+        else if (welcomeMode.getValue() == WelcomeMode.Custom) {
+            text = customText.getValue().replace("$player", mc.getSession().getUsername());
+        }
+
         ScaledResolution scaledResolution = new ScaledResolution(mc);
 
-        FontUtil.drawText(text, (scaledResolution.getScaledWidth() / 2 - FontUtil.getStringWidth(text)) / scale.getValue(), 2 / scale.getValue(), Customise.clientColor.getValue().getRGB());
+        FontUtil.drawText(text, (scaledResolution.getScaledWidth() / 2 - FontUtil.getStringWidth(text) / 2) / scale.getValue(), 2 / scale.getValue(), Customise.clientColor.getValue().getRGB());
 
         GlStateManager.popMatrix();
+    }
+
+    private enum WelcomeMode {
+        Time,
+        Custom,
+        Default
     }
 }

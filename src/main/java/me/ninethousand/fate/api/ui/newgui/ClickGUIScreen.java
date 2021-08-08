@@ -1,6 +1,7 @@
 package me.ninethousand.fate.api.ui.newgui;
 
 import me.ninethousand.fate.api.module.ModuleCategory;
+import me.ninethousand.fate.api.module.ModuleManager;
 import me.ninethousand.fate.api.ui.newgui.components.panel.PanelComponent;
 import me.ninethousand.fate.api.util.misc.GuiUtil;
 import me.ninethousand.fate.impl.modules.client.ClickGUI;
@@ -12,10 +13,8 @@ import java.util.ArrayList;
 public final class ClickGUIScreen extends GuiScreen {
     public final ArrayList<PanelComponent> panels = new ArrayList<>();
     public final int startX = 30, startY = 20, gap = 10, width = 110, height = 18;
-    public static float rotation = 0;
 
-    @Override
-    public void initGui() {
+    public ClickGUIScreen() {
         int drawX = startX;
         int drawY = startY;
 
@@ -69,7 +68,7 @@ public final class ClickGUIScreen extends GuiScreen {
 
     @Override
     public void onGuiClosed() {
-
+        ModuleManager.getModule(ClickGUI.class).setEnabled(false);
     }
 
     @Override
