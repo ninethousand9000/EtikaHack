@@ -16,8 +16,8 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'org.spongepowered.mixin'
 apply plugin: 'com.github.johnrengelman.shadow'
 
-group = 'me.ninethousand.fate'
-version = '1.2.1'
+group = 'me.ninethousand.etikahack'
+version = '1.3'
 archivesBaseName = 'EtikaHack'
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
@@ -33,7 +33,7 @@ minecraft {
 
             workingDirectory project.file('run')
 
-            property 'fml.coreMods.load', 'me.ninethousand.fate.mixin.MixinLoader'
+            property 'fml.coreMods.load', 'me.ninethousand.etikahack.mixin.MixinLoader'
 
             // Recommended logging data for a userdev environment
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
@@ -70,17 +70,17 @@ dependencies {
 }
 
 jar.manifest.attributes(
-        'MixinConfigs': 'mixins.fate.json',
+        'MixinConfigs': 'mixins.etikahack.json',
         'tweakClass': 'org.spongepowered.asm.launch.MixinTweaker',
         'TweakOrder': 0,
         'FMLCorePluginContainsFMLMod': 'true',
-        'FMLCorePlugin': 'me.ninethousand.fate.mixin.MixinLoader',
+        'FMLCorePlugin': 'me.ninethousand.etikahack.mixin.MixinLoader',
         'ForceLoadAsMod': 'true',
 )
 
 mixin {
     defaultObfuscationEnv 'searge'
-    add sourceSets.main, 'refmap.fate.json'
+    add sourceSets.main, 'refmap.etikahack.json'
 }
 
 

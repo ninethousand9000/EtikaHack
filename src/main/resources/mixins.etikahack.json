@@ -1,0 +1,39 @@
+{
+  "required": true,
+  "compatibilityLevel": "JAVA_8",
+  "package": "me.ninethousand.etikahack.mixin",
+  "refmap": "refmap.etikahack.json",
+  "mixins": [
+    "mixins.MixinFontRenderer",
+
+    "mixins.MixinNetworkManager",
+
+    "mixins.MixinRenderLivingBase",
+
+    "mixins.MixinRenderPlayer",
+
+    "mixins.MixinMinecraft",
+    "accessors.IMinecraft",
+
+    "mixins.MixinRenderManager",
+    "accessors.IRenderManager",
+
+    "mixins.MixinTimer",
+    "accessors.ITimer",
+
+    "mixins.MixinEntityPlayerSP",
+
+    "mixins.MixinEntity",
+    "accessors.IEntity",
+
+    "mixins.MixinCPacketPlayer",
+    "accessors.ICPacketPlayer",
+
+    "mixins.MixinPlayerControllerMP",
+
+    "mixins.MixinRenderGlobal",
+
+    "accessors.ICPacketUseEntity",
+    "mixins.MixinCPacketUseEntity"
+  ]
+}
