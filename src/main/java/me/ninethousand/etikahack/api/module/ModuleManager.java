@@ -2,8 +2,8 @@ package me.ninethousand.etikahack.api.module;
 
 import me.ninethousand.etikahack.impl.modules.client.*;
 import me.ninethousand.etikahack.impl.modules.combat.BlockNuker;
+import me.ninethousand.etikahack.impl.modules.combat.Offhand;
 import me.ninethousand.etikahack.impl.modules.combat.SelfFill;
-import me.ninethousand.etikahack.impl.modules.combat.Surround;
 import me.ninethousand.etikahack.impl.modules.hud.*;
 import me.ninethousand.etikahack.impl.modules.misc.*;
 import me.ninethousand.etikahack.impl.modules.movement.AntiVoid;
@@ -27,9 +27,9 @@ public class ModuleManager {
                 new RPC(),
                 new ClientConfig(),
                 //Combat
-                new Surround(),
                 new BlockNuker(),
                 new SelfFill(),
+                new Offhand(),
                 //Movement
                 new Strafe(),
                 new AntiVoid(),
