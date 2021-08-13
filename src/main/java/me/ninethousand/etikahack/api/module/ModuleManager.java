@@ -52,6 +52,7 @@ public class ModuleManager {
                 new EtikaMode(),
                 new VoidEsp(),
                 new Freecam(),
+                new CrystalChams(),
                 //Player
                 new XCarry()
 

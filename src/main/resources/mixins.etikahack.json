@@ -10,6 +10,8 @@
 
     "mixins.MixinRenderLivingBase",
 
+    "mixins.MixinRenderCrystal",
+
     "mixins.MixinRenderPlayer",
 
     "mixins.MixinMinecraft",
