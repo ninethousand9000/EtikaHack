@@ -20,7 +20,10 @@ import java.util.UUID;
 @ModuleAnnotation(category = ModuleCategory.VISUAL)
 public class PlayerChams extends Module {
     public static final Setting<Boolean> players = new Setting<>("Players", true);
-    public static final Setting<Boolean> playerModel = new Setting<>(players, "PlayerModel", true);
+    public static final Setting<Boolean> playerModel = new Setting<>(players, "RenderPlayerModel", true);
+    public static final Setting<Boolean> walls = new Setting<>(players, "Depth", true);
+    public static final Setting<Boolean> middleWall = new Setting<>(walls, "ModelThroughWalls", true);
+    public static final Setting<Boolean> lineWall = new Setting<>(walls, "LineThroughWalls", true);
     public static final Setting<ChamMode> playerMode = new Setting<>(players, "PlayerMode", ChamMode.Fill);
     public static final Setting<Boolean> playerColors = new Setting<>(players, "PlayerColors", true);
     public static final Setting<Color> playerColor = new Setting<>(playerColors,"PlayerColor", new Color(0xB3FFFFFF, true));
@@ -30,7 +33,7 @@ public class PlayerChams extends Module {
     public static final NumberSetting<Float> playerOutlineWidth = new NumberSetting<>(players,"PlayerOutlineWidth", 0.1f, 1.0f, 5.0f, 1);
 
     public static final Setting<Boolean> pops = new Setting<>("Pops", true);
-    public static final Setting<ChamMode> popMode = new Setting<>(pops, "PopMode", ChamMode.Fill);
+    public static final Setting<ChamModePop> popMode = new Setting<>(pops, "PopMode", ChamModePop.Fill);
     public static final Setting<Boolean> popColors = new Setting<>(pops, "PopColors", true);
     public static final Setting<Color> popColor = new Setting<>(popColors,"PopColor", new Color(0xB3FFFFFF, true));
     public static final Setting<Color> popColorO = new Setting<>(popColors,"PopColorO", new Color(0xB3FFFFFF, true));
@@ -96,6 +99,13 @@ public class PlayerChams extends Module {
     }
 
     public enum ChamMode {
+        Fill,
+        Wireframe,
+        Pretty,
+        Normal
+    }
+
+    public enum ChamModePop {
         Fill,
         Wireframe,
         Pretty

@@ -1,5 +1,6 @@
 package me.ninethousand.etikahack.mixin.mixins;
 
+import me.ninethousand.etikahack.api.command.Command;
 import me.ninethousand.etikahack.api.module.ModuleManager;
 import me.ninethousand.etikahack.impl.modules.visual.PlayerChams;
 import net.minecraft.client.Minecraft;
@@ -144,8 +145,8 @@ public abstract class MixinRenderLivingBase<T extends EntityLivingBase> extends 
                                     go = PlayerChams.popColorO.getValue().getGreen() / 255f,
                                     bo = PlayerChams.popColorO.getValue().getBlue() / 255f;
 
-                            if (PlayerChams.popMode.getValue() == PlayerChams.ChamMode.Fill ||
-                                    PlayerChams.popMode.getValue() == PlayerChams.ChamMode.Pretty) {
+                            if (PlayerChams.popMode.getValue() == PlayerChams.ChamModePop.Fill ||
+                                    PlayerChams.popMode.getValue() == PlayerChams.ChamModePop.Pretty) {
                                 GlStateManager.pushMatrix();
                                 GlStateManager.rotate(entity.rotationYaw, 0.0F, 1.0F, 0.0F);
                                 GL11.glPushAttrib(GL11.GL_ALL_ATTRIB_BITS);
@@ -170,8 +171,8 @@ public abstract class MixinRenderLivingBase<T extends EntityLivingBase> extends 
                                 GlStateManager.popMatrix();
                             }
 
-                            if (PlayerChams.popMode.getValue() == PlayerChams.ChamMode.Wireframe ||
-                                    PlayerChams.popMode.getValue() == PlayerChams.ChamMode.Pretty) {
+                            if (PlayerChams.popMode.getValue() == PlayerChams.ChamModePop.Wireframe ||
+                                    PlayerChams.popMode.getValue() == PlayerChams.ChamModePop.Pretty) {
                                 GlStateManager.pushMatrix();
                                 GlStateManager.rotate(entity.rotationYaw, 0.0F, 1.0F, 0.0F);
                                 GL11.glPushAttrib(GL11.GL_ALL_ATTRIB_BITS);
@@ -216,8 +217,11 @@ public abstract class MixinRenderLivingBase<T extends EntityLivingBase> extends 
                                 GL11.glEnable(GL11.GL_LINE_SMOOTH);
                                 GL11.glEnable(GL11.GL_BLEND);
                                 GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-                                GL11.glDisable(GL11.GL_DEPTH_TEST);
-                                GL11.glDepthMask(false);
+
+                                if (PlayerChams.middleWall.getValue()) {
+                                    GL11.glDisable(GL11.GL_DEPTH_TEST);
+                                    GL11.glDepthMask(false);
+                                }
 
                                 GL11.glColor4f(r, g, b, a);
                                 renderModel(entity, f6, f5, f8, f2, f7, f4);
@@ -240,15 +244,45 @@ public abstract class MixinRenderLivingBase<T extends EntityLivingBase> extends 
                                 GL11.glPolygonMode(GL11.GL_FRONT_AND_BACK, GL11.GL_LINE);
                                 GL11.glDisable(GL11.GL_TEXTURE_2D);
                                 GL11.glDisable(GL11.GL_LIGHTING);
-                                GL11.glDisable(GL11.GL_DEPTH_TEST);
                                 GL11.glEnable(GL11.GL_LINE_SMOOTH);
                                 GL11.glEnable(GL11.GL_BLEND);
                                 GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+
+                                if (PlayerChams.lineWall.getValue()) {
+                                    GL11.glDisable(GL11.GL_DEPTH_TEST);
+                                }
 
                                 GL11.glColor4f(ro, go, bo, ao);
                                 GL11.glLineWidth(PlayerChams.playerOutlineWidth.getValue());
                                 renderModel(entity, f6, f5, f8, f2, f7, f4);
                                 GL11.glEnable(2896);
+                                GlStateManager.popAttrib();
+                                GlStateManager.popMatrix();
+                            }
+
+                            if (PlayerChams.playerMode.getValue() == PlayerChams.ChamMode.Normal){
+                                GlStateManager.pushMatrix();
+                                GL11.glPushAttrib(GL11.GL_ALL_ATTRIB_BITS);
+                                GL11.glDisable(GL11.GL_LIGHTING);
+                                GL11.glEnable(GL11.GL_BLEND);
+                                GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+                                GL11.glDisable(GL11.GL_DEPTH_TEST);
+                                GL11.glEnable(GL11.GL_POLYGON_OFFSET_FILL);
+                                GL11.glPolygonOffset(1.0f, -1000000.0f);
+                                GL11.glDepthMask(false);
+
+                                renderModel(entity, f6, f5, f8, f2, f7, f4);
+
+                                GL11.glDisable(GL11.GL_LIGHTING);
+                                GL11.glEnable(GL11.GL_DEPTH_TEST);
+                                GL11.glDepthMask(true);
+
+                                renderModel(entity, f6, f5, f8, f2, f7, f4);
+
+                                GL11.glEnable(GL11.GL_LIGHTING);
+                                GL11.glPolygonOffset(1.0f, 1000000.0f);
+                                GL11.glDisable(GL11.GL_POLYGON_OFFSET_FILL);
+
                                 GlStateManager.popAttrib();
                                 GlStateManager.popMatrix();
                             }

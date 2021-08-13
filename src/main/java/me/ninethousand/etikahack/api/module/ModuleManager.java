@@ -51,6 +51,7 @@ public class ModuleManager {
                 new PopCam(),
                 new EtikaMode(),
                 new VoidEsp(),
+                new Freecam(),
                 //Player
                 new XCarry()
 

@@ -27,7 +27,9 @@ public class FakePlayer extends Module {
 
         try {
             fakePlayer.setHealth(mc.player.getHealth());
-            fakePlayer.rotationYawHead = mc.player.rotationYawHead;
+            /*fakePlayer.rotationYawHead = mc.player.rotationYawHead;
+            fakePlayer.rotationPitch = mc.player.rotationPitch;
+            fakePlayer.rotationYaw = mc.player.rotationYaw;*/
             fakePlayer.inventory = mc.player.inventory;
         }
 
