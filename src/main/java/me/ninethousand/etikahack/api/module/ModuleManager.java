@@ -48,7 +48,7 @@ public class ModuleManager {
                 new PlayerChams(),
                 new BoxEsp(),
                 new SkyColor(),
-                new PopCam(),
+                new PopParticleColor(),
                 new EtikaMode(),
                 new VoidEsp(),
                 new Freecam(),

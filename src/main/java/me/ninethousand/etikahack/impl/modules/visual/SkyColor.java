@@ -4,6 +4,7 @@ import me.ninethousand.etikahack.api.module.Module;
 import me.ninethousand.etikahack.api.module.ModuleAnnotation;
 import me.ninethousand.etikahack.api.module.ModuleCategory;
 import me.ninethousand.etikahack.api.settings.Setting;
+import net.minecraft.client.particle.ParticleTotem;
 import net.minecraftforge.client.event.EntityViewRenderEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 

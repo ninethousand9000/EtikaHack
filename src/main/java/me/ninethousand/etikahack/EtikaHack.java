@@ -19,7 +19,7 @@ import org.lwjgl.opengl.Display;
 public class EtikaHack {
     public static final String MODID = "etikahack";
     public static final String NAME = "EtikaHack";
-    public static final String VERSION = "1.3"; // sexy
+    public static final String VERSION = "1.4"; // sexy
 
     public static final Logger LOGGER = LogManager.getLogger(MODID);
     public static final EventTracker EVENT_TRACKER = new EventTracker();

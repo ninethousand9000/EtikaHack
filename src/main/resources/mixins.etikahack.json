@@ -36,6 +36,8 @@
     "mixins.MixinRenderGlobal",
 
     "accessors.ICPacketUseEntity",
-    "mixins.MixinCPacketUseEntity"
+    "mixins.MixinCPacketUseEntity",
+
+    "mixins.MixinParticleManager"
   ]
 }

@@ -5,7 +5,7 @@ import me.ninethousand.etikahack.api.module.ModuleAnnotation;
 import me.ninethousand.etikahack.api.module.ModuleCategory;
 import me.ninethousand.etikahack.api.settings.NumberSetting;
 import me.ninethousand.etikahack.api.settings.Setting;
-import me.ninethousand.etikahack.api.util.render.font.CFontRenderer;
+import me.ninethousand.etikahack.api.util.render.font.better.CustomFont;
 
 @ModuleAnnotation(category = ModuleCategory.CLIENT, enabledByDefault = true)
 public final class ClientFont extends Module {
@@ -14,8 +14,6 @@ public final class ClientFont extends Module {
     public static final Setting<Boolean> overrideMinecraft = new Setting<>("Override Minecraft", false);
     public static final Setting<Boolean> shadow = new Setting<>("Shadow", true);
     public static final Setting<Boolean> lowercase = new Setting<>("Lowercase", false);
-
-    public static CFontRenderer customFont = null;
 
     public ClientFont() {
         addSettings(

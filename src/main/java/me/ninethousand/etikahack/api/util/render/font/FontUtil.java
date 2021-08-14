@@ -1,49 +1,58 @@
 package me.ninethousand.etikahack.api.util.render.font;
 
+import me.ninethousand.etikahack.api.command.Command;
 import me.ninethousand.etikahack.api.module.ModuleManager;
 import me.ninethousand.etikahack.api.util.math.MathUtil;
+import me.ninethousand.etikahack.api.util.render.font.better.CustomFont;
 import me.ninethousand.etikahack.impl.modules.client.ClientFont;
 import me.ninethousand.etikahack.impl.modules.client.Customise;
 import net.minecraft.client.Minecraft;
 
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 
 public class FontUtil {
     private static final Minecraft mc = Minecraft.getMinecraft();
 
     //Font
-    private static int currentSize;
+    private static float currentSize;
     private static String currentFontName;
-    private static CFontRenderer current;
+    private static CustomFont fontRenderer = new CustomFont(new Font("Verdana", 0, 17), true, true);
 
-    public static CFontRenderer getCurrentCustomFont() {
+    public static void updateFont() {
         if (ClientFont.size.getValue() != currentSize || ClientFont.font.getValue().toString() != currentFontName) {
             currentSize = ClientFont.size.getValue();
             currentFontName = ClientFont.font.getValue().toString();
-            current = new CFontRenderer(currentFontName, currentSize);
-        }
+//            fontRenderer = new CustomFont(new Font(currentFontName, 0, currentSize), true, true);
 
-        return current;
+            try {
+                fontRenderer = new CustomFont(getFontByName(currentFontName).deriveFont(Font.BOLD).deriveFont(currentSize), true, true);
+            }
+
+            catch (Exception e) {
+                fontRenderer = new CustomFont(new Font(currentFontName, 0, (int) currentSize), true, true);
+                Command.sendClientMessageDefault("Exception");
+            }
+        }
     }
 
-    public static int drawText(String text, float x, float y, int color) {
+    public static float drawText(String text, float x, float y, int color) {
+        updateFont();
+
         if (ClientFont.shadow.getValue()) {
             if (ModuleManager.getModule(ClientFont.class).isEnabled()) {
-                return getCurrentCustomFont().drawStringWithShadow(ClientFont.lowercase.getValue() ? text.toLowerCase() : text, x, y, color);
+                return fontRenderer.drawStringWithShadow(text, x, y, color);
             } else {
                 return mc.fontRenderer.drawStringWithShadow(ClientFont.lowercase.getValue() ? text.toLowerCase() : text, x, y, color);
             }
         } else {
             if (ModuleManager.getModule(ClientFont.class).isEnabled()) {
-                return getCurrentCustomFont().drawString(ClientFont.lowercase.getValue() ? text.toLowerCase() : text, x, y, color);
+                return fontRenderer.drawString(text, x, y, color);
             } else {
                 return mc.fontRenderer.drawString(ClientFont.lowercase.getValue() ? text.toLowerCase() : text, (int) x, (int) y, color);
             }
         }
-    }
-
-    public static void drawText(String text, double x, double y, int color) {
-        drawText(text, (float) x, (float) y, color);
     }
 
     public static void drawTextHUD(String text, float x, float y) {
@@ -95,18 +104,53 @@ public class FontUtil {
     }
 
     public static float getStringWidth(String text) {
-        return mc.fontRenderer.getStringWidth(text);
+        return fontRenderer.getStringWidth(text);
     }
 
     public static float getStringHeight(String text) {
-        return 9f;
+        return fontRenderer.getStringHeight(text) + 2;
     }
 
-    /*public static float getStringWidth(String text) {
-        return getCurrentCustomFont().getStringWidth(text);
+    private static Font font = null;
+
+    public static Font getFontFromInput(String path) throws IOException, FontFormatException {
+        font = Font.createFont(Font.TRUETYPE_FONT, FontUtil.class.getResourceAsStream(path));
+
+        return font;
     }
 
-    public static float getStringHeight(String text) {
-        return getCurrentCustomFont().getStringHeight(text);
-    }*/
+    public static Font getFontByName(String name) throws IOException, FontFormatException {
+        if (name == "ProductSans")
+            return getFontFromInput("/assets/fate/fonts/ProductSans.ttf");
+
+        else if (name == "Ubuntu")
+            return getFontFromInput("/assets/fate/fonts/Ubuntu.ttf");
+
+        else if (name == "Lato")
+            return getFontFromInput("/assets/fate/fonts/Lato.ttf");
+
+        else if (name == "Verdana")
+            return getFontFromInput("/assets/fate/fonts/Verdana.ttf");
+
+        else if (name == "Comfortaa")
+            return getFontFromInput("/assets/fate/fonts/Comfortaa.ttf");
+
+        else if (name == "Subtitle")
+            return getFontFromInput("/assets/fate/fonts/Subtitle.ttf");
+
+        else if (name == "ComicSans")
+            return getFontFromInput("/assets/fate/fonts/ComicSans.ttf");
+
+        else if (name == "SergoeUI")
+            return getFontFromInput("/assets/fate/fonts/SergoeUI.ttf");
+
+        else if (name == "Roboto")
+            return getFontFromInput("/assets/fate/fonts/Roboto.ttf");
+
+        else if (name == "Arial")
+            return getFontFromInput("/assets/fate/fonts/Arial.ttf");
+
+        else
+            return Font.createFont(Font.TRUETYPE_FONT, new File("/assets/fate/fonts/" + name + ".ttf"));
+    }
 }

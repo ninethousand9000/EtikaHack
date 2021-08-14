@@ -16,7 +16,7 @@ public final class MixinFontRenderer {
 
     @Inject(method = "drawString(Ljava/lang/String;FFIZ)I", at = @At(value = "HEAD"), cancellable = true)
     public void onDrawStringHead(String text, float x, float y, int color, boolean shadow, CallbackInfoReturnable<Integer> cir) {
-        if (mc.world != null && ClientFont.overrideMinecraft.getValue() && ModuleManager.getModule(ClientFont.class).isEnabled()) cir.setReturnValue(FontUtil.drawText(text, x, y, color));
+        if (mc.world != null && ClientFont.overrideMinecraft.getValue() && ModuleManager.getModule(ClientFont.class).isEnabled()) cir.setReturnValue((int) FontUtil.drawText(text, x, y, color));
     }
 
     @Inject(method = "getStringWidth", at = @At("HEAD"), cancellable = true)
