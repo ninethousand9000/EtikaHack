@@ -104,10 +104,20 @@ public class FontUtil {
     }
 
     public static float getStringWidth(String text) {
-        return fontRenderer.getStringWidth(text);
+        updateFont();
+
+        if (ModuleManager.getModule(ClientFont.class).isEnabled()) {
+            return fontRenderer.getStringWidth(text);
+        }
+
+        else {
+            return mc.fontRenderer.getStringWidth(text);
+        }
     }
 
     public static float getStringHeight(String text) {
+        updateFont();
+
         return fontRenderer.getStringHeight(text) + 2;
     }
 

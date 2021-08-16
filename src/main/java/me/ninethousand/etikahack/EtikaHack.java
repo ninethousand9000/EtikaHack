@@ -7,10 +7,12 @@ import me.ninethousand.etikahack.api.module.ModuleManager;
 import me.ninethousand.etikahack.api.util.game.ServerManager;
 import me.ninethousand.etikahack.api.util.render.IconUtil;
 import net.minecraft.client.Minecraft;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.launcher.FMLTweaker;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.lwjgl.opengl.Display;
@@ -19,7 +21,7 @@ import org.lwjgl.opengl.Display;
 public class EtikaHack {
     public static final String MODID = "etikahack";
     public static final String NAME = "EtikaHack";
-    public static final String VERSION = "1.4"; // sexy
+    public static final String VERSION = "1.5"; // sexy
 
     public static final Logger LOGGER = LogManager.getLogger(MODID);
     public static final EventTracker EVENT_TRACKER = new EventTracker();

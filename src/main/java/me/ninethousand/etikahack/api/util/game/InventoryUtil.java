@@ -16,6 +16,20 @@ import java.util.Arrays;
 public class InventoryUtil {
     private static final Minecraft mc = Minecraft.getMinecraft();
 
+    public static void switchToHotbarSlot(int slot, boolean silent) {
+        if (InventoryUtil.mc.player.inventory.currentItem == slot || slot < 0) {
+            return;
+        }
+        if (silent) {
+            InventoryUtil.mc.player.connection.sendPacket(new CPacketHeldItemChange(slot));
+            InventoryUtil.mc.playerController.updateController();
+        } else {
+            InventoryUtil.mc.player.connection.sendPacket(new CPacketHeldItemChange(slot));
+            InventoryUtil.mc.player.inventory.currentItem = slot;
+            InventoryUtil.mc.playerController.updateController();
+        }
+    }
+
     public static int findBlockInHotbar(Block blockToFind) {
 
         // search blocks in hotbar

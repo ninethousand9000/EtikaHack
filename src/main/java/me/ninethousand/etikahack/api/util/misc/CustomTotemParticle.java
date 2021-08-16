@@ -2,11 +2,10 @@ package me.ninethousand.etikahack.api.util.misc;
 
 import me.ninethousand.etikahack.api.command.Command;
 import me.ninethousand.etikahack.api.module.ModuleManager;
-import me.ninethousand.etikahack.impl.modules.visual.PopParticleColor;
+import me.ninethousand.etikahack.impl.modules.visual.SlowSwing;
 import net.minecraft.client.particle.IParticleFactory;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleSimpleAnimated;
-import net.minecraft.client.particle.ParticleTotem;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -21,13 +20,13 @@ public class CustomTotemParticle extends ParticleSimpleAnimated {
         this.particleScale *= 0.75F;
         this.particleMaxAge = 60 + this.rand.nextInt(12);
 
-        if (ModuleManager.getModule(PopParticleColor.class).isEnabled()) {
+        if (ModuleManager.getModule(SlowSwing.class).isEnabled()) {
             Command.sendClientMessageLine("PopColor");
 
             float
-                    r = PopParticleColor.popColor.getValue().getRed() / 255f,
-                    g = PopParticleColor.popColor.getValue().getGreen() / 255f,
-                    b = PopParticleColor.popColor.getValue().getBlue() / 255f;
+                    r = 255 / 255f,
+                    g = 255 / 255f,
+                    b = 255 / 255f;
 
             this.setRBGColorF(1, 1, 1);
         }

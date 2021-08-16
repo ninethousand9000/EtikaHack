@@ -38,6 +38,8 @@
     "accessors.ICPacketUseEntity",
     "mixins.MixinCPacketUseEntity",
 
-    "mixins.MixinParticleManager"
+    "mixins.MixinParticleManager",
+
+    "mixins.MixinEntityLivingBase"
   ]
 }

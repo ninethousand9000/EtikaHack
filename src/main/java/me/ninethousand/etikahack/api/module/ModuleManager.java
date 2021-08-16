@@ -4,11 +4,12 @@ import me.ninethousand.etikahack.impl.modules.client.*;
 import me.ninethousand.etikahack.impl.modules.combat.BlockNuker;
 import me.ninethousand.etikahack.impl.modules.combat.Offhand;
 import me.ninethousand.etikahack.impl.modules.combat.SelfFill;
+import me.ninethousand.etikahack.impl.modules.combat.SelfWeb;
 import me.ninethousand.etikahack.impl.modules.hud.*;
 import me.ninethousand.etikahack.impl.modules.misc.*;
 import me.ninethousand.etikahack.impl.modules.movement.AntiVoid;
 import me.ninethousand.etikahack.impl.modules.movement.Strafe;
-import me.ninethousand.etikahack.impl.modules.player.XCarry;
+import me.ninethousand.etikahack.impl.modules.player.ClickPearl;
 import me.ninethousand.etikahack.impl.modules.visual.*;
 
 import java.util.ArrayList;
@@ -30,6 +31,7 @@ public class ModuleManager {
                 new BlockNuker(),
                 new SelfFill(),
                 new Offhand(),
+                new SelfWeb(),
                 //Movement
                 new Strafe(),
                 new AntiVoid(),
@@ -39,6 +41,7 @@ public class ModuleManager {
                 new Welcomer(),
                 new TargetHud(),
                 new InfoList(),
+                new Armor(),
                 //Misc
                 new FakePlayer(),
                 new TotemPop(),
@@ -48,14 +51,15 @@ public class ModuleManager {
                 new PlayerChams(),
                 new BoxEsp(),
                 new SkyColor(),
-                new PopParticleColor(),
+                new SlowSwing(),
                 new EtikaMode(),
                 new VoidEsp(),
-                new Freecam(),
                 new CrystalChams(),
                 //Player
-                new XCarry()
-
+//                new XCarry(),
+//                new EnderBackpack(),
+//                new AntiHunger(),
+                new ClickPearl()
         ));
 
         modules.sort(ModuleManager::order);
