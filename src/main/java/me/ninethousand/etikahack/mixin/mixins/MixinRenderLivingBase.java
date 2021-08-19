@@ -15,6 +15,7 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.scoreboard.Team;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.common.MinecraftForge;
 import org.apache.logging.log4j.LogManager;
@@ -224,6 +225,10 @@ public abstract class MixinRenderLivingBase<T extends EntityLivingBase> extends 
                                 }
 
                                 GL11.glColor4f(r, g, b, a);
+
+                                ResourceLocation resourcelocation = new ResourceLocation("textures/fate/skins/player_cham.png");
+                                this.bindTexture(resourcelocation);
+
                                 renderModel(entity, f6, f5, f8, f2, f7, f4);
                                 GL11.glDisable(GL11.GL_LIGHTING);
                                 GL11.glEnable(GL11.GL_DEPTH_TEST);

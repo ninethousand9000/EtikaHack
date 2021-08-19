@@ -10,6 +10,11 @@ public class PacketEvent extends EventStage {
         this.packet = packet;
     }
 
+    @Override
+    public boolean isCancelable() {
+        return true;
+    }
+
     public <T extends Packet<?>> T getPacket() {
         return (T) this.packet;
     }

@@ -39,13 +39,13 @@ public class EntityUtil {
                 ((IRenderManager)renderManager).getRenderPosZ());
     }
 
-    public static void resetTimer() {
-        ((ITimer)((IMinecraft)mc).getTimer()).setTickLength(50);
-    }
+//    public static void resetTimer() {
+//        ((ITimer)((IMinecraft)mc).getTimer()).setTickLength(50);
+//    }
 
-    public static void setTimer(float speed) {
+    /*public static void setTimer(float speed) {
         ((ITimer)((IMinecraft)mc).getTimer()).setTickLength(50 / speed);
-    }
+    }*/
 
     public static Block isColliding(double posX, double posY, double posZ) {
         Block block = null;

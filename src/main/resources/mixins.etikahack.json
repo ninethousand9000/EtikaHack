@@ -40,6 +40,9 @@
 
     "mixins.MixinParticleManager",
 
-    "mixins.MixinEntityLivingBase"
+    "mixins.MixinEntityLivingBase",
+
+    "mixins.MixinItemRenderer",
+    "accessors.IItemRenderer"
   ]
 }

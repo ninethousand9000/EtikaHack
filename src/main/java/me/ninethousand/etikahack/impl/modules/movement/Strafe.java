@@ -36,7 +36,7 @@ public class Strafe extends Module {
 
     @Override
     public void onDisable() {
-        EntityUtil.resetTimer();
+//        EntityUtil.resetTimer();
         timer.reset();
     }
 
@@ -54,7 +54,7 @@ public class Strafe extends Module {
         double speedY = speed.getValue();
 
         if (mc.player.onGround && PlayerUtil.isMoving(mc.player) && timer.passedMs(300)) {
-            EntityUtil.setTimer(timerSpeed.getValue().floatValue());
+//            EntityUtil.setTimer(timerSpeed.getValue().floatValue());
             if (mc.player.isPotionActive(MobEffects.JUMP_BOOST)) {
                 speedY += (mc.player.getActivePotionEffect(MobEffects.JUMP_BOOST).getAmplifier() + 1) * 0.1f;
             }
@@ -63,7 +63,7 @@ public class Strafe extends Module {
             slowdown = true;
             timer.reset();
         } else {
-            EntityUtil.resetTimer();
+//            EntityUtil.resetTimer();
             if (slowdown || mc.player.collidedHorizontally) {
                 playerSpeed -= (EntityUtil.isColliding(0, -0.8, 0) instanceof BlockLiquid && !EntityUtil.isInLiquid()) ? 0.4 : 0.7 * (playerSpeed = PlayerUtil.getBaseMoveSpeed());
                 slowdown = false;

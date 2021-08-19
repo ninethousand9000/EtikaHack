@@ -9,7 +9,10 @@ import me.ninethousand.etikahack.impl.modules.hud.*;
 import me.ninethousand.etikahack.impl.modules.misc.*;
 import me.ninethousand.etikahack.impl.modules.movement.AntiVoid;
 import me.ninethousand.etikahack.impl.modules.movement.Strafe;
+import me.ninethousand.etikahack.impl.modules.player.AntiHunger;
 import me.ninethousand.etikahack.impl.modules.player.ClickPearl;
+import me.ninethousand.etikahack.impl.modules.player.EnderBackpack;
+import me.ninethousand.etikahack.impl.modules.player.XCarry;
 import me.ninethousand.etikahack.impl.modules.visual.*;
 
 import java.util.ArrayList;
@@ -27,6 +30,7 @@ public class ModuleManager {
                 new Customise(),
                 new RPC(),
                 new ClientConfig(),
+                //
                 //Combat
                 new BlockNuker(),
                 new SelfFill(),
@@ -42,11 +46,13 @@ public class ModuleManager {
                 new TargetHud(),
                 new InfoList(),
                 new Armor(),
+                new ShulkerViewer(),
                 //Misc
                 new FakePlayer(),
                 new TotemPop(),
                 new VisualRange(),
                 new AutoDuper(),
+                new Media(),
                 //Visual
                 new PlayerChams(),
                 new BoxEsp(),
@@ -55,10 +61,13 @@ public class ModuleManager {
                 new EtikaMode(),
                 new VoidEsp(),
                 new CrystalChams(),
+                new HoleESP(),
+                new ViewModel(),
+                new DragonWings(),
                 //Player
-//                new XCarry(),
-//                new EnderBackpack(),
-//                new AntiHunger(),
+                new XCarry(),
+                new EnderBackpack(),
+                new AntiHunger(),
                 new ClickPearl()
         ));
 

@@ -207,7 +207,7 @@ public class GraphicsUtil2d {
         GlStateManager.enableTexture2D();
         GlStateManager.disableLighting();
         GlStateManager.disableDepth();
-        if (drawAmount && amount > 0) {
+        if (drawAmount && amount > 1) {
             FontUtil.drawText(amount + "", x + 17 - FontUtil.getStringWidth(amount + ""), y + FontUtil.getStringHeight("]"), Color.white.getRGB());
         }
         GlStateManager.enableDepth();

@@ -13,14 +13,4 @@ public class RPC extends Module {
     public RPC() {
         addSettings(message);
     }
-
-    @Override
-    public void onEnable() {
-        DiscordUtil.start();
-    }
-
-    @Override
-    public void onDisable() {
-        DiscordUtil.stop();
-    }
 }
