@@ -8,6 +8,12 @@ import java.math.RoundingMode;
 public final class MathUtil {
     public static final Minecraft mc = Minecraft.getMinecraft();
 
+    public static double roundDouble(double number, int scale) {
+        BigDecimal bd = new BigDecimal(number);
+        bd = bd.setScale(scale, RoundingMode.HALF_UP);
+        return bd.doubleValue();
+    }
+
     public static double degToRad(double deg) {
         return deg * 0.01745329238474369;
     }

@@ -1,9 +1,11 @@
 package me.ninethousand.etikahack.api.util.game;
 
+import me.ninethousand.etikahack.api.util.math.MathUtil;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.network.play.client.CPacketEntityAction;
 import net.minecraft.network.play.client.CPacketPlayer;
@@ -12,7 +14,9 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.Vec3i;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
@@ -106,6 +110,45 @@ public class BlockUtil {
             }
         } catch (Exception ignored) { }
         return false;
+    }
+
+    public static List<BlockPos> getNearbyBlocks(EntityPlayer player, double blockRange, boolean motion) {
+        List<BlockPos> nearbyBlocks = new ArrayList<>();
+        int range = (int) MathUtil.roundDouble(blockRange, 0);
+
+        if (motion)
+            player.getPosition().add(new Vec3i(player.motionX, player.motionY, player.motionZ));
+
+        for (int x = -range; x <= range; x++)
+            for (int y = -range; y <= range - (range / 2); y++)
+                for (int z = -range; z <= range; z++)
+                    nearbyBlocks.add(player.getPosition().add(x, y, z));
+
+        return nearbyBlocks;
+    }
+
+    @SuppressWarnings("deprecation")
+    public static BlockResistance getBlockResistance(BlockPos block) {
+        if (mc.world.isAirBlock(block))
+            return BlockResistance.Blank;
+
+        else if (mc.world.getBlockState(block).getBlock().getBlockHardness(mc.world.getBlockState(block), mc.world, block) != -1 && !(mc.world.getBlockState(block).getBlock().equals(Blocks.OBSIDIAN) || mc.world.getBlockState(block).getBlock().equals(Blocks.ANVIL) || mc.world.getBlockState(block).getBlock().equals(Blocks.ENCHANTING_TABLE) || mc.world.getBlockState(block).getBlock().equals(Blocks.ENDER_CHEST)))
+            return BlockResistance.Breakable;
+
+        else if (mc.world.getBlockState(block).getBlock().equals(Blocks.OBSIDIAN) || mc.world.getBlockState(block).getBlock().equals(Blocks.ANVIL) || mc.world.getBlockState(block).getBlock().equals(Blocks.ENCHANTING_TABLE) || mc.world.getBlockState(block).getBlock().equals(Blocks.ENDER_CHEST))
+            return BlockResistance.Resistant;
+
+        else if (mc.world.getBlockState(block).getBlock().equals(Blocks.BEDROCK))
+            return BlockResistance.Unbreakable;
+
+        return null;
+    }
+
+    public enum BlockResistance {
+        Blank,
+        Breakable,
+        Resistant,
+        Unbreakable
     }
 
 }

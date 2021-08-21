@@ -1,5 +1,7 @@
 package me.ninethousand.etikahack.api.util.render.graphics;
 
+import me.ninethousand.etikahack.api.util.world.hole.Hole;
+import me.ninethousand.etikahack.impl.modules.visual.HoleESP;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
@@ -64,10 +66,10 @@ public class GraphicsUtil3d {
     }
 
     public static void renderStandardBox(BlockPos pos, Color color, RenderBoxMode mode, float height, float lineWidth) {
-        drawBoxESP(pos, color, lineWidth, mode, 200, height);
+        drawBoxESP(pos, color, lineWidth, mode, height);
     }
 
-    private static void drawBoxESP(BlockPos pos, Color color, float lineWidth, RenderBoxMode mode, int outlineAlpha, float height) {
+    private static void drawBoxESP(BlockPos pos, Color color, float lineWidth, RenderBoxMode mode, float height) {
         ICamera camera = new Frustum();
         AxisAlignedBB bb = new AxisAlignedBB((double) pos.getX() - mc.getRenderManager().viewerPosX, (double) pos.getY() - mc.getRenderManager().viewerPosY, (double) pos.getZ() - mc.getRenderManager().viewerPosZ, (double) (pos.getX() + 1) - mc.getRenderManager().viewerPosX, (double) (pos.getY() + 1) - mc.getRenderManager().viewerPosY + height, (double) (pos.getZ() + 1) - mc.getRenderManager().viewerPosZ);
         camera.setPosition(Objects.requireNonNull(mc.getRenderViewEntity()).posX, mc.getRenderViewEntity().posY, mc.getRenderViewEntity().posZ);
@@ -88,7 +90,7 @@ public class GraphicsUtil3d {
                 drawBlockOutline(bb, color, lineWidth);
             }
             if (mode == RenderBoxMode.Fancy) {
-                RenderGlobal.drawBoundingBox(bb.minX, bb.minY, bb.minZ, bb.maxX, bb.maxY, bb.maxZ, (float) color.getRed() / 255.0f, (float) color.getGreen() / 255.0f, (float) color.getBlue() / 255.0f, (float) outlineAlpha / 255.0f);
+                RenderGlobal.drawBoundingBox(bb.minX, bb.minY, bb.minZ, bb.maxX, bb.maxY, bb.maxZ, (float) color.getRed() / 255.0f, (float) color.getGreen() / 255.0f, (float) color.getBlue() / 255.0f, (float) color.getAlpha() / 255.0f);
             }
             GL11.glDisable(2848);
             GlStateManager.depthMask(true);
@@ -139,6 +141,41 @@ public class GraphicsUtil3d {
         GlStateManager.enableTexture2D();
         GlStateManager.disableBlend();
         GlStateManager.popMatrix();
+    }
+
+    public static void renderHoleESP(Hole hole) {
+        Color fill = HoleESP.bedrockColor.getValue();
+        Color outline = HoleESP.bedrockColorO.getValue();
+
+        if (hole.type == Hole.Type.Obsidian) {
+            fill = HoleESP.obsidianColor.getValue();
+            outline = HoleESP.obsidianColorO.getValue();
+        }
+
+        if (hole.type == Hole.Type.Double) {
+            fill = HoleESP.doublesColor.getValue();
+            outline = HoleESP.doublesColorO.getValue();
+        }
+
+        if (HoleESP.renderMode.getValue() == HoleESP.HoleRenderMode.Normal) {
+            if (HoleESP.useFill.getValue()) {
+                drawBoxESP(hole.hole, fill, 2f, RenderBoxMode.Filled, HoleESP.renderHeight.getValue() - 1);
+            }
+
+            if (HoleESP.useOutline.getValue()) {
+                drawBoxESP(hole.hole, outline, HoleESP.outlineWidth.getValue(), RenderBoxMode.Outline, HoleESP.renderHeight.getValue() - 1);
+            }
+        }
+
+        if (hole.type == Hole.Type.Double) {
+            if (HoleESP.useFill.getValue()) {
+                drawBoxESP(hole.hole.offset(hole.facing.getDirection()), fill, 2f, RenderBoxMode.Filled, HoleESP.renderHeight.getValue() - 1);
+            }
+
+            if (HoleESP.useOutline.getValue()) {
+                drawBoxESP(hole.hole.offset(hole.facing.getDirection()), outline, HoleESP.outlineWidth.getValue(), RenderBoxMode.Outline, HoleESP.renderHeight.getValue() - 1);
+            }
+        }
     }
 
     public enum RenderBoxMode {
