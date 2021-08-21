@@ -1,7 +1,7 @@
 package me.ninethousand.etikahack.impl.modules.hud;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
-import me.ninethousand.etikahack.api.event.events.RenderEvent2d;
+import me.ninethousand.etikahack.api.event.events.HudRenderEvent;
 import me.ninethousand.etikahack.api.module.Module;
 import me.ninethousand.etikahack.api.module.ModuleAnnotation;
 import me.ninethousand.etikahack.api.module.ModuleCategory;
@@ -46,7 +46,7 @@ public class TargetHud extends Module {
     }
 
     @Override
-    public void onHudRender(RenderEvent2d event, VertexHelper vertexHelper) {
+    public void onHudRender(HudRenderEvent event, VertexHelper vertexHelper) {
         if (nullCheck()) return;
 
 

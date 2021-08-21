@@ -64,6 +64,7 @@ public class ModuleManager {
                 new HoleESP(),
                 new ViewModel(),
                 new DragonWings(),
+                new BlockOutline(),
                 //Player
                 new XCarry(),
                 new EnderBackpack(),

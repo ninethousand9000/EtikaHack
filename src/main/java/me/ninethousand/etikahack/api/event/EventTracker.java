@@ -86,9 +86,9 @@ public class EventTracker {
     @SubscribeEvent(priority = EventPriority.LOW)
     public void onRenderGameOverlayEvent(RenderGameOverlayEvent.Text event) {
         ScaledResolution resolution = new ScaledResolution(mc);
-        RenderEvent2d renderEvent2D = new RenderEvent2d(event.getPartialTicks(), resolution);
+        HudRenderEvent hudRenderEvent = new HudRenderEvent(event.getPartialTicks(), resolution);
         ModuleManager.getModules().stream().forEach(module -> {
-            if (module.isEnabled()) module.onHudRender(renderEvent2D, new VertexHelper(true));
+            if (module.isEnabled()) module.onHudRender(hudRenderEvent, new VertexHelper(true));
         });
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
     }
@@ -106,7 +106,7 @@ public class EventTracker {
         GlStateManager.shadeModel(7425);
         GlStateManager.disableDepth();
         GlStateManager.glLineWidth(1.0f);
-        RenderEvent3d render3dEvent = new RenderEvent3d(event.getPartialTicks());
+        WorldRenderEvent worldRenderEvent = new WorldRenderEvent(event.getPartialTicks());
         GLUProjection projection = GLUProjection.getInstance();
         IntBuffer viewPort = GLAllocation.createDirectIntBuffer(16);
         FloatBuffer modelView = GLAllocation.createDirectFloatBuffer(16);
@@ -117,7 +117,7 @@ public class EventTracker {
         ScaledResolution scaledResolution = new ScaledResolution(mc);
         projection.updateMatrices(viewPort, modelView, projectionPort, (double) scaledResolution.getScaledWidth() / (double) mc.displayWidth, (double) scaledResolution.getScaledHeight() / (double) mc.displayHeight);
         ModuleManager.getModules().stream().forEach(module -> {
-            if (module.isEnabled()) module.onWorldRender(render3dEvent);
+            if (module.isEnabled()) module.onWorldRender(worldRenderEvent);
         });
         GlStateManager.glLineWidth(1.0f);
         GlStateManager.shadeModel(7424);

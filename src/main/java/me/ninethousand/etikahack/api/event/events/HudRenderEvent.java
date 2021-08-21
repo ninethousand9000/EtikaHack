@@ -3,11 +3,11 @@ package me.ninethousand.etikahack.api.event.events;
 import me.ninethousand.etikahack.api.event.EventStage;
 import net.minecraft.client.gui.ScaledResolution;
 
-public class RenderEvent2d extends EventStage {
+public class HudRenderEvent extends EventStage {
     public float partialTicks;
     public ScaledResolution scaledResolution;
 
-    public RenderEvent2d(float partialTicks, ScaledResolution scaledResolution) {
+    public HudRenderEvent(float partialTicks, ScaledResolution scaledResolution) {
         this.partialTicks = partialTicks;
         this.scaledResolution = scaledResolution;
     }

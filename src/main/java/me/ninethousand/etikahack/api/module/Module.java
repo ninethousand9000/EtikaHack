@@ -2,8 +2,8 @@ package me.ninethousand.etikahack.api.module;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
 import me.ninethousand.etikahack.api.command.Command;
-import me.ninethousand.etikahack.api.event.events.RenderEvent2d;
-import me.ninethousand.etikahack.api.event.events.RenderEvent3d;
+import me.ninethousand.etikahack.api.event.events.HudRenderEvent;
+import me.ninethousand.etikahack.api.event.events.WorldRenderEvent;
 import me.ninethousand.etikahack.api.settings.Setting;
 import me.ninethousand.etikahack.api.util.render.gl.VertexHelper;
 import me.ninethousand.etikahack.impl.modules.client.Customise;
@@ -143,8 +143,8 @@ public abstract class Module {
 
     public void onTick() {}
 
-    public void onHudRender(RenderEvent2d event, VertexHelper vertexHelper) {}
+    public void onHudRender(HudRenderEvent event, VertexHelper vertexHelper) {}
 
-    public void onWorldRender(RenderEvent3d event3d) {}
+    public void onWorldRender(WorldRenderEvent event3d) {}
 
 }

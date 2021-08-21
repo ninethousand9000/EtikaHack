@@ -12,7 +12,7 @@ import java.awt.*;
 @ModuleAnnotation(category = ModuleCategory.CLIENT, alwaysEnabled = true)
 public class Customise extends Module {
     public static final Setting<String> clientName = new Setting<>("Name", "EtikaHack");
-    public static final NumberSetting<Integer> rainbowSpeed = new NumberSetting<>("RainbowSpeed", 0, 10, 100, 1);
+    public static final NumberSetting<Integer> rainbowSpeed = new NumberSetting<>("RainbowSpeed", 1, 10, 100, 1);
 
     public static final Setting<Boolean> hudHeader = new Setting<>("HUD", true);
     public static final Setting<Color> hudColor = new Setting<>(hudHeader, "HudColor", new Color(0x2A93B3));

@@ -81,11 +81,11 @@ public class GraphicsUtil3d {
             GL11.glEnable(2848);
             GL11.glHint(3154, 4354);
             GL11.glLineWidth(lineWidth);
-            if (mode == RenderBoxMode.Filled || mode == RenderBoxMode.Fancy || mode == RenderBoxMode.OutlineFilled) {
+            if (mode == RenderBoxMode.Filled || mode == RenderBoxMode.Fancy || mode == RenderBoxMode.Pretty) {
                 RenderGlobal.renderFilledBox(bb, (float) color.getRed() / 255.0f, (float) color.getGreen() / 255.0f, (float) color.getBlue() / 255.0f, (float) color.getAlpha() / 255.0f);
             }
-            if (mode == RenderBoxMode.Outline || mode == RenderBoxMode.OutlineFilled) {
-                drawBlockOutline(bb, color, 2f);
+            if (mode == RenderBoxMode.Outline || mode == RenderBoxMode.Pretty) {
+                drawBlockOutline(bb, color, lineWidth);
             }
             if (mode == RenderBoxMode.Fancy) {
                 RenderGlobal.drawBoundingBox(bb.minX, bb.minY, bb.minZ, bb.maxX, bb.maxY, bb.maxZ, (float) color.getRed() / 255.0f, (float) color.getGreen() / 255.0f, (float) color.getBlue() / 255.0f, (float) outlineAlpha / 255.0f);
@@ -145,6 +145,6 @@ public class GraphicsUtil3d {
         Outline,
         Filled,
         Fancy,
-        OutlineFilled,
+        Pretty,
     }
 }

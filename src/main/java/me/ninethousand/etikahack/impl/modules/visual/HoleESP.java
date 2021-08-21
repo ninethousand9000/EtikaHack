@@ -1,6 +1,6 @@
 package me.ninethousand.etikahack.impl.modules.visual;
 
-import me.ninethousand.etikahack.api.event.events.RenderEvent3d;
+import me.ninethousand.etikahack.api.event.events.WorldRenderEvent;
 import me.ninethousand.etikahack.api.module.Module;
 import me.ninethousand.etikahack.api.module.ModuleAnnotation;
 import me.ninethousand.etikahack.api.module.ModuleCategory;
@@ -40,7 +40,7 @@ public class HoleESP extends Module {
     }
 
     @Override
-    public void onWorldRender(RenderEvent3d event3d) {
+    public void onWorldRender(WorldRenderEvent event3d) {
         if (nullCheck())
             return;
 

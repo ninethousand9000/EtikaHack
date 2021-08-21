@@ -1,6 +1,6 @@
 package me.ninethousand.etikahack.impl.modules.visual;
 
-import me.ninethousand.etikahack.api.event.events.RenderEvent3d;
+import me.ninethousand.etikahack.api.event.events.WorldRenderEvent;
 import me.ninethousand.etikahack.api.module.Module;
 import me.ninethousand.etikahack.api.module.ModuleAnnotation;
 import me.ninethousand.etikahack.api.module.ModuleCategory;
@@ -19,8 +19,8 @@ import java.util.List;
 public class VoidEsp extends Module {
     public static final NumberSetting<Integer> range = new NumberSetting<>("Range", 0, 6, 15, 1);
     public static final Setting<Color> color = new Setting<>("Color", new Color(0x2A93B3));
-    public static final Setting<GraphicsUtil3d.RenderBoxMode> voidMode = new Setting<>("Void", GraphicsUtil3d.RenderBoxMode.OutlineFilled);
-    public static final Setting<GraphicsUtil3d.RenderBoxMode> blockMode = new Setting<>("Block", GraphicsUtil3d.RenderBoxMode.OutlineFilled);
+    public static final Setting<GraphicsUtil3d.RenderBoxMode> voidMode = new Setting<>("Void", GraphicsUtil3d.RenderBoxMode.Pretty);
+    public static final Setting<GraphicsUtil3d.RenderBoxMode> blockMode = new Setting<>("Block", GraphicsUtil3d.RenderBoxMode.Pretty);
 
     public VoidEsp() {
         addSettings(
@@ -54,7 +54,7 @@ public class VoidEsp extends Module {
     }
 
     @Override
-    public void onWorldRender(RenderEvent3d event3d) {
+    public void onWorldRender(WorldRenderEvent event3d) {
         new ArrayList<>(voidBlocks).forEach(pos -> {
             if (isVoidHole(pos) == HoleType.Void) GraphicsUtil3d.renderStandardBox(pos, color.getValue(), voidMode.getValue(), 0.0f, 1f);
             GraphicsUtil3d.renderStandardBox(pos, color.getValue(), blockMode.getValue(), 0.0f, 1f);

@@ -1,6 +1,6 @@
 package me.ninethousand.etikahack.impl.modules.visual;
 
-import me.ninethousand.etikahack.api.event.events.RenderEvent3d;
+import me.ninethousand.etikahack.api.event.events.WorldRenderEvent;
 import me.ninethousand.etikahack.api.module.Module;
 import me.ninethousand.etikahack.api.module.ModuleAnnotation;
 import me.ninethousand.etikahack.api.module.ModuleCategory;
@@ -42,7 +42,7 @@ public class BoxEsp extends Module {
     }
 
     @Override
-    public void onWorldRender(RenderEvent3d gay) {
+    public void onWorldRender(WorldRenderEvent gay) {
         if (nullCheck()) return;
 
         float r = boxColor.getValue().getRed() / 255f;

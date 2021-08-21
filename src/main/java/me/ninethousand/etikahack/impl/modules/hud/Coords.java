@@ -1,7 +1,6 @@
 package me.ninethousand.etikahack.impl.modules.hud;
 
-import com.mojang.realmsclient.gui.ChatFormatting;
-import me.ninethousand.etikahack.api.event.events.RenderEvent2d;
+import me.ninethousand.etikahack.api.event.events.HudRenderEvent;
 import me.ninethousand.etikahack.api.module.Module;
 import me.ninethousand.etikahack.api.module.ModuleAnnotation;
 import me.ninethousand.etikahack.api.module.ModuleCategory;
@@ -11,7 +10,6 @@ import me.ninethousand.etikahack.api.util.render.font.FontUtil;
 import me.ninethousand.etikahack.api.util.render.gl.GlStateHelper;
 import me.ninethousand.etikahack.api.util.render.gl.VertexHelper;
 import me.ninethousand.etikahack.api.util.rotation.RotationUtil;
-import me.ninethousand.etikahack.impl.modules.client.Customise;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
 
@@ -26,7 +24,7 @@ public class Coords extends Module {
     }
 
     @Override
-    public void onHudRender(RenderEvent2d event, VertexHelper vertexHelper) {
+    public void onHudRender(HudRenderEvent event, VertexHelper vertexHelper) {
         if (nullCheck()) return;
 
         GlStateManager.pushMatrix();

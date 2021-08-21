@@ -83,23 +83,17 @@ public class Setting<T> {
     public void updateSetting() {
         if (Minecraft.getMinecraft().player == null ||Minecraft.getMinecraft().world == null) return;
 
-        float addition = 0.001f;
+        float speed = 0.001f;
 
         try {
-            addition = Customise.rainbowSpeed.getValue() / 10000f;
+            speed = 100 - Customise.rainbowSpeed.getValue();
         }
 
         catch (Exception e) {}
 
-            if (value instanceof Color) {
+        if (value instanceof Color) {
             if (rainbow) {
-                if (hue + addition <= 1.0f) {
-                    hue += addition;
-                }
-
-                else {
-                    hue = 0;
-                }
+                hue = (float) (System.currentTimeMillis() % (long) (360 * speed)) / (360.0f * speed);
             }
 
             Color c = new Color(Color.HSBtoRGB(hue, 1 - saturation, 1 - brightness));

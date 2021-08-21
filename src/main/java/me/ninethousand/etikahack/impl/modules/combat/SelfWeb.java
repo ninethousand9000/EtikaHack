@@ -1,7 +1,7 @@
 package me.ninethousand.etikahack.impl.modules.combat;
 
 import me.ninethousand.etikahack.api.command.Command;
-import me.ninethousand.etikahack.api.event.events.RenderEvent3d;
+import me.ninethousand.etikahack.api.event.events.WorldRenderEvent;
 import me.ninethousand.etikahack.api.module.Module;
 import me.ninethousand.etikahack.api.module.ModuleAnnotation;
 import me.ninethousand.etikahack.api.module.ModuleCategory;
@@ -10,7 +10,6 @@ import me.ninethousand.etikahack.api.settings.Setting;
 import me.ninethousand.etikahack.api.social.FriendManager;
 import me.ninethousand.etikahack.api.util.game.BlockInteractionHelper;
 import me.ninethousand.etikahack.api.util.game.PlayerUtil;
-import me.ninethousand.etikahack.api.util.render.graphics.GraphicsUtil2d;
 import me.ninethousand.etikahack.api.util.render.graphics.GraphicsUtil3d;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -34,7 +33,7 @@ public class SelfWeb extends Module {
     public static final Setting<Color> color = new Setting<>(shouldRender, "BoxColor", new Color(0x79E00909, true));
     public static final Setting<Color> colorO = new Setting<>(shouldRender, "OutlineColor", new Color(0xFFE00909, true));
     public static final NumberSetting<Integer> lineWidth = new NumberSetting<>(shouldRender, "OutlineWidth", 0, 2, 5, 1);
-    public static final Setting<GraphicsUtil3d.RenderBoxMode> boxMode = new Setting<>(shouldRender, "Mode", GraphicsUtil3d.RenderBoxMode.OutlineFilled);
+    public static final Setting<GraphicsUtil3d.RenderBoxMode> boxMode = new Setting<>(shouldRender, "Mode", GraphicsUtil3d.RenderBoxMode.Pretty);
 
     public SelfWeb() {
         addSettings(
@@ -113,7 +112,7 @@ public class SelfWeb extends Module {
     }
 
     @Override
-    public void onWorldRender(RenderEvent3d event3d) {
+    public void onWorldRender(WorldRenderEvent event3d) {
         if (posToRender != null && shouldRender.getValue()) {
             GraphicsUtil3d.renderStandardBox(posToRender, color.getValue(), boxMode.getValue(), 0, lineWidth.getValue());
         }

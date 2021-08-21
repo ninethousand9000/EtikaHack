@@ -1,7 +1,7 @@
 package me.ninethousand.etikahack.impl.modules.combat;
 
 import me.ninethousand.etikahack.api.event.events.PacketEvent;
-import me.ninethousand.etikahack.api.event.events.RenderEvent3d;
+import me.ninethousand.etikahack.api.event.events.WorldRenderEvent;
 import me.ninethousand.etikahack.api.module.Module;
 import me.ninethousand.etikahack.api.module.ModuleAnnotation;
 import me.ninethousand.etikahack.api.module.ModuleCategory;
@@ -117,7 +117,7 @@ public class BlockNuker extends Module {
     }
 
     @Override
-    public void onWorldRender(RenderEvent3d event3d) {
+    public void onWorldRender(WorldRenderEvent event3d) {
         if (nullCheck()) return;
 
         if (render.getValue() && getTargetBlock() != null) {

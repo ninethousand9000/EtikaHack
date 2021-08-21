@@ -2,7 +2,7 @@ package me.ninethousand.etikahack.impl.modules.misc;
 
 import me.ninethousand.etikahack.api.command.Command;
 import me.ninethousand.etikahack.api.event.events.PlayerDamageBlockEvent;
-import me.ninethousand.etikahack.api.event.events.RenderEvent3d;
+import me.ninethousand.etikahack.api.event.events.WorldRenderEvent;
 import me.ninethousand.etikahack.api.module.Module;
 import me.ninethousand.etikahack.api.module.ModuleAnnotation;
 import me.ninethousand.etikahack.api.module.ModuleCategory;
@@ -210,7 +210,7 @@ public class AutoDuper extends Module {
     }
 
     @Override
-    public void onWorldRender(RenderEvent3d event3d) {
+    public void onWorldRender(WorldRenderEvent event3d) {
         if (chestPos != null) GraphicsUtil3d.renderStandardBox(chestPos, Color.RED, GraphicsUtil3d.RenderBoxMode.Outline, 0, 1f);
         if (standPos != null) GraphicsUtil3d.renderStandardBox(standPos, Color.GREEN, GraphicsUtil3d.RenderBoxMode.Outline, 0, 1f);
     }
