@@ -31,8 +31,10 @@
     "mixins.MixinCPacketPlayer",
     "accessors.ICPacketPlayer",
 
+    "accessors.IPlayerControllerMP",
     "mixins.MixinPlayerControllerMP",
 
+    "accessors.IRenderGlobal",
     "mixins.MixinRenderGlobal",
 
     "accessors.ICPacketUseEntity",

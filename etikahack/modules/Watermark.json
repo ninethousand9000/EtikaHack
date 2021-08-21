@@ -1,9 +1,0 @@
-{
-  "Name": "Watermark",
-  "Enabled": false,
-  "Drawn": true,
-  "Bind": 0,
-  "Settings": {
-    "Scale": 1.0
-  }
-}

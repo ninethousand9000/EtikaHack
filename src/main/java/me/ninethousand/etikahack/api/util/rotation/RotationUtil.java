@@ -51,4 +51,8 @@ public class RotationUtil {
         return "Invalid";
     }
 
+    public static int getDirection4D() {
+        return MathHelper.floor((double) (RotationUtil.mc.player.rotationYaw * 4.0f / 360.0f) + 0.5) & 3;
+    }
+
 }

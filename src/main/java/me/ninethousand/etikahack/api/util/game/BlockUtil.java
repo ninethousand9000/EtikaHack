@@ -1,6 +1,7 @@
 package me.ninethousand.etikahack.api.util.game;
 
 import me.ninethousand.etikahack.api.util.math.MathUtil;
+import me.ninethousand.etikahack.api.util.rotation.RotationUtil;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
@@ -88,6 +89,20 @@ public class BlockUtil {
         float pitch = (float) (-Math.toDegrees(Math.atan2(diffY, diffXZ)));
 
         mc.player.connection.sendPacket(new CPacketPlayer.Rotation(yaw, pitch, mc.player.onGround));
+    }
+
+    public static Boolean isPosInFov(BlockPos pos) {
+        int dirnumber = RotationUtil.getDirection4D();
+        if (dirnumber == 0 && (double) pos.getZ() - BlockUtil.mc.player.getPositionVector().z < 0.0) {
+            return false;
+        }
+        if (dirnumber == 1 && (double) pos.getX() - BlockUtil.mc.player.getPositionVector().x > 0.0) {
+            return false;
+        }
+        if (dirnumber == 2 && (double) pos.getZ() - BlockUtil.mc.player.getPositionVector().z > 0.0) {
+            return false;
+        }
+        return dirnumber != 3 || (double) pos.getX() - BlockUtil.mc.player.getPositionVector().x >= 0.0;
     }
 
 
