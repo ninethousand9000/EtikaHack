@@ -1,11 +1,14 @@
 package me.ninethousand.etikahack.api.util.render.render;
 
+import me.ninethousand.etikahack.api.command.Command;
 import me.ninethousand.etikahack.api.module.ModuleManager;
 import me.ninethousand.etikahack.api.util.misc.WingsUtil;
 import me.ninethousand.etikahack.impl.modules.visual.DragonWings;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderPlayerEvent;
@@ -59,8 +62,7 @@ public class RenderWings extends ModelBase
         }
     }
 
-    private void renderWings(EntityPlayer player, float partialTicks)
-    {
+    private void renderWings(EntityPlayer player, float partialTicks) {
         double scale = DragonWings.scale.getValue() / 100D;
         double rotate = interpolate(player.prevRenderYawOffset, player.renderYawOffset, partialTicks);
 
@@ -69,6 +71,7 @@ public class RenderWings extends ModelBase
         GL11.glRotated(180 + rotate, 0, 1, 0); // Rotate the wings to be with the player.
         GL11.glTranslated(0, -(playerUsesFullHeight ? 1.45 : 1.25) / scale, 0); // Move wings correct amount up.
         GL11.glTranslated(0, 0, 0.2 / scale);
+
 
         if (player.isSneaking())
         {

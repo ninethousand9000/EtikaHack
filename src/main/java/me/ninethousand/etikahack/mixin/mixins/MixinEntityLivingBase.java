@@ -1,7 +1,7 @@
 package me.ninethousand.etikahack.mixin.mixins;
 
 import me.ninethousand.etikahack.api.module.ModuleManager;
-import me.ninethousand.etikahack.impl.modules.visual.SlowSwing;
+import me.ninethousand.etikahack.impl.modules.visual.Swing;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.MobEffects;
 import net.minecraft.potion.Potion;
@@ -18,8 +18,8 @@ public abstract class MixinEntityLivingBase {
             return 6 - (1 + this.getActivePotionEffect(MobEffects.HASTE).getAmplifier());
         }
 
-        else if (ModuleManager.getModule(SlowSwing.class).isEnabled()) {
-            return 6 + (1 + 1) * 2;
+        else if (ModuleManager.getModule(Swing.class).isEnabled()) {
+            return 6 + (1 + Swing.factor.getValue()) * 2;
         }
 
         else

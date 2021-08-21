@@ -22,6 +22,15 @@ public class MixinItemRenderer implements IItemRenderer {
     @Final
     private RenderItem itemRenderer;
 
+    @Shadow
+    private float equippedProgressMainHand;
+
+    @Shadow
+    private float prevEquippedProgressMainHand;
+
+    @Shadow
+    private ItemStack itemStackMainHand;
+
     @Inject(method = "renderItemSide", at = @At("HEAD"))
     public void renderItemSide(EntityLivingBase entitylivingbaseIn, ItemStack heldStack, ItemCameraTransforms.TransformType transform, boolean leftHanded, CallbackInfo ci) {
         if (ModuleManager.getModule(ViewModel.class).isEnabled()) {
@@ -43,5 +52,20 @@ public class MixinItemRenderer implements IItemRenderer {
     @Override
     public RenderItem getRenderItem() {
         return itemRenderer;
+    }
+
+    @Override
+    public float getPrevEquippedProgressMainHand() {
+        return prevEquippedProgressMainHand;
+    }
+
+    @Override
+    public void setEquippedProgressMainHand(float equippedProgressMainHand) {
+        this.equippedProgressMainHand = equippedProgressMainHand;
+    }
+
+    @Override
+    public void setItemStackMainHand(ItemStack itemStackMainHand) {
+        this.itemStackMainHand = itemStackMainHand;
     }
 }

@@ -2,7 +2,7 @@ package me.ninethousand.etikahack.api.util.misc;
 
 import me.ninethousand.etikahack.api.command.Command;
 import me.ninethousand.etikahack.api.module.ModuleManager;
-import me.ninethousand.etikahack.impl.modules.visual.SlowSwing;
+import me.ninethousand.etikahack.impl.modules.visual.Swing;
 import net.minecraft.client.particle.IParticleFactory;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleSimpleAnimated;
@@ -20,7 +20,7 @@ public class CustomTotemParticle extends ParticleSimpleAnimated {
         this.particleScale *= 0.75F;
         this.particleMaxAge = 60 + this.rand.nextInt(12);
 
-        if (ModuleManager.getModule(SlowSwing.class).isEnabled()) {
+        if (ModuleManager.getModule(Swing.class).isEnabled()) {
             Command.sendClientMessageLine("PopColor");
 
             float

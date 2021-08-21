@@ -9,10 +9,7 @@ import me.ninethousand.etikahack.impl.modules.hud.*;
 import me.ninethousand.etikahack.impl.modules.misc.*;
 import me.ninethousand.etikahack.impl.modules.movement.AntiVoid;
 import me.ninethousand.etikahack.impl.modules.movement.Strafe;
-import me.ninethousand.etikahack.impl.modules.player.AntiHunger;
-import me.ninethousand.etikahack.impl.modules.player.ClickPearl;
-import me.ninethousand.etikahack.impl.modules.player.EnderBackpack;
-import me.ninethousand.etikahack.impl.modules.player.XCarry;
+import me.ninethousand.etikahack.impl.modules.player.*;
 import me.ninethousand.etikahack.impl.modules.visual.*;
 
 import java.util.ArrayList;
@@ -53,11 +50,12 @@ public class ModuleManager {
                 new VisualRange(),
                 new AutoDuper(),
                 new Media(),
+                new DebugTools(),
                 //Visual
                 new PlayerChams(),
                 new BoxEsp(),
                 new SkyColor(),
-                new SlowSwing(),
+                new Swing(),
                 new EtikaMode(),
                 new VoidEsp(),
                 new CrystalChams(),
@@ -69,7 +67,10 @@ public class ModuleManager {
                 new XCarry(),
                 new EnderBackpack(),
                 new AntiHunger(),
-                new ClickPearl()
+                new ClickPearl(),
+                new NoRotate(),
+                new FootXP(),
+                new NoHitbox()
         ));
 
         modules.sort(ModuleManager::order);

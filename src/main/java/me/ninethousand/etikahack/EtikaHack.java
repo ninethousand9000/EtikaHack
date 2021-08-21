@@ -31,7 +31,7 @@ public class EtikaHack {
     public static final String MODID = "etikahack";
     public static final String NAME = "EtikaHack";
     public static final String VERSION = "2.0-Developer"; // sexy
-    public static final String SERIAL = "erWgQrUS"; // pogger
+    public static final String BUILDNO = "1"; // pogger
 
     public static final Logger LOGGER = LogManager.getLogger(MODID);
     public static final EventTracker EVENT_TRACKER = new EventTracker();
@@ -83,7 +83,7 @@ public class EtikaHack {
 //        DiscordUtil.start();
 
         try {
-            Verification.declareUserStart(Minecraft.getMinecraft().getSession().getPlayerID());
+            Verification.declareUserStart(Minecraft.getMinecraft().getSession().getUsername());
         }
 
         catch (Exception e) {

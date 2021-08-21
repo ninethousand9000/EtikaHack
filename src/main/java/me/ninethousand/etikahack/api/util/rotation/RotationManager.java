@@ -42,7 +42,7 @@ public class RotationManager {
         pitch = pitch1;
     }
 
-    private static void resetRotations() {
+    public static void resetRotations() {
         yaw = mc.player.rotationYaw;
         pitch = mc.player.rotationPitch;
     }

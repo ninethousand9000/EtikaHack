@@ -1,13 +1,9 @@
 package me.ninethousand.etikahack.api.user;
 
 import me.ninethousand.etikahack.EtikaHack;
-import net.minecraft.client.Minecraft;
-import net.minecraftforge.common.MinecraftForge;
 
 import java.awt.*;
-import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 
 public class Verification {
     public static void declareUserStart(String user) throws IOException {
@@ -15,7 +11,7 @@ public class Verification {
         webhook.setUsername("EtikaHack Verification");
         webhook.addEmbed(new DiscordWebhook.EmbedObject()
                 .setColor(Color.GREEN)
-                .setDescription(user + " has started " + EtikaHack.NAME + " Version: " + EtikaHack.VERSION + " Serial: " + EtikaHack.SERIAL));
+                .setDescription(user + " has started " + EtikaHack.NAME + " Version: " + EtikaHack.VERSION + " Serial: " + EtikaHack.BUILDNO));
         webhook.execute();
     }
 
@@ -24,7 +20,7 @@ public class Verification {
         webhook.setUsername("EtikaHack Verification");
         webhook.addEmbed(new DiscordWebhook.EmbedObject()
                 .setColor(Color.RED)
-                .setDescription(user + " has closed " + EtikaHack.NAME + " Version: " + EtikaHack.VERSION + " Serial: " + EtikaHack.SERIAL));
+                .setDescription(user + " has closed " + EtikaHack.NAME + " Version: " + EtikaHack.VERSION + " Serial: " + EtikaHack.BUILDNO));
         webhook.execute();
     }
 }
