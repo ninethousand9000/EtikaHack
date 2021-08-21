@@ -63,7 +63,7 @@ public class ModuleManager {
                 new ViewModel(),
                 new DragonWings(),
                 new BlockOutline(),
-                // new Skeleton(), // not working currently
+                new Skeleton(), // not working currently
                 new BreakESP(),
                 //Player
                 new XCarry(),

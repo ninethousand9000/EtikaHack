@@ -64,7 +64,7 @@ public class EtikaHack {
             log("Config Saved");
 
             try {
-                Verification.declareUserQuit(Minecraft.getMinecraft().getSession().getPlayerID());
+                Verification.declareUserQuit(Minecraft.getMinecraft().getSession().getUsername());
             }
 
             catch (Exception e) {
@@ -80,7 +80,7 @@ public class EtikaHack {
         MinecraftForge.EVENT_BUS.register(new RenderWings());
         log("Wings Loaded");
 
-//        DiscordUtil.start();
+        DiscordUtil.start();
 
         try {
             Verification.declareUserStart(Minecraft.getMinecraft().getSession().getUsername());

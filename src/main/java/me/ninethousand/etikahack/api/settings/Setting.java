@@ -86,7 +86,7 @@ public class Setting<T> {
         float speed = 0.001f;
 
         try {
-            speed = 100 - Customise.rainbowSpeed.getValue();
+            speed = 101 - Customise.rainbowSpeed.getValue();
         }
 
         catch (Exception e) {}

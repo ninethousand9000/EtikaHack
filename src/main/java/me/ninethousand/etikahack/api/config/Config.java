@@ -172,41 +172,45 @@ public class Config {
     private static void loadSetting(Setting<?> setting, JsonObject json) {
         JsonElement jsonValue = json.get(setting.getName());
 
-        if (setting.getValue() instanceof Boolean) {
-            ((Setting<Boolean>) setting).setValue(jsonValue.getAsBoolean());
-        }
+        if (jsonValue != null) {
+            if (setting.getValue() instanceof Boolean) {
+                ((Setting<Boolean>) setting).setValue(jsonValue.getAsBoolean());
+            }
 
-        if (setting.getValue() instanceof Enum) {
-            EnumUtil.setEnumValue(((Setting<Enum<?>>) setting), jsonValue.getAsString());
-        }
+            if (setting.getValue() instanceof Enum) {
+                EnumUtil.setEnumValue(((Setting<Enum<?>>) setting), jsonValue.getAsString());
+            }
 
-        if (setting.getValue() instanceof String) {
-            ((Setting<String>) setting).setValue(jsonValue.getAsString());
-        }
+            if (setting.getValue() instanceof String) {
+                ((Setting<String>) setting).setValue(jsonValue.getAsString());
+            }
 
-        if (setting.getValue() instanceof Integer) {
-            ((Setting<Integer>) setting).setValue(jsonValue.getAsInt());
-        }
+            if (setting.getValue() instanceof Integer) {
+                ((Setting<Integer>) setting).setValue(jsonValue.getAsInt());
+            }
 
-        if (setting.getValue() instanceof Float) {
-            ((Setting<Float>) setting).setValue(jsonValue.getAsFloat());
-        }
+            if (setting.getValue() instanceof Float) {
+                ((Setting<Float>) setting).setValue(jsonValue.getAsFloat());
+            }
 
-        if (setting.getValue() instanceof Double) {
-            ((Setting<Double>) setting).setValue(jsonValue.getAsDouble());
-        }
+            if (setting.getValue() instanceof Double) {
+                ((Setting<Double>) setting).setValue(jsonValue.getAsDouble());
+            }
 
-        if (setting.getValue() instanceof Color) {
-            Setting<Color> colorSetting = (Setting<Color>) setting;
-            String value = jsonValue.getAsString().replaceAll("\\[", "").replaceAll("\\]","").replaceAll(" ", "");
-            String[] values = value.split(",");
-            colorSetting.setValue(new Color(Integer.parseInt(values[0]), Integer.parseInt(values[1]), Integer.parseInt(values[2]), Integer.parseInt(values[3])));
-            colorSetting.setRainbow(Integer.parseInt(values[4]) == 1 ? true : false);
+            if (setting.getValue() instanceof Color) {
+                Setting<Color> colorSetting = (Setting<Color>) setting;
+                String value = jsonValue.getAsString().replaceAll("\\[", "").replaceAll("\\]","").replaceAll(" ", "");
+                String[] values = value.split(",");
+                colorSetting.setValue(new Color(Integer.parseInt(values[0]), Integer.parseInt(values[1]), Integer.parseInt(values[2]), Integer.parseInt(values[3])));
+                colorSetting.setRainbow(Integer.parseInt(values[4]) == 1 ? true : false);
+            }
         }
 
         if (setting.hasSubSettings()) {
             for (Setting<?> subSetting : setting.getSubSettings()) {
-                loadSetting(subSetting, json.get(setting.getName() + "SubSettings").getAsJsonObject());
+                if (json.get(setting.getName() + "SubSettings") != null) {
+                    loadSetting(subSetting, json.get(setting.getName() + "SubSettings").getAsJsonObject());
+                }
             }
         }
     }

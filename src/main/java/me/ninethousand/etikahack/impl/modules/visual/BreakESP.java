@@ -20,7 +20,6 @@ import net.minecraft.util.math.BlockPos;
 import java.awt.*;
 import java.util.Map;
 
-import static org.lwjgl.opengl.GL11.GL_LINE_STRIP;
 import static org.lwjgl.opengl.GL11.GL_TRIANGLE_STRIP;
 
 @ModuleAnnotation(category = ModuleCategory.VISUAL)
