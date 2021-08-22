@@ -3,14 +3,10 @@ package me.ninethousand.etikahack.api.util.misc;
 import club.minnced.discord.rpc.DiscordEventHandlers;
 import club.minnced.discord.rpc.DiscordRPC;
 import club.minnced.discord.rpc.DiscordRichPresence;
-import com.mojang.authlib.minecraft.MinecraftSessionService;
 import me.ninethousand.etikahack.EtikaHack;
 import me.ninethousand.etikahack.api.module.ModuleManager;
-import me.ninethousand.etikahack.api.user.Verification;
 import me.ninethousand.etikahack.impl.modules.client.RPC;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.main.GameConfiguration;
-import net.minecraft.util.Session;
 
 public class DiscordUtil {
     // 872175802962288640
@@ -56,6 +52,8 @@ public class DiscordUtil {
 
                         discordRPC.Discord_UpdatePresence(discordRichPresence);
                     }
+
+                    EtikaHack.gameSession.updateSession();
 
                 } catch (Exception exception) {
                     exception.printStackTrace();
