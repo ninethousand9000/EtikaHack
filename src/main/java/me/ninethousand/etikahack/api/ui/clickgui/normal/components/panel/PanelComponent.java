@@ -1,13 +1,13 @@
-package me.ninethousand.etikahack.api.ui.newgui.components.panel;
+package me.ninethousand.etikahack.api.ui.clickgui.normal.components.panel;
 
 import me.ninethousand.etikahack.api.module.Module;
 import me.ninethousand.etikahack.api.module.ModuleCategory;
 import me.ninethousand.etikahack.api.module.ModuleManager;
-import me.ninethousand.etikahack.api.ui.newgui.components.GUIComponent;
-import me.ninethousand.etikahack.api.ui.newgui.components.category.CategoryHeaderComponent;
-import me.ninethousand.etikahack.api.ui.newgui.components.category.module.ModuleComponent;
-import me.ninethousand.etikahack.api.ui.newgui.components.category.module.setting.SettingComponent;
-import me.ninethousand.etikahack.api.ui.newgui.components.category.module.setting.settings.BindComponent;
+import me.ninethousand.etikahack.api.ui.clickgui.normal.components.GUIComponent;
+import me.ninethousand.etikahack.api.ui.clickgui.normal.components.category.CategoryHeaderComponent;
+import me.ninethousand.etikahack.api.ui.clickgui.normal.components.category.module.ModuleComponent;
+import me.ninethousand.etikahack.api.ui.clickgui.normal.components.category.module.setting.SettingComponent;
+import me.ninethousand.etikahack.api.ui.clickgui.normal.components.category.module.setting.settings.BindComponent;
 import me.ninethousand.etikahack.api.util.misc.GuiUtil;
 import me.ninethousand.etikahack.impl.modules.client.ClickGUI;
 

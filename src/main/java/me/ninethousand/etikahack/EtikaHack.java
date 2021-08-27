@@ -4,6 +4,7 @@ import me.ninethousand.etikahack.api.command.CommandManager;
 import me.ninethousand.etikahack.api.config.Config;
 import me.ninethousand.etikahack.api.event.EventTracker;
 import me.ninethousand.etikahack.api.module.ModuleManager;
+import me.ninethousand.etikahack.api.user.InvalidHardwareException;
 import me.ninethousand.etikahack.api.user.Session;
 import me.ninethousand.etikahack.api.util.misc.DiscordUtil;
 import me.ninethousand.etikahack.api.util.misc.WingsUtil;
@@ -25,7 +26,7 @@ import java.io.IOException;
 public class EtikaHack {
     public static final String MODID = "etikahack";
     public static final String NAME = "EtikaHack";
-    public static final String VERSION = "2.0-Pre"; // sexy
+    public static final String VERSION = "2.0.2-Pre"; // sexy
     public static final String BUILDNO = "1"; // pogger
 
     public static final Logger LOGGER = LogManager.getLogger(MODID);
@@ -42,7 +43,7 @@ public class EtikaHack {
     }
 
     @EventHandler
-    public void init(FMLInitializationEvent event) {
+    public void init(FMLInitializationEvent event) throws InvalidHardwareException {
         log("Welcome To EtikaHack " + VERSION);
         log("Proudly developed by ninethousand");
         log("https://discord.gg/mRGn35t4XE");
@@ -63,11 +64,7 @@ public class EtikaHack {
             Config.saveConfig();
             log("Config Saved");
 
-            try {
-                gameSession.declareSessionEnd();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            gameSession.closeSession(1);
         }));
 
         Config.loadConfig();

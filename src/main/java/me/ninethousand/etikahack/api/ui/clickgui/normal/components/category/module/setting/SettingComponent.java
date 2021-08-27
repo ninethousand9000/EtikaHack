@@ -1,11 +1,11 @@
-package me.ninethousand.etikahack.api.ui.newgui.components.category.module.setting;
+package me.ninethousand.etikahack.api.ui.clickgui.normal.components.category.module.setting;
 
 import me.ninethousand.etikahack.api.module.Module;
 import me.ninethousand.etikahack.api.settings.NumberSetting;
 import me.ninethousand.etikahack.api.settings.Setting;
-import me.ninethousand.etikahack.api.ui.newgui.GuiColors;
-import me.ninethousand.etikahack.api.ui.newgui.components.GUIComponent;
-import me.ninethousand.etikahack.api.ui.newgui.components.category.module.setting.settings.*;
+import me.ninethousand.etikahack.api.ui.clickgui.normal.GuiColors;
+import me.ninethousand.etikahack.api.ui.clickgui.normal.components.GUIComponent;
+import me.ninethousand.etikahack.api.ui.clickgui.normal.components.category.module.setting.settings.*;
 import me.ninethousand.etikahack.api.util.math.Vec2d;
 import me.ninethousand.etikahack.api.util.render.graphics.GraphicsUtil2d;
 

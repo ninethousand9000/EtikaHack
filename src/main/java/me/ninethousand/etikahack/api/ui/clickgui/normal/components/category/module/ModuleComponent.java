@@ -1,8 +1,8 @@
-package me.ninethousand.etikahack.api.ui.newgui.components.category.module;
+package me.ninethousand.etikahack.api.ui.clickgui.normal.components.category.module;
 
 import me.ninethousand.etikahack.api.module.Module;
-import me.ninethousand.etikahack.api.ui.newgui.GuiColors;
-import me.ninethousand.etikahack.api.ui.newgui.components.GUIComponent;
+import me.ninethousand.etikahack.api.ui.clickgui.normal.GuiColors;
+import me.ninethousand.etikahack.api.ui.clickgui.normal.components.GUIComponent;
 import me.ninethousand.etikahack.api.util.math.Vec2d;
 import me.ninethousand.etikahack.api.util.misc.GuiUtil;
 import me.ninethousand.etikahack.api.util.render.font.FontUtil;

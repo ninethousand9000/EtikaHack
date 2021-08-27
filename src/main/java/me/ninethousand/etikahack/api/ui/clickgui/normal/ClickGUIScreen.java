@@ -1,8 +1,8 @@
-package me.ninethousand.etikahack.api.ui.newgui;
+package me.ninethousand.etikahack.api.ui.clickgui.normal;
 
 import me.ninethousand.etikahack.api.module.ModuleCategory;
 import me.ninethousand.etikahack.api.module.ModuleManager;
-import me.ninethousand.etikahack.api.ui.newgui.components.panel.PanelComponent;
+import me.ninethousand.etikahack.api.ui.clickgui.normal.components.panel.PanelComponent;
 import me.ninethousand.etikahack.api.util.misc.GuiUtil;
 import me.ninethousand.etikahack.impl.modules.client.ClickGUI;
 import net.minecraft.client.gui.GuiScreen;

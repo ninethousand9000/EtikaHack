@@ -7,7 +7,7 @@ import me.ninethousand.etikahack.api.module.ModuleAnnotation;
 import me.ninethousand.etikahack.api.module.ModuleCategory;
 import me.ninethousand.etikahack.api.settings.NumberSetting;
 import me.ninethousand.etikahack.api.settings.Setting;
-import me.ninethousand.etikahack.api.ui.newgui.GuiColors;
+import me.ninethousand.etikahack.api.ui.clickgui.normal.GuiColors;
 import me.ninethousand.etikahack.api.util.game.InventoryUtil;
 import me.ninethousand.etikahack.api.util.render.graphics.GraphicsUtil3d;
 import me.ninethousand.etikahack.api.util.rotation.RotationManager;

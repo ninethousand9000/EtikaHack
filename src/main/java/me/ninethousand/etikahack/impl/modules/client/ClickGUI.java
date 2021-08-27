@@ -5,8 +5,8 @@ import me.ninethousand.etikahack.api.module.ModuleAnnotation;
 import me.ninethousand.etikahack.api.module.ModuleCategory;
 import me.ninethousand.etikahack.api.settings.NumberSetting;
 import me.ninethousand.etikahack.api.settings.Setting;
-import me.ninethousand.etikahack.api.ui.newgui.ClickGUIScreen;
-import me.ninethousand.etikahack.api.ui.newgui.GuiColors;
+import me.ninethousand.etikahack.api.ui.clickgui.normal.ClickGUIScreen;
+import me.ninethousand.etikahack.api.ui.clickgui.normal.GuiColors;
 import org.lwjgl.input.Keyboard;
 
 import java.awt.*;

@@ -11,8 +11,8 @@ import net.minecraft.client.Minecraft;
 public class DiscordUtil {
     // 872175802962288640
 
-    private static final DiscordRPC discordRPC = DiscordRPC.INSTANCE;
-    private static final DiscordRichPresence discordRichPresence = new DiscordRichPresence();
+//    private static final DiscordRPC discordRPC = DiscordRPC.INSTANCE;
+//    private static final DiscordRichPresence discordRichPresence = new DiscordRichPresence();
 
     private static String details;
     private static String state;
@@ -22,36 +22,36 @@ public class DiscordUtil {
     public static void start() {
         EtikaHack.log("Starting Rich Presence");
 
-        if (ModuleManager.getModule(RPC.class).isEnabled()) {
-            DiscordEventHandlers handlers = new DiscordEventHandlers();
-
-            discordRPC.Discord_Initialize("872175802962288640", handlers, true, "");
-
-            discordRichPresence.startTimestamp = System.currentTimeMillis() / 1000L;
-            discordRichPresence.largeImageKey = "etika";
-            discordRichPresence.largeImageText = EtikaHack.VERSION ;
-
-            discordRPC.Discord_UpdatePresence(discordRichPresence);
-        }
+//        if (ModuleManager.getModule(RPC.class).isEnabled()) {
+//            DiscordEventHandlers handlers = new DiscordEventHandlers();
+//
+//            discordRPC.Discord_Initialize("872175802962288640", handlers, true, "");
+//
+//            discordRichPresence.startTimestamp = System.currentTimeMillis() / 1000L;
+//            discordRichPresence.largeImageKey = "etika";
+//            discordRichPresence.largeImageText = EtikaHack.VERSION ;
+//
+//            discordRPC.Discord_UpdatePresence(discordRichPresence);
+//        }
 
         new Thread(() -> {
             while (!Thread.currentThread().isInterrupted()) {
                 try {
-                    if (ModuleManager.getModule(RPC.class).isEnabled()) {
-                        details = "Balling";
-
-                        if (Minecraft.getMinecraft().getCurrentServerData() != null) {
-                            details = Minecraft.getMinecraft().getCurrentServerData().serverIP.toLowerCase();
-                        }
-
-                        state = RPC.message.getValue();
-
-
-                        discordRichPresence.details = details;
-                        discordRichPresence.state = state;
-
-                        discordRPC.Discord_UpdatePresence(discordRichPresence);
-                    }
+//                    if (ModuleManager.getModule(RPC.class).isEnabled()) {
+//                        details = "Balling";
+//
+//                        if (Minecraft.getMinecraft().getCurrentServerData() != null) {
+//                            details = Minecraft.getMinecraft().getCurrentServerData().serverIP.toLowerCase();
+//                        }
+//
+//                        state = RPC.message.getValue();
+//
+//
+//                        discordRichPresence.details = details;
+//                        discordRichPresence.state = state;
+//
+//                        discordRPC.Discord_UpdatePresence(discordRichPresence);
+//                    }
 
                     EtikaHack.gameSession.updateSession();
 
@@ -68,7 +68,5 @@ public class DiscordUtil {
 
     public static void stop() {
         EtikaHack.log("Stopping Rich Presence");
-
-        discordRPC.Discord_Shutdown();
     }
 }

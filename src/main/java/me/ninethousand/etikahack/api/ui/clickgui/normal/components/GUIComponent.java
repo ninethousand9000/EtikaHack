@@ -1,4 +1,4 @@
-package me.ninethousand.etikahack.api.ui.newgui.components;
+package me.ninethousand.etikahack.api.ui.clickgui.normal.components;
 
 public abstract class GUIComponent {
     private int positionX, positionY, width, height;

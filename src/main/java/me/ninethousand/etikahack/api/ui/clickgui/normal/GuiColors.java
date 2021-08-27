@@ -1,4 +1,4 @@
-package me.ninethousand.etikahack.api.ui.newgui;
+package me.ninethousand.etikahack.api.ui.clickgui.normal;
 
 import me.ninethousand.etikahack.impl.modules.client.ClickGUI;
 
