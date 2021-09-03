@@ -3,6 +3,7 @@ package me.ninethousand.etikahack.mixin.mixins;
 import me.ninethousand.etikahack.api.module.ModuleManager;
 import me.ninethousand.etikahack.impl.modules.visual.CrystalChams;
 import me.ninethousand.etikahack.impl.modules.visual.PlayerChams;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelEnderCrystal;
 import net.minecraft.client.renderer.GlStateManager;

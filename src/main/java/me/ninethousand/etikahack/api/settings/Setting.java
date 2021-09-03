@@ -48,36 +48,6 @@ public class Setting<T> {
         }
 
         parent.addSubSetting(this);
-
-        /*f (parent.getValue() instanceof Boolean) {
-            Setting<Boolean> booleanSetting = (Setting<Boolean>) parent;
-            booleanSetting.addSubSetting(this);
-        }
-
-        if (parent.getValue() instanceof Enum) {
-            Setting<Enum<?>> enumSetting = (Setting<Enum<?>>) parent;
-            enumSetting.addSubSetting(this);
-        }
-
-        if (parent.getValue() instanceof Color) {
-            Setting<Color> colorSetting = (Setting<Color>) parent;
-            colorSetting.addSubSetting(this);
-        }
-
-        if (parent.getValue() instanceof Integer) {
-            NumberSetting<Integer> integerNumberSetting = (NumberSetting<Integer>) parent;
-            integerNumberSetting.addSubSetting(this);
-        }
-
-        if (parent.getValue() instanceof Double) {
-            NumberSetting<Double> doubleNumberSetting = (NumberSetting<Double>) parent;
-            doubleNumberSetting.addSubSetting(this);
-        }
-
-        if (parent.getValue() instanceof Float) {
-            NumberSetting<Float> floatNumberSetting = (NumberSetting<Float>) parent;
-            floatNumberSetting.addSubSetting(this);
-        }*/
     }
 
     public void updateSetting() {

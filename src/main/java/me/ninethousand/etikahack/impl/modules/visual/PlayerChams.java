@@ -21,6 +21,9 @@ import java.util.UUID;
 public class PlayerChams extends Module {
     public static final Setting<Boolean> players = new Setting<>("Players", true);
     public static final Setting<Boolean> playerModel = new Setting<>(players, "RenderPlayerModel", true);
+    public static final Setting<Boolean> simpleModel = new Setting<>(players, "BasicModel", true);
+    public static final Setting<Boolean> customTexture = new Setting<>(players, "Texture", true);
+    public static final NumberSetting<Float> textureAlpha = new NumberSetting<>(players,"TextureAlpha", 0f, 150f, 255f, 1);
     public static final Setting<Boolean> walls = new Setting<>(players, "Depth", true);
     public static final Setting<Boolean> middleWall = new Setting<>(walls, "ModelThroughWalls", true);
     public static final Setting<Boolean> lineWall = new Setting<>(walls, "LineThroughWalls", true);

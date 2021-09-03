@@ -26,7 +26,7 @@ import java.io.IOException;
 public class EtikaHack {
     public static final String MODID = "etikahack";
     public static final String NAME = "EtikaHack";
-    public static final String VERSION = "2.0.2-Pre"; // sexy
+    public static final String VERSION = "69-Skidded Rat Fortnite"; // sexy
     public static final String BUILDNO = "1"; // pogger
 
     public static final Logger LOGGER = LogManager.getLogger(MODID);

@@ -2,16 +2,20 @@ package me.ninethousand.etikahack.mixin.mixins;
 
 import me.ninethousand.etikahack.api.command.Command;
 import me.ninethousand.etikahack.api.module.ModuleManager;
+import me.ninethousand.etikahack.api.util.render.graphics.GraphicsUtil2d;
+import me.ninethousand.etikahack.api.util.render.graphics.GraphicsUtil3d;
 import me.ninethousand.etikahack.impl.modules.visual.PlayerChams;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityOtherPlayerMP;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.model.ModelPlayer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.scoreboard.Team;
@@ -27,6 +31,10 @@ import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(RenderLivingBase.class)
 public abstract class MixinRenderLivingBase<T extends EntityLivingBase> extends Render<T> {
+    private static final Minecraft mc = Minecraft.getMinecraft();
+
+    private static final ResourceLocation RES_ITEM_GLINT = new ResourceLocation("textures/fate/cool/sky.png");
+
     @Shadow
     private static final Logger LOGGER = LogManager.getLogger();
 
@@ -226,10 +234,14 @@ public abstract class MixinRenderLivingBase<T extends EntityLivingBase> extends 
 
                                 GL11.glColor4f(r, g, b, a);
 
-                                ResourceLocation resourcelocation = new ResourceLocation("textures/fate/skins/player_cham.png");
-                                this.bindTexture(resourcelocation);
+                                if (PlayerChams.customTexture.getValue()) {
+                                    renderModelC(entity, f6, f5, f8, f2, f7, f4);
+                                }
 
-                                renderModel(entity, f6, f5, f8, f2, f7, f4);
+                                else {
+                                    renderModel(entity, f6, f5, f8, f2, f7, f4);
+                                }
+
                                 GL11.glDisable(GL11.GL_LIGHTING);
                                 GL11.glEnable(GL11.GL_DEPTH_TEST);
                                 GL11.glDepthMask(true);
@@ -333,6 +345,37 @@ public abstract class MixinRenderLivingBase<T extends EntityLivingBase> extends 
     }
 
     @Shadow
+    protected abstract void renderModel(T entitylivingbaseIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor);
+
+    protected void renderModelC(T entitylivingbaseIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor) {
+        boolean flag = this.isVisible(entitylivingbaseIn);
+        boolean flag1 = !flag && !entitylivingbaseIn.isInvisibleToPlayer(Minecraft.getMinecraft().player);
+
+        if (flag || flag1)
+        {
+            GL11.glEnable(GL11.GL_TEXTURE_2D);
+            GL11.glColor4f(1, 1, 1, PlayerChams.textureAlpha.getValue() / 255f);
+
+            if (flag1)
+            {
+                GlStateManager.enableBlendProfile(GlStateManager.Profile.TRANSPARENT_MODEL);
+            }
+
+            this.mainModel.render(entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor);
+
+            mc.getTextureManager().bindTexture(RES_ITEM_GLINT);
+            this.mainModel.render(entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor);
+
+            if (flag1)
+            {
+                GlStateManager.disableBlendProfile(GlStateManager.Profile.TRANSPARENT_MODEL);
+            }
+
+            GL11.glDisable(GL11.GL_TEXTURE_2D);
+        }
+    }
+
+    @Shadow
     protected abstract boolean isVisible(EntityLivingBase paramEntityLivingBase);
 
     @Shadow
@@ -361,9 +404,6 @@ public abstract class MixinRenderLivingBase<T extends EntityLivingBase> extends 
 
     @Shadow
     protected abstract void unsetBrightness();
-
-    @Shadow
-    protected abstract void renderModel(T paramT, float paramFloat1, float paramFloat2, float paramFloat3, float paramFloat4, float paramFloat5, float paramFloat6);
 
     @Shadow
     protected abstract void renderLayers(T paramT, float paramFloat1, float paramFloat2, float paramFloat3, float paramFloat4, float paramFloat5, float paramFloat6, float paramFloat7);
